@@ -82,6 +82,7 @@
         //Definir constantes
         define("USER","Fernando");
         echo USER;
+        echo "4/oct";
 
         
 
