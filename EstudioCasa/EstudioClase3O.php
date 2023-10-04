@@ -92,6 +92,26 @@
         echo "<br>";
         echo date("r");
         echo date("d/F/y H:i:s");
+        echo "<br>";
+        echo "<br>";
+
+
+        //a
+
+        $archivo = $_SERVER['PHP_SELF'];
+        echo $archivo;
+        echo "<br>";
+
+        //b
+
+        $direccion = $_SERVER['REMOTE_ADDR'];
+        echo $direccion;
+
+        //c
+
+        $ruta = $_SERVER['PATH_TRANSLATED'];
+        echo $ruta;
+
     ?>
     </pre>
 </body>
