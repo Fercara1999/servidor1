@@ -1,20 +1,36 @@
+<!-- Realiza una página web denominada eligeidioma.html:
+a. Tendrá varios links con el nombre del idioma y una bandera (Se podrá hacer click tanto en
+idioma como en la bandera). Con 5 idiomas que quieras
+i. Ej Español y bandera de España
+ii. Ej English y bandera de Inglatera
+b. Todos los links harán referencia a HolaMundoIdioma.php
+i. Pero le pasará como variable de url un código que tu consideres
+1. Ej ‘es’
+c. Dependiendo de la variable de url te saludará en un idioma. Usa Google para traducir
+i. Para ello hay que hacer uso de variables de variables no de estructuras de control
+que aún no las hemos visto. -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Practica HolaMundoIdioma</title>
+    <h1 align="center">Práctica HolaMundoIdioma de Fernando Calles</h1>
+    <link rel="stylesheet" type="text/css" href="css/estilos.css"></link>
 </head>
 <body>
-    <a href="http://192.168.7.202/Tema2/EligeIdioma/HolaMundoIdioma.php?idioma=$variable">Francés
+    <p> - Haz clic en un idioma o bandera para que te muestre la frase "Hola Mundo" traducida al idioma elegido
+    </p>
+    <a href="HolaMundoIdioma.php?idiomaelegido=fr">Francés<br>
     <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg" heigth ="100" width="200"></a><br> 
-    <a href="http://192.168.7.202/Tema2/EligeIdioma/HolaMundoIdioma.php?idioma=$variable">Inglés
+    <a href="HolaMundoIdioma.php?idiomaelegido=en"><br><br>Inglés<br>
     <img src="https://upload.wikimedia.org/wikipedia/en/thumb/b/be/Flag_of_England.svg/1200px-Flag_of_England.svg.png" heigth ="100" width="200"></a><br>
-    <a href="">Español
+    <a href="HolaMundoIdioma.php?idiomaelegido=es"><br><br>Español<br>
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Bandera_de_Espa%C3%B1a.svg/1200px-Bandera_de_Espa%C3%B1a.svg.png" heigth ="100" width="200"></a><br>
-    <a href="">Italia
+    <a href="HolaMundoIdioma.php?idiomaelegido=it"><br><br>Italia<br>
     <img src="https://upload.wikimedia.org/wikipedia/commons/0/03/Flag_of_Italy.svg" heigth ="100" width="200"></a><br>
-    <a href="">Portugal
+    <a href="HolaMundoIdioma.php?idiomaelegido=po"><br><br>Portugal<br>
     <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_Portugal.svg" heigth ="100" width="200"></a> 
 
 </body>
