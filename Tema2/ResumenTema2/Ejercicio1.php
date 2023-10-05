@@ -28,12 +28,14 @@
         echo "<p>".date("D/m H:i:s e")."</p>";
         // f. Inicializa y muestra una variable en el timestamp y en fecha con formato
         // dd/mm/yyyy de tu cumpleaños
-        $fechaCumpleaños = strtotime("1999/11/27");
-        echo "<p>".$fechaCumpleaños."</p>";
+        $fechaCumpleaños = new DateTime('1999-11-27');
+        echo $fechaCumpleaños -> format('d/m/Y');
+        echo "<br>";
+        echo "<br>";
         // g. Calcular la fecha y dia de la semana de dentro de 60 dias
-        // $hoy = date("d/m/Y");
-        // echo $hoy;
-        // echo date_add($hoy, date_interval_create_from_date_string("60 days"));
+        $fechaHoy = new DateTime();
+        $fechaHoy -> modify('+ 60 days');
+        echo $fechaHoy -> format('l d-m-Y');
 
     ?>
     <?php
