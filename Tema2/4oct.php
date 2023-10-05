@@ -41,7 +41,9 @@
         print_r(getdate());
         echo "</pre>";
 
-        // MKTIME
+        $rutaFichero = $_SERVER['DOCUMENT_ROOT'];
+    
+        echo "<a href='./$rutaFichero/verCodigo.php'> Para ver codigo </a>";
 
 
 

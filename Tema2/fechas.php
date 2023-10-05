@@ -18,6 +18,11 @@
     echo date("d/F/y H:i:s");
     echo "<br>";
     echo ("<p></p>");
+
+    $ruta = $_SERVER['SCRIPT_FILENAME'];
+    echo "<a href='./verCodigo.php?fichero=.$ruta."/".$fichero.'> Enlace </a>";
+    
+
     ?>
 </body>
 </html>

@@ -10,7 +10,7 @@
     <?php
         include("../../fragmentos/header.html");
     ?>
-    <p><a href="./Ejercicio2.php?numero=1999"> Enlace </a></p>
+    
     <?php
     // $cadena = $numero;
     echo "El valor de la variable es : " .$_GET['numero'];
@@ -26,6 +26,7 @@
     ?>
     <?php
         include("../../fragmentos/footer.html");
+        echo "<a href='http://".$_SERVER['SERVER_ADDR']."/verCodigo.php?fichero=".$_SERVER['SCRIPT_FILENAME']."'>Para ver el codigo</a>";
     ?>
 </body>
 </html>

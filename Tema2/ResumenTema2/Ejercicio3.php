@@ -10,7 +10,7 @@
     <?php
         include("../../fragmentos/header.html");
     ?>
-    <p><a href="./Ejercicio3.php?ano=2023&mes=10&dia=03"> Enlace </a></p>
+    
     <?php
     
         $ano = $_GET['ano'];
@@ -24,6 +24,7 @@
     ?>
     <?php
         include("../../fragmentos/footer.html");
+        echo "<a href='http://".$_SERVER['SERVER_ADDR']."/verCodigo.php?fichero=".$_SERVER['SCRIPT_FILENAME']."'>Para ver el codigo</a>";
     ?>
 </body>
 </html>
