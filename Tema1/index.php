@@ -14,7 +14,7 @@
         <h3>·  <a href="Anexo_Instalación_Ubuntu_Servicios_Fernando_Calles.pdf" target="blank">Manual de instalación de Linux</a></h3>
         <h3>·  <a href="Manual_Server_Fernando_Calles.pdf" target="blank">Manual de Configuración del servidor + configuración GitHub</a></h3>
      <?php
-        include("../fragmentos/footer.html");
+        include("../fragmentos/footer.php");
     ?>
 </body>
 </html>

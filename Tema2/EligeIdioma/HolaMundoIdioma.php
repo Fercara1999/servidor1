@@ -10,6 +10,9 @@
     <p>
     </p>
     <?php
+        include("../../fragmentos/header.html");
+    ?>
+    <?php
 
         $idiomaescribir = $_GET['idiomaelegido']; 
 
@@ -23,6 +26,9 @@
 
         echo "<h2>".$$idiomaelegido."</h2>";
 
+    ?>
+    <?php
+        include("../../fragmentos/footer.html");
     ?>
 </body>
 </html>

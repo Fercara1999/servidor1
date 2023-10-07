@@ -13,9 +13,9 @@
     <h2>- <a href="Tema1/index.php">Tema 1</a></h2><br>
     <h2>- <a href="Tema2/index.php">Tema 2</a></h2><br>
     <?php
-        include("./fragmentos/footer.html");
+        include("./fragmentos/footer.php");
 
-        echo "<a href='http://".$_SERVER['SERVER_ADDR']."/verCodigo.php?fichero=".$_SERVER['SCRIPT_FILENAME']."'>Para ver el codigo</a>";
+        // echo "<a href='http://".$_SERVER['SERVER_ADDR']."/verCodigo.php?fichero=".$_SERVER['SCRIPT_FILENAME']."'>Para ver el codigo</a>";
     ?>
 </body>
 </html>

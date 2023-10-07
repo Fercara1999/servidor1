@@ -14,7 +14,7 @@
         <h3>·  <a href="./EligeIdioma/" target="blank">Tarea Elige Idioma</a></h3>
         <h3>·  <a href="./ResumenTema2/index.php" target="blank">Tarea Resumen Tema 2</a></h3>
     <?php
-        include("../fragmentos/footer.html");
+        include("../fragmentos/footer.php");
     ?>
 </body>
 </html>
