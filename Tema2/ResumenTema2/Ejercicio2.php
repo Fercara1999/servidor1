@@ -20,6 +20,7 @@
     echo "El valor de la variable es : " .$variable;
     echo "<br>";
     echo "El tipo de la variable es: " .gettype($variable);
+    var_dump(is_numeric($variable));
     echo "<br>";
     echo "La variable es o no numerica (1 si es que si y 0 si es que no): " .is_numeric($variable);
     echo "<br>";
