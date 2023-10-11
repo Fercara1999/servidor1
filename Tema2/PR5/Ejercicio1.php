@@ -32,6 +32,27 @@
     }
     echo "<br>=============4<br>";
     $tamanoMatriz = 5;
+    $matriz = array();
+
+        for($i = 0 ; $i <= $tamanoMatriz ; $i++){
+            for($j = 0 ; $j <= $tamanoMatriz ; $j++){
+                if ($i == 0 || $j == 0){
+                   $matriz[$i][$j] = 1;
+                }else{
+                    $matriz[$i][$j] = $matriz[$i-1][$j] + $matriz[$i][$j-1];
+                }
+                
+            }
+        }
+
+    foreach ($matriz as $fila) {
+        foreach ($fila as $value) {
+            echo $value ." ";
+        }
+        echo "<br>";
+    }
+
+
     
 
     ?>
