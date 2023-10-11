@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PR5 - Fernando Calles</title>
+    <link rel="stylesheet" href="./estilos.css" type="text/css">
 </head>
 <body>
     <?php
@@ -31,7 +32,7 @@
         echo "<br> $key = $value";
     }
     echo "<br>=============4<br>";
-    $tamanoMatriz = 5;
+    $tamanoMatriz = $_GET['tamano'];
     $matriz = array();
 
         for($i = 0 ; $i <= $tamanoMatriz ; $i++){
@@ -44,16 +45,16 @@
                 
             }
         }
-
+        
     foreach ($matriz as $fila) {
+        echo "<table border='1'><tr>";
         foreach ($fila as $value) {
-            echo $value ." ";
+            echo "<td>".$value."</td>";
         }
-        echo "<br>";
+        echo "</tr>";
     }
+    echo "</table>";
 
-
-    
 
     ?>
 </body>

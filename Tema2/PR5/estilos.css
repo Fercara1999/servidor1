@@ -1,0 +1,8 @@
+table{
+    table-layout: fixed;
+    width: 250px;
+}
+
+tr,td{
+    word-wrap: break-word;
+}
