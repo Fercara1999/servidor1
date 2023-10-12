@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -105,44 +105,40 @@
 
             echo "<tr>";
                     echo "<th>$nombreEquipos</th>";
+                    
+                    $puntos[$nombreEquipos] = 0;
+                    $golesFavor[$nombreEquipos] = 0;
+                    $golesContra[$nombreEquipos] = 0;
 
-                    $puntosEquipos = 0;
-                    $golesEquipos = 0;
-                    $golesRival = 0;
-                    $puntosRival = 0;
-                    $golesMetidosVuelta = 0;
-                    $golesMetieronVuelta = 0;
             foreach ($rivales as $nombreRival => $partido) {
 
+                $puntos[$nombreRival] = 0;
+                $golesFavor[$nombreRival] = 0;
+                $golesContra[$nombreRival] = 0;
                     
                 foreach ($partido as $clavePartido => $datosPartido) {
 
                         if($clavePartido == "Resultado"){
                             $resultado = explode("-",$datosPartido);
+                            $golesFavor[$nombreEquipos] += $resultado[0];
+                            $golesContra[$nombreRival] += $resultado[1];
                             if($resultado[0] > $resultado[1]){
-                                $puntosEquipos+=3;
-                                $golesEquipos += $resultado[0];
-                                $golesRival += $resultado[1];
+                                $puntos[$nombreEquipos] += 3;
 
                             }else if($resultado[0] < $resultado[1]){
-                                $golesEquipos += $resultado[0];
-                                $golesRival += $resultado[1];
-                                $puntosRival += 3;
+                                $puntos[$nombreRival] += 3;
                             }else{
-                                $puntosEquipos+=1;
-                                $puntosRival+=1;
-                                $golesEquipos += $resultado[0];
-                                $golesRival += $resultado[1];
+                                $puntos[$nombreEquipos] += 1;
+                                $puntos[$nombreRival] += 1;
                             }
-                        }                        
+                        } 
                             
                 }
                 
-            }
-            echo "$puntosRival";
-            echo "<td>".$puntosEquipos."</td>";
-            echo "<td>$golesEquipos</td>";
-            echo "<td>$golesRival</td>";
+            };
+            echo "<td>".$puntos[$nombreEquipos]."</td>";
+            echo "<td>".$golesFavor[$nombreEquipos]."</td>";
+            echo "<td>".$golesContra[$nombreEquipos]."</td>";
             
         }
 
