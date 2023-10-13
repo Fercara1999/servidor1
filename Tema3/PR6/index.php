@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>PR6 - Fernando Calles</title>
+    <link rel="stylesheet" type="text/css" href="../../css/estilos.css"></link>
 </head>
 <body>
+    <?php
+        include("../../fragmentos/header.html");
+    ?>
     <?php
     $liga =
     array(
@@ -55,56 +59,106 @@
         ),
     );
     ?>
-    <!-- Ultimo es 1-1, en vez de 1-2 -->
-    <pre>
-    <table border="1">
-        <tr><th>Equipos</th>
-            <?php
-            $aux = array();
-            foreach ($liga as $clave => $valor) {
-                 echo "<th>$clave</th>";
-                array_push($aux,$clave);
-                
-            }
-            array_unique($aux);
-            foreach ($aux as $key => $value) {
-                print_r($aux);
-            }
-
-            ?>
-        </tr>
-            <?php
-                
-                foreach ($liga as $key2 => $value2) {
-                    echo "<tr>";
-                    foreach ($aux as $key => $value) {
-                        if($aux == $value2){
-                            echo "<td>1</td>";
-                        }
-                    }
-                            echo "<td>";
-                            print_r($key2);
-                            echo "</td>";
-
-                        foreach ($value2 as $key3 => $value3) {
-                            
-                            echo "<td>";
-
-                            foreach ($value3 as $key4 => $value4) {
-                                
-                                echo "<p>";
-                                print_r($value4);
-                                echo "</p>";
-                                
-                            }
-                            echo "</td>";
-                    }
-                    echo "</tr>";
-                }
+    <?php
+        $aux = array();
+        echo "<table border = '1'>";
+        echo "<tr>";
+        echo "<th>Equipos</th>";
+        foreach ($liga as $nombreEquipos => $valores) {
             
-            ?>
+            echo "<th>$nombreEquipos</th>";
+            array_push($aux,$nombreEquipos);
+                
+        }
+        
+        echo "</tr>";
+        foreach ($liga as $nombreEquipos => $rivales) {
+            
+            echo "<tr>";
+            echo "<th>$nombreEquipos</th>";
+            
+            $i = 0;
+            foreach ($rivales as $nombreRival => $partido) {
 
-    </table>
-    </pre>
+                if($aux[$i]==$nombreEquipos){
+                    echo "<td></td>";
+                }
+
+                echo "<td>";
+
+                foreach ($partido as $key => $contenidoPartido) {
+                    
+                    echo "$contenidoPartido<br>";
+                }
+
+                echo "</td>";
+                $i++;
+
+            }
+            echo "</tr>";
+        }
+
+        echo "</table>";
+        
+    ?>
+    <br><br>
+    <?php
+    echo "<table border='1'>";
+        echo "<tr><th>Equipos</th><th>Puntos</th><th>Goles a favor</th><th>Goles en contra</th></tr>";
+
+        foreach ($liga as $nombre => $value) {
+            $auxFinalPuntos[$nombre] = 0;
+            $auxFinalGolesFavor[$nombre] = 0;
+            $auxFinalGolesContra[$nombre] = 0;
+        }
+
+        foreach ($liga as $nombreEquipos => $rivales) {
+
+            echo "<tr>";
+                    echo "<th>$nombreEquipos</th>";
+
+            foreach ($rivales as $nombreRival => $partido) {
+
+                            $resultado = explode("-",$partido["Resultado"]);
+
+                            $auxFinalGolesFavor[$nombreEquipos] += $resultado[0];
+                            $auxFinalGolesContra[$nombreEquipos] += $resultado[1];
+                            $auxFinalGolesFavor[$nombreRival] += $resultado[1];
+                            $auxFinalGolesContra[$nombreRival] += $resultado[0];
+                            if($resultado[0] > $resultado[1]){
+                                $auxFinalPuntos[$nombreEquipos]+= 3;
+
+                            }elseif($resultado[0] < $resultado[1]){
+                                $auxFinalPuntos[$nombreRival]+= 3;
+                            }else{
+                                $auxFinalPuntos[$nombreEquipos] += 1;
+                                $auxFinalPuntos[$nombreRival] += 1;
+                            }
+                        } 
+            echo "<td>$auxFinalPuntos[$nombreEquipos]</td>";
+            echo "<td>$auxFinalGolesFavor[$nombreEquipos]</td>";
+            echo "<td>$auxFinalGolesContra[$nombreEquipos]</td>";             
+
+        }
+
+    echo "</table><br>";
+
+    echo "<table border='1'>";
+        echo "<tr><th>Equipos</th><th>Puntos</th><th>Goles a favor</th><th>Goles en contra</th></tr>";
+        echo "<tr>";
+            foreach ($liga as $nombres => $value) {
+                echo "<b><th>$nombres</th></b>";
+                
+                    echo "<td>$auxFinalPuntos[$nombres]</td>";
+                    echo "<td>$auxFinalGolesFavor[$nombres]</td>";
+                    echo "<td>$auxFinalGolesContra[$nombres]</td>";
+                
+                echo "</tr>";
+            }
+    echo "</table>";
+    ?>
+    <?php
+        include("../../fragmentos/footer.php");
+    ?>
 </body>
 </html>

@@ -13,7 +13,7 @@
     <h3>- Práctica 5:</h3>
         <h4>·  <a href="./Ejercicio1.php" target="blank">Ejercicio 1</a></h4>
         <h4>·  <a href="./Ejercicio2.php" target="blank">Ejercicio 2</a></h4>
-        <h4>·  <a href="./Ejercicio3.php?tamano=30" target="blank">Ejercicio 3</a></h4>
+        <h4>·  <a href="./Ejercicio3.php?tamano=5" target="blank">Ejercicio 3</a></h4>
     <?php
         include("../../fragmentos/footer.php");
     ?>
