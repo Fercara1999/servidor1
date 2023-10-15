@@ -123,8 +123,7 @@
             }
             echo "</tr>";
         }
-        echo "</table>";
-        echo "$puntos[Valladolid]";
+        echo "</table><br>";
 
         echo "<table border ='1'><tr><th>Equipos</th><th>Puntos</th><th>Goles a Favor</th><th>Goles en contra</th></tr>";
         echo "<tr>";
