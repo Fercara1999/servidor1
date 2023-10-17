@@ -133,10 +133,10 @@
                 else
                     $clasificacion[$nombreLocal]["Puntos"] += 3;
             } elseif ($resultado2[0] < $resultado2[1]) {
-                if (!isset($clasificacion[$nombreLocal]["Puntos"]))
-                    $clasificacion[$nombreLocal]["Puntos"] = 3;
+                if (!isset($clasificacion[$nombresRivales]["Puntos"]))
+                    $clasificacion[$nombresRivales]["Puntos"] = 3;
                 else
-                    $clasificacion[$nombreLocal]["Puntos"] += 3;
+                    $clasificacion[$nombresRivales]["Puntos"] += 3;
             } else {
                 if (!isset($clasificacion[$nombreLocal]["Puntos"]))
                     $clasificacion[$nombreLocal]["Puntos"] = 1;
