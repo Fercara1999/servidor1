@@ -17,6 +17,29 @@
 <p>c. Número máximo incluido</p>
 <p>d. Número de números generados</p>
 <p>e. True si puedes repetirse/ False si no pueden repetirse</p></b>
+
+    <?php
+        function numerosAleatorios($arrayNumeros,$min,$max,$nGenerados,$boolRepite){
+            $arrayNumeros = array();
+
+            for($i = 0 ; $i < $nGenerados ; $i++){
+                $n = rand($min,$max);
+                if($boolRepite){
+                    array_push($arrayNumeros,$n);
+                    echo $n."<br>";
+                }else{
+                    if(in_array($n,$arrayNumeros)){
+                        // echo "Ya esta el " .$n."<br>";
+                        $i--;
+                    }else{
+                        array_push($arrayNumeros,$n);
+                        echo $n."<br>";
+                    }
+                }
+            }
+
+        }
+    ?>
     <?php
         include("../../fragmentos/footer.php");
     ?>

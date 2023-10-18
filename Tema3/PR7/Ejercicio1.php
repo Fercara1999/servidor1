@@ -18,6 +18,39 @@
 <p>d. self() Devuelve el fichero actual</p>
 <p>e. letraDni() Se introduce el dni y devuelve la letra que le corresponde</p>
 <p>f. Realiza una página que utilice estas funciones</b></p>
+    
+    <?php
+
+        // Función apartado 1 
+            function br(){
+                echo "<br>";
+            }
+
+        // Función apartado 2
+            function h1($cadena){
+                echo "<h1>".$cadena."</h1>";
+            }
+
+        // Función apartado 3
+
+            function p($cadena){
+                echo "<p>".$cadena."</p>";
+            }
+
+        // Función apartado 4
+
+            function self(){
+                echo $_SERVER['PHP_SELF'];
+            }
+
+        // Función apartado 5
+
+            function letraDNI($numeros){
+                $arrayLetras = array("T", "R", "W", "A", "G", "M", "Y", "F", "P", "D", "X", "B", "N", "J", "Z", "S", "Q", "V", "H", "L", "C", "K", "E");
+                $posicionMiLetra = $numeros % count($arrayLetras);
+                echo "La letra de tu DNI es " .$arrayLetras[$posicionMiLetra];
+            }
+    ?>
     <?php
         include("../../fragmentos/footer.php");
     ?>
