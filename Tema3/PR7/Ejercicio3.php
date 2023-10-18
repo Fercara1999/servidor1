@@ -180,5 +180,8 @@
         }
        
     ?>
+    <?php
+        include("../../fragmentos/footer.php");
+    ?>
 </body>
 </html>
