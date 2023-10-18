@@ -56,15 +56,31 @@
                     
                     if($numero % 7 == 0){    
                         if(in_array($numero,$numerosGanadores)){
-                            echo "<td bgcolor='green'>".$numero."</td></tr><tr>";
+                            if(in_array($numero,$miCombinacion)){
+                                echo "<td bgcolor='blue'>".$numero."</td></tr><tr>";
+                            }else{
+                                echo "<td bgcolor='green'>".$numero."</td></tr><tr>";
+                            }
                         }else{
-                            echo "<td>".$numero."</td></tr><tr>";
+                            if(in_array($numero,$miCombinacion)){
+                                echo "<td bgcolor='blue'>".$numero."</td></tr><tr>";
+                            }else{
+                                echo "<td>".$numero."</td></tr><tr>";
+                            }
                         }
                     }else{
                         if(in_array($numero,$numerosGanadores)){
-                            echo "<td bgcolor='green'>".$numero."</td>";
+                            if(in_array($numero,$miCombinacion)){
+                                echo "<td bgcolor='blue'>".$numero."</td>";
+                            }else{
+                                echo "<td bgcolor='green'>".$numero."</td>";
+                            }
                         }else{
-                            echo "<td>".$numero."</td>";
+                            if(in_array($numero,$miCombinacion)){
+                                echo "<td bgcolor='blue'>".$numero."</td>";
+                             } else{
+                                echo "<td>".$numero."</td>";
+                            }
                         }
                     }
                 }
@@ -78,19 +94,44 @@
             foreach ($combinacionEstrellas as $numero) {
                 if($numero % 4 == 0){  
                     if(in_array($numero,$numerosEstrellas)){  
-                        echo "<td bgcolor='green'>".$numero."</td></tr><tr>";
+                        if(in_array($numero,$miCombinacionEstrellas)){
+                            echo "<td bgcolor='blue'>".$numero."</td></tr><tr>";    
+                        }else{
+                            echo "<td bgcolor='green'>".$numero."</td></tr><tr>";
+                        }
+                        
                     }else{
-                        echo "<td>".$numero."</td></tr><tr>";
+                        if(in_array($numero,$miCombinacionEstrellas)){
+                            echo "<td bgcolor='blue'>".$numero."</td></tr><tr>";
+                        }else{
+                            echo "<td>".$numero."</td></tr><tr>";
+                        }
                     }
                 }else{
                     if(in_array($numero,$numerosEstrellas)){  
-                        echo "<td bgcolor='green'>".$numero."</td>";
+                        if(in_array($numero,$miCombinacionEstrellas)){
+                            echo "<td bgcolor='blue'>".$numero."</td>";
+                        }else{
+                            echo "<td bgcolor='green'>".$numero."</td>";
+                        }
                     }else{
-                        echo "<td>".$numero."</td>";
+                        if(in_array($numero,$miCombinacionEstrellas)){
+                            echo "<td bgcolor='blue'>".$numero."</td>";
+                        }else{
+                            echo "<td>".$numero."</td>";
+                        }
                     }
                 }
             }
             echo "</table>";
+
+            foreach ($numerosGanadores as $key) {
+                echo "$key<br>";
+            }
+            echo "<br>";
+            foreach ($numerosEstrellas as $key) {
+                echo "$key<br>";
+            }
 
             $aciertos = 0;
         for ($i = 0 ; $i < 5 ; $i++){
