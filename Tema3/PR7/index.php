@@ -11,8 +11,8 @@
         include("../../fragmentos/header.html");
     ?>
     <h3>- Práctica 7:</h3>
-        <h4>·  <a href="./Ejercicio1.php" target="blank">Ejercicio 1</a></h4>
-        <h4>·  <a href="./Ejercicio2.php" target="blank">Ejercicio 2</a></h4>
+        <h4>·  <a href="./PruebasEjercicio1.php" target="blank">Ejercicio 1</a></h4>
+        <h4>·  <a href="./PruebasEjercicio2.php" target="blank">Ejercicio 2</a></h4>
 
     <?php
         include("../../fragmentos/footer.php");
