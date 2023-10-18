@@ -57,7 +57,7 @@
                     if($numero % 7 == 0){    
                         if(in_array($numero,$numerosGanadores)){
                             if(in_array($numero,$miCombinacion)){
-                                echo "<td bgcolor='blue'>".$numero."</td></tr><tr>";
+                                echo "<td bgcolor='yellow'>".$numero."</td></tr><tr>";
                             }else{
                                 echo "<td bgcolor='green'>".$numero."</td></tr><tr>";
                             }
@@ -71,7 +71,7 @@
                     }else{
                         if(in_array($numero,$numerosGanadores)){
                             if(in_array($numero,$miCombinacion)){
-                                echo "<td bgcolor='blue'>".$numero."</td>";
+                                echo "<td bgcolor='yellow'>".$numero."</td>";
                             }else{
                                 echo "<td bgcolor='green'>".$numero."</td>";
                             }
@@ -95,7 +95,7 @@
                 if($numero % 4 == 0){  
                     if(in_array($numero,$numerosEstrellas)){  
                         if(in_array($numero,$miCombinacionEstrellas)){
-                            echo "<td bgcolor='blue'>".$numero."</td></tr><tr>";    
+                            echo "<td bgcolor='yellow'>".$numero."</td></tr><tr>";    
                         }else{
                             echo "<td bgcolor='green'>".$numero."</td></tr><tr>";
                         }
@@ -110,7 +110,7 @@
                 }else{
                     if(in_array($numero,$numerosEstrellas)){  
                         if(in_array($numero,$miCombinacionEstrellas)){
-                            echo "<td bgcolor='blue'>".$numero."</td>";
+                            echo "<td bgcolor='yellow'>".$numero."</td>";
                         }else{
                             echo "<td bgcolor='green'>".$numero."</td>";
                         }
@@ -160,7 +160,8 @@
 ?>
 <table>
     <td bgcolor="green"> Combinacion ganadora</td><tr>
-    <td bgcolor="blue">Mi combinacion</td>
+    <td bgcolor="blue">Mi combinacion</td><tr>
+    <td bgcolor="yellow">Acierto</td>
 </table>
 
 <?php
