@@ -156,7 +156,14 @@
             }
         }
 
-        echo "Has tenido ".$aciertosEstrellas." aciertos en los números especiales";
+        echo "Has tenido ".$aciertosEstrellas." aciertos en los números especiales<br><br>";
+?>
+<table>
+    <td bgcolor="green"> Combinacion ganadora</td><tr>
+    <td bgcolor="blue">Mi combinacion</td>
+</table>
+
+<?php
 
  
         function numerosAleatorios(&$arrayNumeros,$min,$max,$nGenerados,$boolRepite){
