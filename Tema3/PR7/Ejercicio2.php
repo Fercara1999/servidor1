@@ -7,9 +7,6 @@
     <link rel="stylesheet" type="text/css" href="../../css/estilos.css">
 </head>
 <body>
-    <?php
-        include("../../fragmentos/header.html");
-    ?>
 
 <b><p>2. Haz una función que genere números aleatorios que se le pase como parámetros:</p>
 <p>a. Array para lo rellene con los números</p>
@@ -39,9 +36,6 @@
             }
 
         }
-    ?>
-    <?php
-        include("../../fragmentos/footer.php");
     ?>
 </body>
 </html>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>17O</title>
 </head>
 <body>
     <?php
@@ -16,7 +16,15 @@
     echo "<br>";
     $contador = array();
     añadirAlArray($contador,"uno");
+    añadirAlArray($contador,"dos");
+    añadirAlArray($contador,"tres");
     print_r($contador);
+    echo "<br>";
+    $contador2 = array();
+    añadirAlArray2($contador2,"uno");
+    añadirAlArray2($contador2,"dos");
+    añadirAlArray2($contador2,"tres");
+    print_r($contador2);
     ?>
 </body>
 </html>

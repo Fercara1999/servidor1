@@ -21,9 +21,16 @@
         return $precio * $iva;
         }
 
-        function añadirAlArray($array,$value){
+        function añadirAlArray(&$array,$value){
             $ultimo = count($array);
             $array[$ultimo] = $value;
+            // print_r($array);
+        }
+
+        function añadirAlArray2($array,$value){
+            $ultimo = count($array);
+            $array[$ultimo] = $value;
+            return $array;
         }
     ?>
 </body>

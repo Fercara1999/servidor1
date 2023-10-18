@@ -7,9 +7,6 @@
     <link rel="stylesheet" type="text/css" href="../../css/estilos.css">
 </head>
 <body>
-    <?php
-        include("../../fragmentos/header.html");
-    ?>
 
     <p><b>1. Crea tu propio fichero de php que tenga las funciones de:</p>
 <p>a. br() Pinta un br</p>
@@ -50,9 +47,6 @@
                 $posicionMiLetra = $numeros % count($arrayLetras);
                 echo "La letra de tu DNI es " .$arrayLetras[$posicionMiLetra];
             }
-    ?>
-    <?php
-        include("../../fragmentos/footer.php");
     ?>
 </body>
 </html>

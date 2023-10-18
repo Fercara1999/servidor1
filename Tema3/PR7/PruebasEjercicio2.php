@@ -8,12 +8,16 @@
 </head>
 <body>
     <?php
+        include("../../fragmentos/header.html");
         include("./Ejercicio2.php");
     ?>
     <?php
+        $arrayNumeros = array();
         numerosAleatorios($arrayNumeros,1,11,10,false);
     
     ?>
-    
+    <?php
+        include("../../fragmentos/footer.php");
+    ?>
 </body>
 </html>

@@ -8,6 +8,7 @@
 </head>
 <body>
     <?php
+        include("../../fragmentos/header.html");
         include("./Ejercicio1.php");
     ?>
     <?php
@@ -43,6 +44,8 @@
 
     
     ?>
-    
+    <?php
+        include("../../fragmentos/footer.php");
+    ?>
 </body>
 </html>
