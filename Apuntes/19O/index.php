@@ -22,7 +22,7 @@
             }
         ?>
 
-        <form action="" method="post" name="formulario1" enctype="multipart/form-data">
+        <form action="./procesa.php" method="get" name="formulario1" enctype="multipart/form-data">
         <label for="nombre">Nombre: <input type="text" name="nombre" id="nombre" placeholder="nombre" value=<?php recuerda('nombre'); ?>></label>
         <p class="error">
             <?php errores($errores,'nombre'); ?>
