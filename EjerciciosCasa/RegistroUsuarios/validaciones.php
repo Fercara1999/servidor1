@@ -10,10 +10,8 @@
 
     function textoVacio($nombre){
         if(empty($_REQUEST[$nombre])){
-            echo $nombre;
             return true;
         }else{
-            echo $nombre;
             return false;
         }
     }
@@ -25,17 +23,16 @@
     }
     
 
-    function coincidenContraseñas($contrasena,$confirma){
-        if(strcmp($contrasena,$confirma)){
-        // if($contrasena === $confirma){
-            echo $contrasena;
-            echo $confirma;
-            return true;
-        }else{
-            echo $contrasena;
-            echo $confirma;
-            return false;
-        }
+    function coincidenContraseñas(){
+        $contrasena = $_GET['contrasena'];
+        $confirma = $_GET['confContrasena'];
+
+            if($contrasena === $confirma){
+                return false;
+            }else{
+                return true;
+            }
+        
     }
 
 ?>

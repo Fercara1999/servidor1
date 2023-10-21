@@ -17,8 +17,8 @@
             if(textoVacio("nombre")){
                 $errores["nombre"] = "Nombre vacio";
             }
-            if(!(coincidenContraseñas("contrasena","confContrasena"))){
-                $errores["confContrasena"] = "No coinciden las contraseñas";
+            if(coincidenContraseñas()){
+                $errores["contrasena"] = "No coinciden las contraseñas";
             }
         }
     ?>
@@ -30,9 +30,9 @@
         </p>
         <label for="correo">Correo electronico: <input type="email" name="correo" id="correo" value=""></label><br>
         <label for="contrasena">Contraseña: <input type="password" name="contrasena" id="contrasena"></label><br>
-        <label for="confContrasena">Confirmación contraseña: <input type="password" name="confcontrasena" id="confContrasena"></label><br>
+        <label for="confContrasena">Confirmación contraseña: <input type="password" name="confContrasena" id="confContrasena"></label><br>
         <p class="error">
-            <?php errores($errores,'confContrasena') ?>
+            <?php errores($errores,'contrasena') ?>
         </p>
         <label for="fechaNacimiento">Fecha de nacimiento: <input type="datetime-local" name="fechaNacimiento" id="fechaNacimiento"></label><br>
         <label for="hombre">Hombre <input type="radio" name="genero" id="hombre" value="hombre"></label>
