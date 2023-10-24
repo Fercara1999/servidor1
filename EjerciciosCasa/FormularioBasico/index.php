@@ -26,7 +26,7 @@
     ?>
 
     <form action="" method="get" name="formBasico">
-       <label for="nombre">Nombre: <input type="text" name="nombre" id="nombre"></label><br>
+       <label for="nombre">Nombre: <input type="text" name="nombre" id="nombre" value=<?php recuerda('nombre'); ?>></label><br>
        <p class="error"><?php errores($errores,'nombre'); ?></p>
 
        <label for="correo">Correo: <input type="email" name="correo" id="correo"></label><br>

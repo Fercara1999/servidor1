@@ -29,4 +29,12 @@
             echo "Mal mensaje";
         }
     }
+
+    function recuerda($name){
+        if(enviado() && !empty($_REQUEST[$name]))
+            echo $_REQUEST[$name];
+
+        if(isset($_REQUEST['Borrar']))
+            echo "''";
+    }
 ?>
