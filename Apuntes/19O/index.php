@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>19O</title>
     <link rel="stylesheet" type="text/css" href="./estilo.css">
+    <link rel="stylesheet" type="text/css" href="./../../css/estilos.css">
 </head>
 <body>
     <?php
@@ -28,7 +29,7 @@
         Enctype: para poder enviar ficheros -->
 
         <!-- Todo lo que esté en input, textarea y select, se envia -->
-        <form action="" method="get" name="formulario1" enctype="multipart/form-data">
+        <form action="procesa.php" method="get" name="formulario1" enctype="multipart/form-data">
         <label for="nombre">Nombre: <input type="text" name="nombre" id="nombre" placeholder="nombre" value=<?php recuerda('nombre'); ?>></label>
         <p class="error">
             <?php errores($errores,'nombre'); ?>
