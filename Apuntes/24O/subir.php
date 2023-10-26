@@ -8,9 +8,9 @@
             $ruta = "";
             $ruta = '/var/www/servidor1/Tema3/';
             $ruta .= basename($_FILES['fichero']['name'][$key]);
-             if(move_uploaded_file($_FILES['fichero']['tmp_name'][$key],$ruta))
+             if(move_uploaded_file($_FILES['fichero']['tmp_name'][$key],$ruta)){
                 echo "El archivo ".$_FILES['fichero']['name'][$key]." ha sido subido<br>";
-             else
+             }else
                 echo "Error en la subida del archivo";
         }
              
