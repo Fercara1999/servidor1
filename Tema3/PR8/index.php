@@ -15,60 +15,21 @@
 
     <?php
         $errores = array();
-        $escribe = array();
         
-        if(enviado()){
-            if(textoVacio('alfabetico'))
-                $errores['alfabetico'] = 'Alfabetico vacio';
-            // else
-            //     $escribe['alfabetico'] = 'El nombre es '.$_GET['alfabetico'];
-            if(textoVacio('opalfabetico'))
-                $errores['opalfabetico'] = 'Opcional Alfabetico vacio';
-            if(textoVacio('alfanumerico'))
-                $errores['alfanumerico'] = 'Alfanumericio vacio';
-            if(textoVacio('opalfanumerico'))
-                $errores['opalfanumerico'] = 'Opcional Alfanumericio vacio';
-            if(textoVacio('numerico'))
-                $errores['numerico'] = 'Numerico vacio';
-            if(compruebaNumero('numerico'))
-                $errores['numerico'] = "Debes introducir un numero entre 0 y 100";
-            if(textoVacio('opnumerico'))
-                $errores['opnumerico'] = 'Opcional numerico vacio';
-            if(textoVacio('fecha'))
-                $errores['fecha'] = 'Fecha vacio';
-            if(esMayorEdad('fecha'))
-                $errores['fecha'] = "La fecha introducida es menor a los 18 años";
-            if(textoVacio('opfecha'))
-                $errores['opfecha'] = 'Opcional Fecha vacio';
-            if(radioVacio('opcion'))
-                $errores['opcion'] = 'No has seleccionado ninguna opcion radio';
-            if(distinta0())
-                $errores['selecciona'] = 'No has elegido ninguna opcion del select';
-            if(radioVacio('check'))
-                $errores['check'] = 'No has elegido ninguna opcion del check';
-            if(compruebaCheck('check'))
-                $errores['check'] = "Tienes que marcar 1 opcion como mínimo y 3 como máximo";
-            if(textoVacio('tlf'))
-                $errores['tlf'] = 'No has introducido un numero de telefono';
-            if(textoVacio('correo'))
-                $errores['correo'] = 'No has introducido un correo electrónico';
-            if(textoVacio('contrasena'))
-                $errores['contrasena'] = 'No has introducido una contraseña';
-            if(textoVacio('archivo'))
-                $errores['archivo'] = 'No has subido ningún archivo';
-        }
-            
+        if(enviado() && validaFormulario($errores)){
+            muestraFormulario();
+        }else{
     ?>
     
     <form action="./procesa.php" method="post" name="formulario1" enctype="multipart/form-data">
         <h2>Formulario de registro</h2>
-        <label for="alfabetico">Alfabetico <input type="text" name="alfabetico" id="alfabetico" value="<?php recuerda('alfabetico'); ?>" ></label><span style= "color:red"><?php errores($errores,'alfabetico'); ?></span>
-        <br><label for="opalfabetico">Alfabetico opcional <input type="text" name="opalfabetico" id="opalfabetico" value="<?php recuerda('opalfabetico'); ?>"></label><span style= "color:red"><?php errores($errores,'opalfabetico'); ?></span>
-        <br><label for="alfanumerico">Alfanumerico <input type="text" name="alfanumerico" id="alfanumerico" value="<?php recuerda('alfanumerico'); ?>" ></label><span style= "color:red"><?php errores($errores,'alfanumerico'); ?></span>
-        <br><label for="opalfanumerico">Alfanumerico opcional <input type="text" name="opalfanumerico" id="opalfanumerico" value="<?php recuerda('opalfanumerico'); ?>"></label><span style= "color:red"><?php errores($errores,'opalfanumerico'); ?></span>
-        <br><label for="numerico">Numerico <input type="number" name="numerico" id="numerico" value="<?php recuerda('numerico'); ?>" ></label><span style= "color:red"><?php errores($errores,'numerico'); ?></span>
-        <br><label for="opnumerico">Numerico opcional <input type="number" name="opnumerico" id="opnumerico" value="<?php recuerda('opnumerico'); ?>"></label><span style= "color:red"><?php errores($errores,'opnumerico'); ?></span>
-        <br><label for="fecha">Fecha <input type="date" name="fecha" id="fecha" value="<?php recuerda('fecha'); ?>" ></label><span style= "color:red"><?php errores($errores,'fecha'); ?></span>
+        <label for="alfabetico">Alfabetico <input type="text" name="alfabetico" id="alfabetico" value="<?php recuerda('alfabetico'); ?>" placeholder ="Nombre" required></label><span style= "color:red"><?php errores($errores,'alfabetico'); ?></span>
+        <br><label for="opalfabetico">Alfabetico opcional <input type="text" name="opalfabetico" id="opalfabetico" value="<?php recuerda('opalfabetico'); ?>" placeholder ="Opcional nombre"></label><span style= "color:red"><?php errores($errores,'opalfabetico'); ?></span>
+        <br><label for="alfanumerico">Alfanumerico <input type="text" name="alfanumerico" id="alfanumerico" value="<?php recuerda('alfanumerico'); ?>" placeholder ="Apellido" required></label><span style= "color:red"><?php errores($errores,'alfanumerico'); ?></span>
+        <br><label for="opalfanumerico">Alfanumerico opcional <input type="text" name="opalfanumerico" id="opalfanumerico" value="<?php recuerda('opalfanumerico'); ?>" placeholder ="Opcional apellido" ></label><span style= "color:red"><?php errores($errores,'opalfanumerico'); ?></span>
+        <br><label for="numerico">Numerico <input type="number" name="numerico" id="numerico" value="<?php recuerda('numerico'); ?>" placeholder ="Numerico" required></label><span style= "color:red"><?php errores($errores,'numerico'); ?></span>
+        <br><label for="opnumerico">Numerico opcional <input type="number" name="opnumerico" id="opnumerico" value="<?php recuerda('opnumerico'); ?>" placeholder ="Opcional numérico" ></label><span style= "color:red"><?php errores($errores,'opnumerico'); ?></span>
+        <br><label for="fecha">Fecha <input type="date" name="fecha" id="fecha" value="<?php recuerda('fecha'); ?>" required></label><span style= "color:red"><?php errores($errores,'fecha'); ?></span>
         <br><label for="opfecha">Fecha opcional <input type="date" name="opfecha" id="opfecha" value="<?php recuerda('opfecha'); ?>"></label><span style= "color:red"><?php errores($errores,'opfecha'); ?></span>
         <br>Radio obligatorio
         <br><label for="op1">Opcion1<input <?php recuerdaRadio('opcion','op1') ?> type="radio" name="opcion" id="op1" value="op1"></label>
@@ -90,11 +51,11 @@
             echo "<label for='check$i'><input ".recuerdaCheck('check','check'.$i). " type='checkbox' name='check[]' id='check$i' value='check$i'>Check$i</input></label><br>"
         ?>
         <span style= "color:red"><?php errores($errores,'check'); ?></span>
-        <br><label for="tlf">Nº Telefono <input type="tel" name="tlf" id="tlf" value="<?php recuerda('tlf'); ?>"></label>
+        <br><label for="tlf">Nº Telefono <input type="tel" name="tlf" id="tlf" value="<?php recuerda('tlf'); ?>" placeholder ="111111111" ></label>
         <span style= "color:red"><?php errores($errores,'tlf'); ?></span>
-        <br><label for="correo">Correo electrónico <input type="email" name="correo" id="correo" value="<?php recuerda('correo'); ?>"></label>
+        <br><label for="correo">Correo electrónico <input type="email" name="correo" id="correo" value="<?php recuerda('correo'); ?>" placeholder ="prueba@prueba.com" required></label>
         <span style= "color:red"><?php errores($errores,'correo'); ?></span>
-        <br><label for="contrasena">Contraseña <input type="password" name="contrasena" id="contrasena" value="<?php recuerda('contrasena'); ?>"></label>
+        <br><label for="contrasena">Contraseña <input type="password" name="contrasena" id="contrasena" value="<?php recuerda('contrasena'); ?>" required></label>
         <span style= "color:red"><?php errores($errores,'contrasena'); ?></span>
         <br><label for="archivo">Subir documento <input type="file" name="archivo" id="archivo"></label>
         <?php muestraImagen('archivo'); ?>
@@ -103,6 +64,7 @@
     </form>
 
     <?php
+        }
         include("../../fragmentos/footer.php");
     ?>
 
