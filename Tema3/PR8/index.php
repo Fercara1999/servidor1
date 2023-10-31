@@ -21,7 +21,7 @@
         }else{
     ?>
     
-    <form action="./procesa.php" method="post" name="formulario1" enctype="multipart/form-data">
+    <form action="" method="post" name="formulario1" enctype="multipart/form-data">
         <h2>Formulario de registro</h2>
         <label for="alfabetico">Alfabetico <input type="text" name="alfabetico" id="alfabetico" value="<?php recuerda('alfabetico'); ?>" placeholder ="Nombre" required></label><span style= "color:red"><?php errores($errores,'alfabetico'); ?></span>
         <br><label for="opalfabetico">Alfabetico opcional <input type="text" name="opalfabetico" id="opalfabetico" value="<?php recuerda('opalfabetico'); ?>" placeholder ="Opcional nombre"></label><span style= "color:red"><?php errores($errores,'opalfabetico'); ?></span>

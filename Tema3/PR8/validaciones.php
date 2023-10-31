@@ -150,8 +150,8 @@
                 $errores['correo'] = 'No has introducido un correo electrónico';
             if(textoVacio('contrasena'))
                 $errores['contrasena'] = 'No has introducido una contraseña';
-            if(textoVacio('archivo'))
-                $errores['archivo'] = 'No has subido ningún archivo';
+            // if(isset($_FILES['archivo']))
+            //     $errores['archivo'] = 'No has subido ningún archivo';
             if(count($errores) == 0){
                 return true;
             }else{
