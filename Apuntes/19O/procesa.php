@@ -8,7 +8,9 @@ include("../../funcionesUtiles.php");
 // print_r($_POST);
 print_r($_REQUEST);
 br();
-print_r($_FILES);
+print_r(
+    w
+    $_FILES);
 
 br();
 

@@ -1,7 +1,7 @@
 <?php
 
     function enviado(){
-        if(isset($_REQUEST['Enviar'])){
+        if(isset($_POST['Enviar'])){
             return true;
         }else{
             return false;
@@ -9,7 +9,7 @@
     }
 
     function textoVacio($nombre){
-        if(empty($_REQUEST[$nombre])){
+        if(empty($_POST[$nombre])){
             return true;
         }else{
             return false;
