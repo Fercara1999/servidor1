@@ -37,7 +37,7 @@
     }
 
     function expresionContrasena($name){
-        $exp = '/[a-z]{1,}[A-Z]{1,}[0-9]{1,}/';
+        $exp = '/^(?=.*[a-z]){1,}(?=.*[A-Z]){1,}(?=.*[0-9]){1,}/';
         $texto = $_REQUEST[$name];
         if(preg_match($exp,$texto))
             return false;
@@ -57,7 +57,7 @@
 
     function expresionFecha($name){
 
-        $exp = '/(\d{1,2})(\/)(\d{1,2})(\/)(\d{2,4})/';
+        $exp = '/(\d{4})(\/)(\d{1,2})(\/)(\d{1,2})/';
         $texto = $_REQUEST[$name];
 
         if(preg_match($exp,$texto))
@@ -69,7 +69,7 @@
 
     function esMayorEdad($name){
         
-        $fechaUsuario = new DateTime($_REQUEST[$name]);
+        $fechaUsuario = date_create_from_format('Y/m/d',$_REQUEST[$name]);
         $hoy = new DateTime();
 
         $intervalo = $fechaUsuario->diff($hoy);
@@ -87,6 +87,19 @@
         $texto = $_REQUEST[$name];
 
         if(preg_match($exp,$texto))
+            return false;
+        else
+            return true;
+    }
+
+    function letraDNI($name){
+        $DNI = $_REQUEST[$name];
+        $numeros = substr($DNI,0,-1);
+        $letra = substr($DNI,strlen($DNI)-1);
+        $arrayLetras = array("T", "R", "W", "A", "G", "M", "Y", "F", "P", "D", "X", "B", "N", "J", "Z", "S", "Q", "V", "H", "L", "C", "K", "E");
+        $posicionMiLetra = $numeros % count($arrayLetras);
+        $miLetra = $arrayLetras[$posicionMiLetra];
+        if ($miLetra == $letra)
             return false;
         else
             return true;
@@ -117,6 +130,13 @@
         }
     }
 
+    function imagenVacia($name){
+        if(empty($_FILES[$name]['name']))
+            return true;
+        else
+            return false;
+    }
+
     function muestraImagen($name){
     
         if(count($_FILES) != 0){
@@ -136,28 +156,42 @@
 
         if(textoVacio('nombre'))
             $errores['nombre'] = "El campo nombre está vacío";
-        if(expresionNombre('nombre'))
+        elseif(expresionNombre('nombre'))
             $errores['nombre'] = "El contenido introducido en el nombre no es valido";
         if(textoVacio('apellido'))
             $errores['apellido'] = "El campo apellido está vacío";
-        if(expresionApellido('apellido'))
+        elseif(expresionApellido('apellido'))
             $errores['apellido'] = "El contenido introducido en los apellidos no es valido";
-        if(expresionContrasena('contrasena'))
+        if(textoVacio('contrasena'))
+            $errores['contrasena'] = "El campo contrasena está vacío";
+        elseif(expresionContrasena('contrasena'))
             $errores['contrasena'] = "El contenido introducido en la contraseña no es valido";
+        if(textoVacio('repcontrasena'))
+            $errores['repcontrasena'] = "El campo confirma contrasena está vacío";
         if(expresionContrasena('repcontrasena'))
             $errores['repcontrasena'] = "El contenido introducido en la confirmación de contraseña no es valido";
         if(coincideContrasena('contrasena','repcontrasena'))
             $errores['repcontrasena'] = "Las contraseñas no coinciden";
-        if(esMayorEdad('fecha'))
+        if(textoVacio('fecha'))
+            $errores['fecha'] = "El campo fecha está vacío";
+        elseif(expresionFecha('fecha'))
+            $errores['fecha'] = "El formato de fecha no es correcto";
+        elseif(esMayorEdad('fecha'))
             $errores['fecha'] = "La fecha es inferior a 18 años";
-        if(expresionDNI('DNI'))
+        if(textoVacio('DNI'))
+            $errores['DNI'] = "El campo DNI está vacío";
+        elseif(expresionDNI('DNI'))
             $errores['DNI'] = "El formato de DNI es incorrecto";
-        if(expresionCorreo('email'))
+        elseif(letraDNI('DNI'))
+            $errores['DNI'] = "El DNI no está escrito correctamente";
+        if(textoVacio('email'))
+            $errores['email'] = "El campo email está vacío";
+        elseif(expresionCorreo('email'))
             $errores['email'] = "El formato del correo es incorrecto";
-        // if(textoVacio('imagen'))
-        //     $errores['imagen'] = "El campo imagen está vacio";
-        if(expresionImagen('imagen'))
-            $errores['imagen'] = "El formato de la imagen no es correcto";
+        if(imagenVacia('imagen'))
+            $errores['imagen'] = "El campo imagen está vacío";    
+        elseif(expresionImagen('imagen'))
+            $errores['imagen'] = "El formato de la imagen no es correcto o el campo está vacío";
         if(count($errores) == 0)
             return true;
         else
