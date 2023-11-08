@@ -1,14 +1,22 @@
 <?php
 
     function pulsaBoton($name){
-        if(isset($_REQUEST[$name])){
-            if($name == 'leer' || $name == 'escribir')
-                header('Location: ./'.$name.'.php?fichero='.$_REQUEST['texto']);
-            else
+        
+            if($name == 'leer' || $name == 'escribir'){
+            $fichero = $_REQUEST['fichero'];
+                if($name=='leer' && !file_exists($fichero)){
+                    echo "No existe";
+                    return false;
+                }
+                else{
+                    header('Location: ./'.$name.'.php?fichero='.$_REQUEST['fichero']);
+                    exit;
+                }
+                
+            }else
                 header('Location: ./'.$name.'.php');
             return true;
-        }else
-            return false;
+      
     }
 
     function leeArchivo(){
@@ -32,7 +40,7 @@
     function escribirArchivo(){
         $fichero = $_REQUEST['fichero'];
         echo $fichero;
-            if(!$fp = fopen($fichero,'a+')){
+            if(!$fp = fopen($fichero,'w')){
                 echo "Problemas al abrir el fichero";
             }else{
                 $texto = $_REQUEST['contenido'];

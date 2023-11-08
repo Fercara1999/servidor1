@@ -9,25 +9,23 @@
 <body>
     <?php
         include("../../fragmentos/header.html");
-        // include("./funcionesSeleccionar.php");
         include("./funciones.php");
     ?>
 
     <?php
 
-
-        if(pulsaBoton('leer'))
-            echo "leyendo";
-
-        if(pulsaBoton('escribir'))
-            echo "Escribiendo";
+    if(isset($_REQUEST['boton']))
+        if(pulsaBoton($_REQUEST['boton'])){
+            exit;
+        }
+            
 
     ?>
     
     <form action="" method="get">
-        <label for="texto"><input type="text" name="texto" id="texto"></label><br><br>
-        <input type="submit" name="leer" id="leer" value="Leer">
-        <input type="submit" name="escribir" id="escribir" value="Escribir">
+        <label for="texto"><input type="text" name="fichero" id="texto"></label><br><br>
+        <input type="submit" name="boton" id="leer" value="leer">
+        <input type="submit" name="boton" id="escribir" value="escribir">
 
     </form>
 

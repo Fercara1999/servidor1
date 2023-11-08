@@ -14,19 +14,23 @@
 
     <?php
 
-        if(pulsaBoton('seleccionar')){
-            
+        if(isset($_REQUEST['boton']))
+        {
+            if($_REQUEST['boton'] == 'Volver')
+                pulsaBoton('seleccionar');
+            else{
+                escribirArchivo();
+                 pulsaBoton('leer');
+            }
         }
-
-        if(pulsaBoton('leer'))
 
 
     ?>
     <form action="" method="get">
-        <label for="contenido"><textarea name="contenido" id="contenido" cols="30" rows="10" placeholder="<?php leeArchivo(); ?>"></textarea></label><br><br>
+        <label for="contenido"><textarea name="contenido" id="contenido" cols="30" rows="10" placeholder=""><?php leeArchivo(); ?></textarea></label><br><br>
         <input type="hidden" name="fichero" value="<?php echo $_GET['fichero']; ?>">
-        <input type="submit" name="seleccionar" id="seleccionar" value="Volver">
-        <input type="submit" name="leer" id="leer" value="Guardar">
+        <input type="submit" name="boton" id="seleccionar" value="Volver">
+        <input type="submit" name="boton" id="leer" value="Guardar">
 
     </form>
 
