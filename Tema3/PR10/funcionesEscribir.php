@@ -15,8 +15,10 @@
     }
 
     function escribirArchivo(){
-        if(file_exists('fichero.txt')){
-            if(!$fp = fopen('fichero.txt','a+')){
+        $fichero = $_GET['fichero'];
+        echo $fichero;
+        if(file_exists($fichero)){
+            if(!$fp = fopen($fichero,'a+')){
                 echo "Problemas al abrir el fichero";
             }else{
                 $texto = $_POST['contenido'];
@@ -32,8 +34,9 @@
     }
 
     function leeArchivo(){
-        if(file_exists('fichero.txt')){
-            if(!$fp = fopen('fichero.txt','r')){
+        $fichero = $_GET['fichero'];
+        if(file_exists($fichero)){
+            if(!$fp = fopen($fichero,'r')){
                 echo "Problemas al abrir el fichero";
             }else{
                 $leido = fread($fp,filesize('fichero.txt'));

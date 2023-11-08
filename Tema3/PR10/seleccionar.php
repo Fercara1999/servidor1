@@ -9,29 +9,25 @@
 <body>
     <?php
         include("../../fragmentos/header.html");
-        include("./funcionesSeleccionar.php");
+        // include("./funcionesSeleccionar.php");
+        include("./funciones.php");
     ?>
 
     <?php
 
-        
 
-        if(pulsaLeer()){
-            $fichero = $_REQUEST['texto'];
-            header('Location: ./leer.php?fichero='.$fichero);
-        }
+        if(pulsaBoton('leer'))
+            echo "leyendo";
 
-        if(pulsaEscribir()){
-            $fichero = $_REQUEST['texto'];
-            header('Location: ./escribir.php?fichero='.$fichero);
-        }
+        if(pulsaBoton('escribir'))
+            echo "Escribiendo";
 
     ?>
     
-    <form action="" method="post">
+    <form action="" method="get">
         <label for="texto"><input type="text" name="texto" id="texto"></label><br><br>
-        <input type="submit" name="Leer" id="Leer" value="Leer">
-        <input type="submit" name="Escribir" id="Escribir" value="Escribir">
+        <input type="submit" name="leer" id="leer" value="Leer">
+        <input type="submit" name="escribir" id="escribir" value="Escribir">
 
     </form>
 

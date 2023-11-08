@@ -9,27 +9,32 @@
 <body>
     <?php
         include("../../fragmentos/header.html");
-        include("./funcionesLeer.php");
+        include("./funciones.php");
     ?>
 
     <?php
 
-        if(pulsaVolver()){
-            header('Location: ./seleccionar.php');
+// echo $_GET['fichero'];
+
+        if(pulsaBoton('seleccionar')){
+
         }
 
-        if(pulsaModificar()){
-            header('Location: ./escribir.php');
+        if(pulsaBoton('modificar')){
+            escribirArchivo();
         }
-
     ?>
 
+<?php
 
-    <form action="" method="post">
-    <!-- <input type="hidden" name="" value=""> -->
-        <label for="contenido"><textarea name="contenido" id="contenido" cols="30" rows="10" placeholder="<?php leeArchivo() ?>" disabled></textarea></label><br><br>
-        <input type="submit" name="Volver" id="Volver" value="Volver">
-        <input type="submit" name="Modificar" id="Modificar" value="Modificar">
+?>
+
+
+    <form action="escribir.php" method="get">
+        <label for="contenido"><textarea name="contenido" id="contenido" cols="30" rows="10" placeholder="<?php leeArchivo() ?>" readonly></textarea></label><br><br>
+        <input type="hidden" name="fichero" value=". <?php echo $_GET['fichero'] ?>.">
+        <input type="submit" name="seleccionar" id="seleccionar" value="Volver">
+        <input type="submit" name="modificar" id="modificar" value="Modificar">
 
     </form>
 
