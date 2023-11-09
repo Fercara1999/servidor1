@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PR10b - Fernando Calles</title>
+    <title>Modificar - Fernando Calles</title>
     <link rel="stylesheet" type="text/css" href="../../css/estilos.css">
 </head>
 <body>
@@ -13,14 +13,8 @@
     ?>
 
     <?php
-
-    if(isset($_GET['guardar']))
-        guardaDatos();
-        // header("Location: ./notas.php");
-
-    if(isset($_GET['eliminar']))
-        eliminaAlumno();
-
+        if(isset($_GET['guardar']))
+            guardaDatos();
     ?>
     
     <form action="" method="get">
@@ -29,11 +23,7 @@
         <label for="nota2">Nota 2: <input type="number" name="nota2" id="nota2" value="<?php echo $_GET['nota2'] ?>"min="0" max="10"></label><br>
         <label for="nota3">Nota 3: <input type="number" name="nota3" id="nota3" value="<?php echo $_GET['nota3'] ?>"min="0" max="10"></label><br>
         <label for="guardar"><input type="submit" value="Guardar cambios" name="guardar" id="guardar"></label>
-        <label for="eliminar"><input type="submit" value="Eliminar alumno" name="eliminar" id="eliminar"></label>
     </form>
-
-    <?php
-    ?>
 
 <?php
         include("../../fragmentos/footer.php");

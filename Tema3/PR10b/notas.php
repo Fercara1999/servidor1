@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PR10b - Fernando Calles</title>
+    <title>Notas - Fernando Calles</title>
     <link rel="stylesheet" type="text/css" href="../../css/estilos.css">
 </head>
+
 <body>
     <?php
         include("../../fragmentos/header.html");
@@ -14,28 +16,21 @@
 
     <?php
 
-    ?>
-    
-    <?php
-
-        if(isset($_GET['editar']))
+    if (isset($_GET['editar']))
         header("Location: ./modificar.php?alumno=" . $_REQUEST['dato0'] . "&nota1=" . $_REQUEST['dato1'] . "&nota2=" . $_REQUEST['dato2'] . "&nota3=" . $_REQUEST['dato3']);
 
-        if(isset($_GET['eliminar'])){
-            header("Location: ./notas.php?alumno=" . $_REQUEST['dato0'] . "&nota1=" . $_REQUEST['dato1'] . "&nota2=" . $_REQUEST['dato2'] . "&nota3=" . $_REQUEST['dato3']);
-            // eliminaAlumno();
-            // header("Location: ./notas.php");
-        }
-
-        if(isset($_GET['anade']))
-            header("Location: ./anadeAlumno.php");
+    if (isset($_GET['eliminar'])) 
+        header("Location: ./eliminar.php?alumno=" . $_REQUEST['dato0'] . "&nota1=" . $_REQUEST['dato1'] . "&nota2=" . $_REQUEST['dato2'] . "&nota3=" . $_REQUEST['dato3']);
+    
+    if (isset($_GET['anade']))
+        header("Location: ./anadeAlumno.php");
 
     ?>
 
     <?php
 
-        $alumno = array();
-        $z = muestraNotas($alumno);
+    $alumno = array();
+    $z = muestraNotas($alumno);
 
     ?>
 
@@ -50,35 +45,32 @@
         </tr>
 
         <?php
-                    for($i = 0 ; $i <= $z-1 ; $i++){
-                        if($i % 4 == 0 || $i == 0){
-                            echo "<tr>";
-                        }
-                        echo "<form action='' method='get' name='enviarDatos'>";
-                        for ($j = 0 ; $j <= 3 ; $j++){
-                        echo "<td><label for='dato".$j."'><input type='text' name='dato".$j."' value='".$alumno[$i][$j] ."'></label></td>";
-                        }
-                    
-                        echo "<td><center><input type='submit' name='editar' id='editar' value='Editar'></center></td>";
-                        echo "<td><center><input type='submit' name='eliminar' id='eliminar' value='Eliminar'></center></td>";
-                    
-                    echo "</form></tr>";
+        for ($i = 0; $i <= $z - 1; $i++) {
+            if ($i % 4 == 0 || $i == 0) {
+                echo "<tr>";
+            }
+            echo "<form action='' method='get' name='enviarDatos'>";
+            for ($j = 0; $j <= 3; $j++) {
+                echo "<td><label for='dato" . $j . "'><input type='text' name='dato" . $j . "' value='" . $alumno[$i][$j] . "'></label></td>";
+            }
 
-                    }   
-                    
-                    
-                    ?>
-        
-        
+            echo "<td><center><input type='submit' name='editar' id='editar' value='Editar'></center></td>";
+            echo "<td><center><input type='submit' name='eliminar' id='eliminar' value='Eliminar'></center></td>";
+
+            echo "</form></tr>";
+        }
+
+        ?>
+
     </table>
-    
+    <br>
     <form action="" method="get">
         <input type='submit' name='anade' id='anade' value='Añadir Alumno'>
     </form>
 
-
     <?php
-        include("../../fragmentos/footer.php");
+    include("../../fragmentos/footer.php");
     ?>
 </body>
+
 </html>
