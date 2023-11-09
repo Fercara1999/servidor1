@@ -12,11 +12,6 @@ function muestraNotas(&$array)
         }
         fclose($fp);
     }
-    foreach ($array as  $value) {
-        
-        if(in_array('gghf',$value))
-            $esta = in_array('gghf',$value);
-    }
     
     return $i;
 }
