@@ -14,35 +14,30 @@
 
     <?php
 
-    // if(isset($_REQUEST['boton']))
-    //     if(pulsaBoton($_REQUEST['boton'])){
-    //         exit;
-    //     }
-            
-
     ?>
     
-    <!-- <form action="" method="get">
-        <label for="texto"><input type="text" name="fichero" id="texto"></label><br><br>
-        <input type="submit" name="boton" id="leer" value="leer">
-        <input type="submit" name="boton" id="escribir" value="escribir">
-
-    </form> -->
-
     <?php
 
         if(isset($_GET['editar']))
-            header('Location: ./modificar.php');
+        header("Location: ./modificar.php?alumno=" . $_REQUEST['dato0'] . "&nota1=" . $_REQUEST['dato1'] . "&nota2=" . $_REQUEST['dato2'] . "&nota3=" . $_REQUEST['dato3']);
+
+        if(isset($_GET['eliminar'])){
+            header("Location: ./notas.php?alumno=" . $_REQUEST['dato0'] . "&nota1=" . $_REQUEST['dato1'] . "&nota2=" . $_REQUEST['dato2'] . "&nota3=" . $_REQUEST['dato3']);
+            // eliminaAlumno();
+            // header("Location: ./notas.php");
+        }
+
+        if(isset($_GET['anade']))
+            header("Location: ./anadeAlumno.php");
 
     ?>
 
     <?php
 
         $alumno = array();
-        muestraNotas($alumno);
+        $z = muestraNotas($alumno);
 
     ?>
-
 
     <table border="1">
         <tr>
@@ -54,30 +49,33 @@
             <th>Eliminar</th>
         </tr>
 
-        <form action="" method="get">
-            <?php
-                    // $j =0;
-                for($i = 0 ; $i < count($alumno)-1 ; $i++){
-                    if($i % 4 == 0 || $i == 0){
-                        echo "<tr>";
-                    }
-                    for ($j = 0 ; $j <= 3 ; $j++){
-                        echo "<td>". $alumno[$i][$j] ."</td>";
-                    }
+        <?php
+                    for($i = 0 ; $i <= $z-1 ; $i++){
+                        if($i % 4 == 0 || $i == 0){
+                            echo "<tr>";
+                        }
+                        echo "<form action='' method='get' name='enviarDatos'>";
+                        for ($j = 0 ; $j <= 3 ; $j++){
+                        echo "<td><label for='dato".$j."'><input type='text' name='dato".$j."' value='".$alumno[$i][$j] ."'></label></td>";
+                        }
                     
-                        echo "<td><input type='submit' name='editar' id='editar' value='Editar'></td>";
-                        echo "<td><input type='submit' name='eliminar' id='eliminar' value='Eliminar'></td>";
+                        echo "<td><center><input type='submit' name='editar' id='editar' value='Editar'></center></td>";
+                        echo "<td><center><input type='submit' name='eliminar' id='eliminar' value='Eliminar'></center></td>";
                     
-                    echo "</tr>";
+                    echo "</form></tr>";
 
+                    }   
                     
-                }
-                
-
-            ?>
-        </form>
-
+                    
+                    ?>
+        
+        
     </table>
+    
+    <form action="" method="get">
+        <input type='submit' name='anade' id='anade' value='Añadir Alumno'>
+    </form>
+
 
     <?php
         include("../../fragmentos/footer.php");
