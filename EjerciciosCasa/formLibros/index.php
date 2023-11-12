@@ -18,11 +18,11 @@
         }
 
         if(isset($_REQUEST["ver"])){
-            verDatos();
+            header("Location: ./muestraLibros.php");
         }
     ?>
 
-    <form action="" method="get" enctype="multipart/form-data">
+    <form action="" method="post" enctype="multipart/form-data">
         <label for="titulo">Titulo: <input type="text" name="titulo" id="titulo"></label><br>
         <label for="autor">Autor: <input type="text" name="autor" id="autor"></label><br>
         <label for="editorial">Editorial: <input type="text" name="editorial" id="editorial"></label><br>
