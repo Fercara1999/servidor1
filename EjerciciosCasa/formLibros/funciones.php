@@ -67,4 +67,69 @@ function muestraImagen($name){
 
 }
 
+function textoVacio($name){
+
+    if(empty($_REQUEST[$name]))
+        return true;
+    else
+        return false;
+    
+}
+
+function validaFormulario(&$errores){
+
+    if(textoVacio('titulo')){
+        $errores['titulo'] = "El campo TITULO está vacio";
+    }
+    if(textoVacio('autor')){
+        $errores['autor'] = "El campo AUTOR está vacio";
+    }elseif(expresionAutor()){
+        $errores['autor'] = "El formato del AUTOR no es correcto";
+    }
+    if(textoVacio('editorial')){
+        $errores['editorial'] = "El campo EDITORIAL está vacio";
+    }
+    if(textoVacio('fechaPub')){
+        $errores['fechaPub'] = "El campo FECHA DE PUBLICACION está vacio";
+    }elseif(expresionFecha()){
+        $errores['fechaPub'] = "El formato de la FECHA DE PUBLICACION no es correcto";
+    }
+    if(textoVacio('precio')){
+        $errores['precio'] = "El campo PRECIO está vacio";
+    }
+}
+
+function recuerda($name){
+    if(isset($_REQUEST[$name]))
+        echo $_REQUEST[$name];
+    else
+        echo "";
+}
+
+function muestraError($array,$campo){
+    if(isset($array[$campo]))
+        echo $array[$campo];
+}
+
+function expresionFecha(){
+
+    $patron = '/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/';
+    $fecha = $_REQUEST['fechaPub'];
+
+    if(!(preg_match($patron,$fecha)))
+        return true;
+    else
+        return false;
+}
+
+function expresionAutor(){
+
+    $patron = '/^[a-zA-Z]{3,}\s[a-zA-Z]{3,}/';
+    $autor = $_REQUEST['autor'];
+    if(!(preg_match($patron,$autor)))
+        return true;
+    else
+        return false;
+}
+
 ?>
