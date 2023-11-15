@@ -16,7 +16,9 @@
 
     <?php
 
-    guardaXML();
+    if(guardaXML())
+        header("Location: ./LeeFicheroXML.php");
+        
 
     if (isset($_GET['editar']))
         header("Location: ./modificar.php?alumno=" . $_REQUEST['dato0'] . "&nota1=" . $_REQUEST['dato1'] . "&nota2=" . $_REQUEST['dato2'] . "&nota3=" . $_REQUEST['dato3']);

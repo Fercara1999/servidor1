@@ -20,19 +20,26 @@ function guardaXML(){
 
     $dom = new DOMDocument("1.0","utf-8");
     $raiz = $dom->appendChild($dom->createElement("notas"));
-    $alumno = $dom->createElement("alumno");
-    if(!$fp = fopen("notas.csv","r") !== FALSE){
+    if($fp = fopen("notas.csv","r")){
         while (($datos = fgetcsv($fp,1000,";")) !== false) {
-            // $i++;
-            $nombre =  $dom->createElement("nombre",$datos);
+            $alumno = $dom->createElement("alumno");
+            $nombre =  $dom->createElement("nombre",$datos[0]);
+            $nota1 =  $dom->createElement("nota1",$datos[1]);
+            $nota2 =  $dom->createElement("nota2",$datos[2]);
+            $nota3 =  $dom->createElement("nota3",$datos[3]);
             $alumno -> appendChild($nombre);
+            $alumno -> appendChild($nota1);
+            $alumno -> appendChild($nota2);
+            $alumno -> appendChild($nota3);
+            $raiz -> appendChild($alumno);
         }
+        fclose($fp);
+        $dom -> formatOutput = true;
+        $dom->save('notas3.xml');
+        return true;
+    }else{
+        return false;
     }
-
-    // $nombre =  $dom->createElement("nombre","");
-
-    $dom -> formatOutput = true;
-    $dom->save('notas.xml');
 }
 
 function guardaDatos()
@@ -65,6 +72,10 @@ function guardaDatos()
         fclose($fp);
         header("Location: ./notas.php");
     }
+}
+
+function guardaXML(){
+    
 }
 
 function eliminaAlumno()
