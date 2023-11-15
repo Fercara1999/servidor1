@@ -1,0 +1,2 @@
+<?xml version="1.0"?>
+<libros><libro id="1"><titulo>Holly</titulo><autor>Stephen King</autor><categorias><categoria>misterio</categoria><categoria>ficcion</categoria><categoria>thriller</categoria></categorias></libro><libro id="2"><titulo>Todo vuelve</titulo><autor>Juan G&#xF3;mez-Jurado</autor><categorias><categoria>misterio</categoria></categorias></libro><libro id="3"><titulo>Juego de tronos</titulo><autor>George R R Martin</autor><categorias><categoria>misterio</categoria><categoria>aventuras</categoria></categorias></libro></libros>
