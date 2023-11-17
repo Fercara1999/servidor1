@@ -12,6 +12,16 @@
     <?php
         include("../../fragmentos/header.html");
         include("./funciones.php");
+
+        if(isset($_GET['Añadir']))
+            header("Location: ./anadeAlumno.php");
+
+        if(isset($_GET['Eliminar'])){
+            eliminaAlumnoXML();
+            // header("Location: ./LeeFicheroXML.php");
+        }
+
+            
     ?>
     <table border="1">
         <tr>
@@ -20,6 +30,7 @@
             <th>Nota 2</th>
             <th>Nota 3</th>
             <th>Editar</th>
+            <th>Eliminar</th>
          </tr> 
          
     <?php
@@ -31,7 +42,7 @@
                 if($alumno->nodeType == 1){
                     echo "<tr>";
                     $nodo = $alumno->firstChild;
-                    echo "<form action='./modificar.php' method='get'>";
+                    echo "<form action='' method='get'>";
                     do{
                         if($nodo->nodeType == 1){
                             echo "<td><label for='dato$i'><input type='text' name='dato$i' value='".$nodo->nodeValue."' readonly></td>";
@@ -39,66 +50,19 @@
                         }
                     }while($nodo = $nodo -> nextSibling);
                     $i = 1;
-                    echo "<td><input type='submit' value='Editar'></td></form>";
+                    echo "<td><input type='submit' value='Editar'></td>";
+                    echo "<td><label for='Eliminar'><input type='submit' value='Eliminar' name='Eliminar'></label></td></form>";
                     echo "</tr>";
                 }
             }
         }
-
-
-
+        echo "</table>";
+        echo "<form action='./anadeAlumno.php' method='get'><input type='submit' value='Añadir' name='Añadir'></form>";
 
     ?>
-    <!-- // if(guardaXML())
-    //     header("Location: ./LeeFicheroXML.php");
-        
-
-    // if (isset($_GET['editar']))
-    //     header("Location: ./modificar.php?alumno=" . $_REQUEST['dato0'] . "&nota1=" . $_REQUEST['dato1'] . "&nota2=" . $_REQUEST['dato2'] . "&nota3=" . $_REQUEST['dato3']);
-
-    // if (isset($_GET['eliminar'])) 
-    //     header("Location: ./eliminar.php?alumno=" . $_REQUEST['dato0'] . "&nota1=" . $_REQUEST['dato1'] . "&nota2=" . $_REQUEST['dato2'] . "&nota3=" . $_REQUEST['dato3']);
-    
-    // if (isset($_GET['anade']))
-    //     header("Location: ./anadeAlumno.php"); -->
-
-
-
-    <!-- // <table border="1">
-    //     <tr>
-    //         <th>Alumno</th>
-    //         <th>Nota 1</th>
-    //         <th>Nota 2</th>
-    //         <th>Nota 3</th>
-    //         <th>Editar</th>
-    //         <th>Eliminar</th>
-    //     </tr>
-
-    //     for ($i = 0; $i <= $z - 1; $i++) {
-    //         if ($i % 4 == 0 || $i == 0) {
-    //             echo "<tr>";
-    //         }
-    //         echo "<form action='' method='get' name='enviarDatos'>";
-    //         for ($j = 0; $j <= 3; $j++) {
-    //             echo "<td><label for='dato" . $j . "'><input type='text' name='dato" . $j . "' value='" . $alumno[$i][$j] . "'></label></td>";
-    //         }
-
-    //         echo "<td><center><input type='submit' name='editar' id='editar' value='Editar'></center></td>";
-    //         echo "<td><center><input type='submit' name='eliminar' id='eliminar' value='Eliminar'></center></td>";
-
-    //         echo "</form></tr>";
-    //     }
-
-    //     ?>
-
-    // </table>
-    // <br>
-    // <form action="" method="get">
-    //     <input type='submit' name='anade' id='anade' value='Añadir Alumno'>
-    // </form>
 
     <?php
-    include("../../fragmentos/footer.php");
+        include("../../fragmentos/footer.php");
     ?>
 </body>
 

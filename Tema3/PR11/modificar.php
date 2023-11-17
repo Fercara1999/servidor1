@@ -13,8 +13,10 @@
     ?>
 
     <?php
-        if(isset($_GET['guardar']))
-            guardaDatos();
+        if(isset($_GET['guardar'])){
+            modificaXML();
+            header("Location: ./LeeFicheroXML.php");
+        }
     ?>
     
     <form action="" method="get">

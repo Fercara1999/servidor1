@@ -14,8 +14,10 @@
 
     <?php
 
-    if(isset($_GET['anade']))
-        anadeAlumno();
+    if(isset($_GET['anade'])){
+        anadeAlumnoXML();
+        header("Location: ./LeeFicheroXML.php");
+    }
     
     ?>
     

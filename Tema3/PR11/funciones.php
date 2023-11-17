@@ -1,21 +1,5 @@
 <?php
 
-function muestraNotas(&$array)
-{
-    $i = 0;
-    if (!$fp = fopen("notas.csv", 'r')) {
-        echo "Problemas al abrir el fichero";
-    } else {
-        while (($lineas = fgetcsv($fp, 1000, ';')) !== false) {
-            $i++;
-            array_push($array, $lineas);
-        }
-        fclose($fp);
-    }
-    
-    return $i;
-}
-
 function guardaXML(){
 
     $dom = new DOMDocument("1.0","utf-8");
@@ -42,92 +26,65 @@ function guardaXML(){
     }
 }
 
-function guardaDatos()
-{
-    $fichero = "notas.csv";
-
-    if (!$fp = fopen($fichero, 'r+')) {
-        echo "Problemas al abrir el fichero";
-    } else {
-        $datos = array();
-        $datos[0] = $_GET['alumno'];
-        $datos[1] = $_GET['nota1'];
-        $datos[2] = $_GET['nota2'];
-        $datos[3] = $_GET['nota3'];
-
-        while (($valores = fgetcsv($fp, 1000, ";")) !== false) {
-            $filas[] = $valores;
-        }
-
-        fseek($fp, 0);
-
-        foreach ($filas as $fila) {
-            if ($fila[0] == $datos[0])
-                fputcsv($fp, $datos, ";");
-            else {
-                fputcsv($fp, $fila, ";");
-            }
-        }
-
-        fclose($fp);
-        header("Location: ./notas.php");
-    }
-}
-
-function guardaXML(){
+function modificaXML(){
     
-}
+    $alumno = $_GET['alumno'];
+    $nota1 = $_GET['nota1'];
+    $nota2 = $_GET['nota2'];
+    $nota3 = $_GET['nota3'];
 
-function eliminaAlumno()
-{
-    $fichero = "notas.csv";
+    $dom = new DOMDocument();
+    $dom -> load('notas.xml');
 
-    if (!$fp = fopen($fichero, 'r+')) {
-        echo "Problemas al abrir el fichero";
-    } else {
-        $datos = array();
-        $datos[0] = $_GET['alumno'];
-        $datos[1] = $_GET['nota1'];
-        $datos[2] = $_GET['nota2'];
-        $datos[3] = $_GET['nota3'];
+    $nombres = $dom->getElementsByTagName('nombre');
+    $notas1 = $dom->getElementsByTagName('nota1');
+    $notas2 = $dom->getElementsByTagName('nota2');
+    $notas3 = $dom->getElementsByTagName('nota3');
 
-        while (($valores = fgetcsv($fp, 1000, ";")) !== false) {
-            $filas[] = $valores;
+    foreach ($nombres as $key => $value) {
+        if($nombres[$key]->nodeValue == $alumno){
+            $notas1[$key]->nodeValue = $nota1;
+            $notas2[$key]->nodeValue = $nota2;
+            $notas3[$key]->nodeValue = $nota3;
         }
-
-        fseek($fp, 0);
-
-        foreach ($filas as $fila) {
-            if ($fila[0] != $datos[0]) {
-                fputcsv($fp, $fila, ";");
-            }
-        }
-
-        ftruncate($fp, ftell($fp));
-        fclose($fp);
     }
 
-    header("Location: ./notas.php");
+    $dom -> save('notas.xml');
+
 }
 
-function anadeAlumno()
-{
-    $fichero = "notas.csv";
-    
-    if (!$fp = fopen($fichero, 'a')) {
-        echo "Problemas al abrir el fichero";
-    } else {
-        $datos = array();
-        $datos[0] = $_GET['alumno'];
-        $datos[1] = $_GET['nota1'];
-        $datos[2] = $_GET['nota2'];
-        $datos[3] = $_GET['nota3'];
+function eliminaAlumnoXML(){
 
-        fseek($fp, 0);
+    $alumno = $_GET['dato1'];
 
-        fputcsv($fp, $datos, ";");
+    $dom = new DOMDocument();
+    $dom -> load('notas.xml');
+    $nombres = $dom->getElementsByTagName('nombre');
+
+    foreach ($nombres as $nombre) {
+        if($nombre->nodeValue == $alumno){
+            $alumnoEliminar = $nombre ->parentNode;
+            $alumnoEliminar -> parentNode -> removeChild($alumnoEliminar);
+        }
     }
 
-    fclose($fp);
-    header("Location: ./notas.php");
+    $dom -> save("./notas.xml");
+
 }
+
+function anadeAlumnoXML(){
+
+    $archivoxml = "./notas.xml";
+    $xml =simplexml_load_file($archivoxml);
+
+    $nuevoAlumno = $xml -> addChild("alumno");
+    $nuevoAlumno -> addChild('nombre',$_GET['alumno']);
+    $nuevoAlumno -> addChild('nota1', $_GET['nota1']);
+    $nuevoAlumno -> addChild('nota2', $_GET['nota2']);
+    $nuevoAlumno -> addChild('nota3', $_GET['nota3']);
+
+    $xml->asXML('notas.xml');
+
+}
+
+?>
