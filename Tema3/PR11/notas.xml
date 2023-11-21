@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <notas>
-  <alumno>
-    <nombre>fernando</nombre>
-    <nota1>3</nota1>
-    <nota2>2</nota2>
-    <nota3>1</nota3>
-  </alumno>
-</notas>
+  
+<alumno><nombre>fer</nombre><nota1>1</nota1><nota2>1</nota2><nota3>1</nota3></alumno><alumno><nombre>2</nombre><nota1>2</nota1><nota2>2</nota2><nota3>2</nota3></alumno></notas>
