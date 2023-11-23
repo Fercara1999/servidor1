@@ -22,13 +22,13 @@ $pdf->Write(5,"Numero de factura: 2023-0001");
 // $hoy = new DateTime();
 // $hoy->format("d/M/Y");
 $pdf->SetXY(130,15);
-$pdf->Write(5,"Fecha Factura: ");
-$pdf->Write(5,utf8_decode('€'));
+$pdf->Write(5,"Fecha Factura: 23/11/2023");
 $pdf->SetXY(120,30);
 $pdf->SetFont("Arial","B",14);
 $pdf->Write(5,"Cliente:");
-
-$cliente = ["VicVal SI","CIF/NIF: B30142516","C/ Mala Nº 1","18190","Zamora, Granada"];
+$text = "€";
+define('EURO',iconv('UTF-8', 'windows-1252', $text));
+$cliente = ["VicVal SI","CIF/NIF: B30142516","C/ Mala Nº 1","18190","Zamora, España"];
 $pdf->SetFont("Helvetica","",10);
 $y = 35;
 foreach ($cliente as $datos) {
@@ -51,16 +51,15 @@ $datos = array(
 );
 
 $tamanho = [60,17,20,28,20];
-
-$pdf->SetFillColor(0,30,50);
 $pdf->SetXY(30,95);
 
+$pdf->SetFillColor(0,182,212);
 $pdf->SetFont("Helvetica","B",10);
-$pdf->Cell(60,5,$nombreDatos[0],1,0,"B",false);
-$pdf->Cell(17,5,$nombreDatos[1],1,0,"B",false);
-$pdf->Cell(20,5,$nombreDatos[2],1,0,"B",false);
-$pdf->Cell(28,5,$nombreDatos[3],1,0,"B",false);
-$pdf->Cell(20,5,$nombreDatos[4],1,0,"B",false);
+$pdf->Cell(60,5,$nombreDatos[0],1,0,'C',true);
+$pdf->Cell(17,5,$nombreDatos[1],1,0,"C",true);
+$pdf->Cell(20,5,$nombreDatos[2],1,0,"C",true);
+$pdf->Cell(28,5,$nombreDatos[3],1,0,"C",true);
+$pdf->Cell(20,5,$nombreDatos[4],1,0,"C",true);
 
 $pdf->SetFont("Helvetica","",10);
 $pdf->SetXY(30,100);
@@ -74,9 +73,9 @@ foreach($datos as $filaDatos){
     $suma = $filaDatos[1]*$filaDatos[2];
     $filaDatos[3] = $suma;
     $filaDatos[4] = $filaDatos[3]*0.21;
-    $pdf->Cell($tamanho[$i],5,utf8_decode($filaDatos[3].'$'),1,0,"C",false);
+    $pdf->Cell($tamanho[$i],5,utf8_decode(round($filaDatos[3],2)).EURO,1,0,"C",false);
     $i++;
-    $pdf->Cell($tamanho[$i],5,utf8_decode($filaDatos[4]).'$',1,0,"C",false);
+    $pdf->Cell($tamanho[$i],5,utf8_decode(round($filaDatos[4],2)).EURO,1,0,"C",false);
     $pdf->Ln();
 }
 
@@ -92,14 +91,14 @@ foreach ($datos as $filaDatos) {
 
 $pdf->SetXY(100,135);
 $pdf->SetFont("Helvetica","",12);
-$pdf->Write(5,"Total Base Imponible:" .$baseImponible.'$');
+$pdf->Write(5,"Total Base Imponible:" .$baseImponible.EURO);
 $pdf->Ln();
 $pdf->SetXY(100,140);
-$pdf->Write(5,"I.V.A. ".$iva.'$');
+$pdf->Write(5,"I.V.A. ".round($iva,2).EURO);
 $pdf->Ln();
 $pdf->SetXY(100,145);
 $pdf->SetFont("Helvetica","B",12);
-$pdf->Write(5,"TOTAL: ".$iva+$baseImponible.'€');
+$pdf->Write(5,"TOTAL: ".round($iva+$baseImponible,2).EURO);
 
 $pdf -> Output();
 
