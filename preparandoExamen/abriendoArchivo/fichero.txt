@@ -1,0 +1,9 @@
+Holly,Stephen King,Plaza,978-84-1111-905-5,28
+Juego de Tronos,George R R Martin,Janes,978-84-1111-905-6,30
+q,q,q,q,1
+w,w,w,w,3
+w,w,w,w,4
+a,a,a,a,5
+a,a,a,a,5
+a,a,a,a,5
+a,a,a,a,5
