@@ -4,6 +4,7 @@
 
     $errores = [];
     $datos = [];
+    $campos = ["titulo","autor","editorial","isbn","precio"];
 
     if(compruebaVacios($errores,$datos)){
         if($fp = fopen("fichero.txt","a")){
@@ -24,5 +25,7 @@
             echo "Error al abrir fichero.txt";
         }
     }
+
+    leeXML("fichero.txt",$campos);
 
 ?>

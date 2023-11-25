@@ -49,7 +49,7 @@ function compruebaVacios(&$errores,&$datos){
     }
 }
 
-function creaXML($fichero){{
+function creaXML($fichero){
     $XML = new DOMDocument('1.0','utf-8');
 
     
@@ -74,6 +74,33 @@ function creaXML($fichero){{
     $XML->formatOutput = true;
     $XML -> save("./libros.xml");
 }
+
+function leeXML($archivo,&$datos){
+    echo "<table border='1'>";
+    foreach ($datos as $dato){
+        echo "<th>$dato</th>";
+    }
+    echo "</tr>";
+    $XML = new DOMDocument("1.0","utf-8");
+    $XML -> load("libros.xml");
+
+    foreach ($XML->childNodes as $libros) {
+        foreach ($libros->childNodes as $libro) {
+            echo "<tr>";
+            if($libro->nodeType == 1){
+                $nodo = $libro->firstChild;
+                do{
+                    if($nodo->nodeType == 1){
+                        echo "<td>";
+                        echo $nodo->nodeValue;
+                        echo "</td>";
+                    }
+                }while($nodo = $nodo->nextSibling);
+            }
+            echo "</tr>";
+        }
+    }
+    echo "</table>";
 
 }
 
