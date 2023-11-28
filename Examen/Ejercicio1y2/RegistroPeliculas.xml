@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<peliculas>
+  <pelicula>
+    <id>2023MM-000</id>
+    <titulo>El padrino</titulo>
+    <director>Francis Ford Coppola</director>
+    <anoLanzamiento>2222</anoLanzamiento>
+    <actores>
+      <actor>Prueba</actor>
+      <actor>prueba2</actor>
+    </actores>
+    <sinopsis>erffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtr</sinopsis>
+  </pelicula>
+<pelicula><id>2023MM-000</id><titulo>El padrino</titulo><director>Francis Ford Coppola</director><anoLanzamiento>2222</anoLanzamiento><actores>Prueba,prueba2</actores><sinopsis>erffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtrerffgwergrtgrtegtregtrtr</sinopsis></pelicula></peliculas>

@@ -20,11 +20,11 @@
             echo $errores[$name];
     }
 
-    function radioVacio($name){
-        if(isset($_POST[$name]))
+    f   if(isset($_POST[$name]))
             return false;
         return true; 
-    }
+    }unction radioVacio($name){
+     
 
     function distinta0(){
         if(isset($_POST['selecciona']) && $_POST['selecciona'] == '0')
