@@ -19,6 +19,10 @@
         <h3>·  <a href="./PR9/index.php" target="blank">PR9</a></h3>
         <h3>·  <a href="./PR10/seleccionar.php" target="blank">PR10</a></h3>
         <h3>·  <a href="./PR10b/notas.php" target="blank">Notas</a></h3>
+        <h3>·  <a href="./PR11/TransformaFichero.php" target="blank">PR11</a></h3>
+        <h3>·  <a href="./PR12/index.php" target="blank">PR12</a></h3>
+        <h3>·  <a href="./ExpresionesRegulares/index.php" target="blank">Apuntes</a></h3>
+        
     <?php
         include("../fragmentos/footer.php");
     ?>
