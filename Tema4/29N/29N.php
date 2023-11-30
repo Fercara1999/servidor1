@@ -41,23 +41,32 @@ try {
         echo "Conectado";
         // $rborra = 'miguel\',20);drop table alumnos';
         // CONSULTAS PREPARADAS: verifican que los datos que se insertan, son del tipo que deben ser
-        $rnombre = 'Manuel';
-        $redad = 30;
+        // $rnombre = 'Manuel';
+        // $redad = 30;
         // Con null también o el campo de la columna tamien autoincrementa
-        $sql = "insert into alumnos(nombre,edad) values('".$rnombre."',".$redad.")";
+        // $sql = "insert into alumnos(nombre,edad) values('".$rnombre."',".$redad.")";
         // En la consulta preparada, escribimos como ? cada uno de los atributos que tendrá la sentencia
-        $sqlprepa = "insert into alumnos(nombre,edad) values(?,?)";
+        // $sqlprepa = "insert into alumnos(nombre,edad) values(?,?)";
         // Creamos um statement, que incluye como primer parametro la conexion y como segundo la consulta preparada
-        $stmt = mysqli_prepare($con,$sqlprepa);
+        // $stmt = mysqli_prepare($con,$sqlprepa);
         // Aquí esamos indicando que el primer parametro de la consulta que contiene el statement será un string 's'
         // y el segundo será un int 'i' , estos parametros los recogerá de la variable $rnombre el primero y $redad el segundo
-        mysqli_stmt_bind_param($stmt,'si',$rnombre,$redad);
+        // mysqli_stmt_bind_param($stmt,'si',$rnombre,$redad);
         // La consulta es ejecutada
-        mysqli_stmt_execute($stmt);
+        // mysqli_stmt_execute($stmt);
 
         // Si la consulta no se lleva a cabo, nos muestra ese error
-        if(!mysqli_query($con,$sql))
-            echo mysqli_errno($con);
+        // if(!mysqli_query($con,$sql))
+        //     echo mysqli_errno($con);
+        $sql = 'select * from alumnos';
+        $result = mysqli_query($con,$sql);
+   
+        while($array = mysqli_fetch_row($result)){
+            echo "<pre>";
+            print_r($array);
+        }
+
+
 
     // siempre debemos de cerrar la conexión
     mysqli_close($con);
