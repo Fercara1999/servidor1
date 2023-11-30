@@ -58,13 +58,17 @@ try {
         // Si la consulta no se lleva a cabo, nos muestra ese error
         // if(!mysqli_query($con,$sql))
         //     echo mysqli_errno($con);
-        $sql = 'select * from alumnos';
-        $result = mysqli_query($con,$sql);
+        // $sql = 'select * from alumnos';
+        
+        $sql = 'delete from alumnos where id >= 5';
+        mysqli_query($con,$sql);
+        // $result = mysqli_query($con,$sql);
+        echo mysqli_affected_rows($con);
    
-        while($array = mysqli_fetch_row($result)){
-            echo "<pre>";
-            print_r($array);
-        }
+        // while($array = mysqli_fetch_row($result)){
+        //     echo "<pre>";
+        //     print_r($array);
+        // }
 
 
 
