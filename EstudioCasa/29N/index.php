@@ -18,7 +18,7 @@ try {
     // Comprobar en clase desde que id Accedemos
 
 } catch (\Throwable $th) {
-    switch ($th->getCode){
+    switch ($th->getCode()){
         case 0:
             echo "No encuentra todos los parámetros de la secuencia";
             break;
