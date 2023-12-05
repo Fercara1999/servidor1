@@ -84,13 +84,50 @@ function recuerda($name){
     if(enviado() && !empty($_REQUEST[$name])){
         echo $_REQUEST[$name];
     }
-    if(isset($_POST['Borrar']))
-        echo "''";
 }
 
 function muestraError(&$error,$campo){
     if(isset($error[$campo]))
         echo $error[$campo];
 }
+
+function distinta0(){
+    if($_GET['opcion'] == '0')
+        return true;
+    else
+        return false;
+}
+
+function buscado(){
+    if(isset($_REQUEST['Buscar']))
+        return true;
+    else
+        return false;
+}
+
+function validaBusqueda(&$errores){
+    if(distinta0())
+        $errores['opcion'] = "No has seleccionado un campo de busqueda";
+    if(textoVacio('busqueda'))
+        $errores['busqueda'] = "El campo de busqueda está vacío";
+    if(count($errores) == 0)
+        return true;
+    else
+        return false;
+}
+
+function recuerdaBusqueda($name){
+    if(buscado() && !empty($_REQUEST[$name])){
+        echo $_REQUEST[$name];
+    }
+}
+
+function recuerdaSelect($name,$value){
+    if(buscado() && isset($_GET[$name]) && $_GET[$name] == $value)
+        echo 'selected';
+    else
+        echo '';
+}
+
 
 ?>

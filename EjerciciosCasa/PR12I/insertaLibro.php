@@ -15,14 +15,6 @@
     require("./funcionesBD.php");
     include("./validacionesForm.php");
 
-    if (isset($_GET['Mostrar'])){
-        header("Location: ./leeTabla.php");
-    }
-
-    if (isset($_GET['Crear'])){
-        creaBD();
-    }
-
     $errores = [];
 
     if(enviado() && validaFormulario($errores)){
@@ -46,16 +38,10 @@
     <?php muestraError($errores,'fechaLanzamiento'); ?><br>
     <label for="precio">Precio: <input type="number" name="precio" id="precio" step='0.01' value='<?php recuerda('precio') ?>'></label>
     <?php muestraError($errores,'precio'); ?><br>
-    <input type="submit" name="Enviar" id="Enviar">
+    <input type="submit" name="Enviar" id="Enviar" value="Crear Libro">
 </form>
-<br>
-<?php } ?>
-    <form action="" method="get">
-    SI ES LA PRIMERA VEZ QUE USAS EL PROGRAMA, PRIMERO DEBES CREAR LA BASE DE DATOS -> <input type="submit" value="Crear BD" id="Crear" name="Crear"><br>
-    <input type="submit" name="Mostrar" id="Mostrar" value="Mostrar Datos">
-    </form>
 
-    <?php
+<?php } 
         include("./fragmentos/footer.php");
     ?>
 </body>
