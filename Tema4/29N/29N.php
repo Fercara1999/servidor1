@@ -65,6 +65,10 @@ try {
         // $result = mysqli_query($con,$sql);
         echo mysqli_affected_rows($con);
    
+    // SCRIPT
+
+    
+
         // while($array = mysqli_fetch_row($result)){
         //     echo "<pre>";
         //     print_r($array);
