@@ -15,20 +15,20 @@
     require("./funcionesBD.php");
     include("./validacionesForm.php");
 
-    if (isset($_GET['Mostrar'])){
-        header("Location: ./leeTabla.php");
+    cargaScript();
+
+    if(isset($_REQUEST['Crear'])){
+        insertaScript();
     }
 
-    if (isset($_GET['Crear'])){
-        creaBD();
-    }
+    leeTabla();
 
     $errores = [];
 
     if(enviado() && validaFormulario($errores)){
         if(isset($_REQUEST['Enviar']))
             insertaDatos();
-            header("Location: ./leeTabla.php");
+            header("Location: ./index.php");
     }else{
 
 ?>
