@@ -34,6 +34,11 @@ if(isset($_REQUEST['Crear'])){
     header("Location: ./index.php");
 }
 
+if(isset($_GET['Guardar'])){
+    guardaCambios();
+    header("Location: ./index.php");
+}
+
 if (isset($_GET['Modificar'])){
     modificaCampo();
 }elseif (isset($_GET['Eliminar'])){
@@ -43,11 +48,6 @@ if (isset($_GET['Modificar'])){
         buscar();
 }else{     
     leeTabla();
-}
-
-if(isset($_GET['Guardar'])){
-    guardaCambios();
-    header("Location: ./index.php");
 }
 
 $errores = [];

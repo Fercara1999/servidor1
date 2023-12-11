@@ -24,7 +24,6 @@ function insertaScript(){
         } else {
             echo "Error en la inserción: " . $con->error;
         }
-        header("Location: ./index.php");
    }catch (\Throwable $th) {
     muestraErrores($th);
     }
