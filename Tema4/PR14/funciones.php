@@ -2,8 +2,7 @@
 
 function cargaScript(){
    try {
-        if(compruebaBD() != 1049){
-            // echo "La base de datos ya está creada";
+        if(compruebaBD() != 7){
         }else{
             echo "<form action='' method='get'>";
             echo "<input type='submit' value='Crear' id='Crear' name='Crear'>";
@@ -16,13 +15,12 @@ function cargaScript(){
 
 function insertaScript(){
     try {
-        $con = new mysqli();
-        $con -> connect(IP,USER,PASSWORD);
+        $con = new PDO(DSNS,USER,PASSWORD);
         $script = file_get_contents("./libreria.sql");
-        if ($con->multi_query($script)) {
+        if ($con->exec($script)) {
             echo "Datos insertados correctamente.";
         } else {
-            echo "Error en la inserción: " . $con->error;
+            // echo "Error en la inserción: " . $con->error;
         }
    }catch (\Throwable $th) {
     muestraErrores($th);
@@ -31,17 +29,16 @@ function insertaScript(){
 
 function compruebaBD(){
     try {
-        $con = new mysqli();
-        $con->connect(IP,USER,PASSWORD,BD);
-    } catch (\Throwable $th) {
-        return $th->getCode();
+        $con = new PDO(DSN,USER,PASSWORD);
+    } catch (PDOException $e) {
+        return $e->getCode();
     }
 }
 
-function muestraErrores($th){
-    switch ($th->getCode()){
-        case 0:
-            echo "No encuentra todos los parámetros de la secuencia";
+function muestraErrores($e){
+    switch ($e->getCode()){
+        case 7:
+            echo "La base de datos no existe";
             break;
         case 2002:
             echo "La IP de acceso a la BD es incorrecta";
@@ -75,21 +72,21 @@ function muestraErrores($th){
             break;
     }
 
-    return $th->getCode();
+    return $e->getCode();
 }
 
 function leeTabla(){
     try {
-        $con = mysqli_connect(IP,USER,PASSWORD,BD);
+        $con = new PDO(DSN,USER,PASSWORD);
         $sql = 'SELECT * FROM libros';
-        $resultado = mysqli_query($con,$sql);
+        $resultado = $con->query($sql);
         echo "<table border='1'>";
         echo "<tr><th>ISBN</th><th>Titulo</th><th>Autor</th><th>Editorial</th><th>Fecha de lanzamiento</th><th>Precio</th><th>Modificar</th><th>Eliminar</th></tr>";
 
-        while($fila = mysqli_fetch_row($resultado)){
+        while($row = $resultado -> fetch(PDO::FETCH_BOTH)){
             echo "<tr>";
             echo "<form action='' method='get'>";
-            foreach ($fila as $key => $value) {
+            foreach ($row as $key => $value) {
                 echo "<label for='dato$key'><td><input type='text' name='dato$key' id='dato$key' value='$fila[$key]' readonly></td></label>";
             }
             echo "<td><input type='submit' name='Modificar' id='Modificar' value='Modificar'></td>";
@@ -99,9 +96,9 @@ function leeTabla(){
 
         echo "</table>";
 
-        mysqli_close($con);
-    } catch (\Throwable $th) {
-        muestraErrores($th);
+        unset($con);
+    } catch (PDOException $e) {
+        echo $e->getCode();
     }
 }
 
