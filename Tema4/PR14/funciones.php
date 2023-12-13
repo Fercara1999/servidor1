@@ -9,8 +9,8 @@ function cargaScript() {
             echo "<input type='submit' value='Crear' id='Crear' name='Crear'>";
             echo "</form>";
         }
-    } catch (\Throwable $th) {
-        muestraErrores($th);
+    } catch (PDOException $e) {
+        muestraErrores($e);
     }
 }
 
@@ -27,8 +27,8 @@ function insertaScript(){
         } else {
             echo "Error en la inserción:";
         }
-   }catch (\Throwable $th) {
-    muestraErrores($th);
+   }catch (PDOException $e) {
+    muestraErrores($e);
     }
 }
 
@@ -41,6 +41,9 @@ function compruebaBD() {
 }
 
 function muestraErrores($e){
+    echo $e->getMessage();
+    echo "<br>";
+    echo $e->getCode();
     switch ($e->getCode()){
         case 7:
             // echo "La base de datos no existe";
@@ -157,8 +160,8 @@ function modificaCampo(){
         echo "</table>";
 
         unset($con);
-    } catch (\Throwable $th) {
-        muestraErrores($th);
+    } catch (PDOException $e) {
+        muestraErrores($e);
         unset($con);
     }
 }
@@ -172,8 +175,8 @@ function borraDato(){
         $stmt -> execute(array($isbn));
 
         unset($con);
-    } catch (\Throwable $th) {
-        muestraErrores($th);
+    } catch (PDOException $e) {
+        muestraErrores($e);
         unset($con);
     }
 
@@ -205,8 +208,8 @@ function guardaCambios(){
             echo "Error de los datos a insertar";
 
         unset($con);
-    } catch (\Throwable $th) {
-        muestraErrores($th);
+    } catch (PDOException $e) {
+        muestraErrores($e);
         unset($con);
     }
 
@@ -241,8 +244,8 @@ function buscar(){
         }
 
         unset($con);
-    } catch (\Throwable $th) {
-        muestraErrores($th);
+    } catch (PDOException $e) {
+        muestraErrores($e);
         unset($con);
     }
 }
