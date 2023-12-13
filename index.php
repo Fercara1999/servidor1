@@ -13,6 +13,7 @@
     <h2>- <a href="Tema1/index.php">Tema 1</a></h2><br>
     <h2>- <a href="Tema2/index.php">Tema 2</a></h2><br>
     <h2>- <a href="Tema3/index.php">Tema 3</a></h2><br>
+    <h2>- <a href="Tema4/index.php">Tema 4</a></h2><br>
     <?php
         include("./fragmentos/footer.php");
 

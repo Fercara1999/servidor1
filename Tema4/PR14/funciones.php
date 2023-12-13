@@ -1,35 +1,37 @@
 <?php
 
-function cargaScript(){
-   try {
-        if(compruebaBD() != 7){
-        }else{
+function cargaScript() {
+    try {
+        if (compruebaBD() != 7) {
+            echo "Ya existe la BD";
+        } else {
             echo "<form action='' method='get'>";
             echo "<input type='submit' value='Crear' id='Crear' name='Crear'>";
             echo "</form>";
         }
-   }catch (\Throwable $th) {
-    muestraErrores($th);
+    } catch (\Throwable $th) {
+        muestraErrores($th);
     }
 }
 
 function insertaScript(){
     try {
-        $con = new PDO(DSNS,USER,PASSWORD);
+        $con = new PDO(DSNS, USER, PASSWORD);
+        $con->setAttribute(PDO::ATTR_AUTOCOMMIT, 1);
         $script = file_get_contents("./libreria.sql");
         if ($con->exec($script)) {
             echo "Datos insertados correctamente.";
         } else {
-            // echo "Error en la inserción: " . $con->error;
+            echo "Error en la inserción:";
         }
    }catch (\Throwable $th) {
     muestraErrores($th);
     }
 }
 
-function compruebaBD(){
+function compruebaBD() {
     try {
-        $con = new PDO(DSN,USER,PASSWORD);
+        $con = new PDO(DSN, USER, PASSWORD);
     } catch (PDOException $e) {
         return $e->getCode();
     }
@@ -38,7 +40,7 @@ function compruebaBD(){
 function muestraErrores($e){
     switch ($e->getCode()){
         case 7:
-            echo "La base de datos no existe";
+            // echo "La base de datos no existe";
             break;
         case 2002:
             echo "La IP de acceso a la BD es incorrecta";
@@ -87,7 +89,7 @@ function leeTabla(){
             echo "<tr>";
             echo "<form action='' method='get'>";
             foreach ($row as $key => $value) {
-                echo "<label for='dato$key'><td><input type='text' name='dato$key' id='dato$key' value='$fila[$key]' readonly></td></label>";
+                echo "<label for='dato$key'><td><input type='text' name='dato$key' id='dato$key' value='$$row[$key]' readonly></td></label>";
             }
             echo "<td><input type='submit' name='Modificar' id='Modificar' value='Modificar'></td>";
             echo "<td><input type='submit' name='Eliminar' id='Eliminar' value='Eliminar'></td>";
@@ -98,7 +100,7 @@ function leeTabla(){
 
         unset($con);
     } catch (PDOException $e) {
-        echo $e->getCode();
+        muestraErrores($e);
     }
 }
 

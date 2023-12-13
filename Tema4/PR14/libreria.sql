@@ -2,7 +2,7 @@
 CREATE DATABASE libreria;
 
 -- Seleccionar la base de datos
-USE libreria;
+-- \c libreria;
 
 -- Crear la tabla libros
 CREATE TABLE IF NOT EXISTS libros (
