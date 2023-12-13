@@ -3,7 +3,7 @@
 function cargaScript() {
     try {
         if (compruebaBD() != 7) {
-            echo "Ya existe la BD";
+            // echo "Ya existe la BD";
         } else {
             echo "<form action='' method='get'>";
             echo "<input type='submit' value='Crear' id='Crear' name='Crear'>";
@@ -15,9 +15,12 @@ function cargaScript() {
 }
 
 function insertaScript(){
+    $DSN = 'pgsql:host='.IP.';dbname=postgres';
     try {
-        $con = new PDO(DSNS, USER, PASSWORD);
-        $con->setAttribute(PDO::ATTR_AUTOCOMMIT, 1);
+        $con = new PDO($DSN, USER, PASSWORD);
+        $sql = 'create database ' .BD;
+        $result = $con->exec($sql);
+        $con = new PDO(DSN, USER, PASSWORD);
         $script = file_get_contents("./libreria.sql");
         if ($con->exec($script)) {
             echo "Datos insertados correctamente.";
@@ -80,16 +83,16 @@ function muestraErrores($e){
 function leeTabla(){
     try {
         $con = new PDO(DSN,USER,PASSWORD);
-        $sql = 'SELECT * FROM libros';
+        $sql = 'select * from libros';
         $resultado = $con->query($sql);
         echo "<table border='1'>";
         echo "<tr><th>ISBN</th><th>Titulo</th><th>Autor</th><th>Editorial</th><th>Fecha de lanzamiento</th><th>Precio</th><th>Modificar</th><th>Eliminar</th></tr>";
 
-        while($row = $resultado -> fetch(PDO::FETCH_BOTH)){
+        while($row = $resultado -> fetch(PDO::FETCH_NUM)){
             echo "<tr>";
             echo "<form action='' method='get'>";
             foreach ($row as $key => $value) {
-                echo "<label for='dato$key'><td><input type='text' name='dato$key' id='dato$key' value='$$row[$key]' readonly></td></label>";
+                echo "<label for='dato$key'><td><input type='text' name='dato$key' id='dato$key' value='$row[$key]' readonly></td></label>";
             }
             echo "<td><input type='submit' name='Modificar' id='Modificar' value='Modificar'></td>";
             echo "<td><input type='submit' name='Eliminar' id='Eliminar' value='Eliminar'></td>";
@@ -106,7 +109,7 @@ function leeTabla(){
 
 function insertaDatos(){
     try {
-        $con = mysqli_connect(IP,USER,PASSWORD,BD);
+        $con = new PDO(DSN,USER,PASSWORD);
             echo "conectado";
     
             $isbn = $_REQUEST['isbn'];
@@ -117,30 +120,26 @@ function insertaDatos(){
             $precio = $_REQUEST['precio'];
     
             $sql = 'insert into libros values(?,?,?,?,?,?)';
-            $stmt = mysqli_prepare($con,$sql);
+            $stmt = $con -> prepare($sql);
+        
+            $stmt -> execute(array($isbn,$titulo,$autor,$editorial,$fechaPublicacion,$precio));
+
+            unset($con);
     
-            mysqli_stmt_bind_param($stmt,'ssssss', $isbn, $titulo, $autor, $editorial, $fechaPublicacion, $precio);
-            mysqli_stmt_execute($stmt);
-    
-        mysqli_close($con);
-    
-    } catch (\Throwable $th) {
-        muestraErrores($th);
-        mysqli_close($con);
+    } catch (PDOException $e) {
+        muestraErrores($e);
+        unset($con);
     }
 }
 
 function modificaCampo(){
     try {
-        $con = mysqli_connect(IP,USER,PASSWORD,BD);
+        $con = new PDO(DSN,USER,PASSWORD);
         $isbn = $_REQUEST['dato0'];
         $sql = "SELECT * FROM libros where isbn = ?";
-        $stmt = mysqli_prepare($con,$sql);
-        mysqli_stmt_bind_param($stmt,'i',$isbn);
-        $resultado = mysqli_stmt_execute($stmt);
-        $resultado = mysqli_stmt_get_result($stmt);
-        // echo $resultado;
-        while($fila = mysqli_fetch_row($resultado)){
+        $stmt = $con -> prepare($sql);
+        $stmt -> execute(array($isbn));
+        while($fila = $stmt->fetch(PDO::FETCH_NUM)){
             echo "<table border='1'>";
         echo "<tr><th>ISBN</th><th>Titulo</th><th>Autor</th><th>Editorial</th><th>Fecha de lanzamiento</th><th>Precio</th><th>Guardar Cambios</th></tr>";
             echo "<tr>";
@@ -157,33 +156,32 @@ function modificaCampo(){
 
         echo "</table>";
 
-        mysqli_close($con);
+        unset($con);
     } catch (\Throwable $th) {
         muestraErrores($th);
-        mysqli_close($con);
+        unset($con);
     }
 }
 
 function borraDato(){
     try {
-        $con = mysqli_connect(IP,USER,PASSWORD,BD);
+        $con = new PDO(DSN,USER,PASSWORD);
         $isbn = $_REQUEST['dato0'];
         $sql = "DELETE FROM libros WHERE isbn =?";
-        $stmt = mysqli_prepare($con,$sql);
-        mysqli_stmt_bind_param($stmt,'i',$isbn);
-        mysqli_stmt_execute($stmt);
+        $stmt = $con -> prepare($sql);
+        $stmt -> execute(array($isbn));
 
-        mysqli_close($con);
+        unset($con);
     } catch (\Throwable $th) {
         muestraErrores($th);
-        mysqli_close($con);
+        unset($con);
     }
 
 }
 
 function guardaCambios(){
     try {
-        $con = mysqli_connect(IP,USER,PASSWORD,BD);
+        $con = new PDO(DSN,USER,PASSWORD);
         $erroresGuarda = [];
 
         if(validaFormularioGuarda($erroresGuarda)){
@@ -201,39 +199,35 @@ function guardaCambios(){
             editorial = ?,
             fecha_lanzamiento = ?,
             precio = ?  WHERE isbn =?";
-            $stmt = mysqli_prepare($con,$sql);
-            mysqli_stmt_bind_param($stmt,'sssssds',$isbn,$titulo,$autor,$editorial,$fechaPublicacion,$precio,$isbn);
-            mysqli_stmt_execute($stmt);
+            $stmt = $con -> prepare($sql);
+            $stmt -> execute(array($isbn,$titulo,$autor,$editorial,$fechaPublicacion,$precio,$isbn));
         }else
             echo "Error de los datos a insertar";
 
-        mysqli_close($con);
+        unset($con);
     } catch (\Throwable $th) {
         muestraErrores($th);
-        mysqli_close($con);
+        unset($con);
     }
 
 }
 
 function buscar(){
     try {
-        $con = mysqli_connect(IP,USER,PASSWORD,BD);
+        $con = new PDO(DSN,USER,PASSWORD);
         $campo = $_REQUEST['opcion'];
         $busqueda = $_REQUEST['busqueda'];
         $sql = "SELECT * FROM libros where $campo = ?";
-        $stmt = mysqli_prepare($con,$sql);
-        mysqli_stmt_bind_param($stmt,'s',$busqueda);
-        $resultado = mysqli_stmt_execute($stmt);
-        $resultado = mysqli_stmt_get_result($stmt);
-
-        if(mysqli_affected_rows($con) == 0){
+        $stmt = $con -> prepare($sql);
+        $resultado = $stmt -> execute(array($busqueda));
+        if($stmt->rowCount() == 0){
             echo "La búsqueda ha devuelto 0 resultados<br>";
 
         }else{
 
             echo "<table border='1'>";
             echo "<tr><th>ISBN</th><th>Titulo</th><th>Autor</th><th>Editorial</th><th>Fecha de lanzamiento</th><th>Precio</th><th>Modificar</th><th>Eliminar</th></tr>";
-            while($fila = mysqli_fetch_row($resultado)){
+            while($fila = $stmt->fetch(PDO::FETCH_NUM)){
                 echo "<tr>";
                 echo "<form action='' method='get'>";
                 foreach ($fila as $key => $value) {
@@ -246,10 +240,10 @@ function buscar(){
             echo "</table>";
         }
 
-        mysqli_close($con);
+        unset($con);
     } catch (\Throwable $th) {
         muestraErrores($th);
-        mysqli_close($con);
+        unset($con);
     }
 }
 

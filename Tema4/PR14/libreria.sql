@@ -1,5 +1,7 @@
+--SELECT datname from
+
 -- Crear la base de datos
-CREATE DATABASE libreria;
+-- CREATE DATABASE libreria;
 
 -- Seleccionar la base de datos
 -- \c libreria;
