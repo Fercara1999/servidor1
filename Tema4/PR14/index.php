@@ -9,6 +9,7 @@ include("./validacionesForm.php");
 
 ?>
 
+<!-- Creación del formulario de busqueda -->
 <form action="" method="get">
     <label for="opciones">Elige un campo con el que buscar:</label>
     <select name="opcion" id="opcion">
@@ -26,6 +27,7 @@ include("./validacionesForm.php");
 <br>
 
 <?php
+
 
 cargaScript();
 
@@ -53,9 +55,10 @@ if (isset($_GET['Modificar'])){
 $errores = [];
 
 if(enviado() && validaFormulario($errores)){
-    if(isset($_REQUEST['Enviar']))
+    if(isset($_REQUEST['Enviar'])){
         insertaDatos();
         header("Location: ./index.php");
+    }
 }else{
 
 ?>
@@ -63,17 +66,17 @@ if(enviado() && validaFormulario($errores)){
 <br>
 <form action="" method="get">
 <label for="isbn">ISBN: <input type="number" name="isbn" id="isbn" value='<?php recuerda('isbn') ?>'></label>
-<?php muestraError($errores,'isbn'); ?><br>
+<p class="error"><?php muestraError($errores,'isbn'); ?></p>
 <label for="titulo">Titulo: <input type="text" name="titulo" id="titulo" value='<?php recuerda('titulo') ?>'></label>
-<?php muestraError($errores,'titulo'); ?><br>
+<p class="error"><?php muestraError($errores,'titulo'); ?></p>
 <label for="autor">Autor: <input type="text" name="autor" id="autor" value='<?php recuerda('autor') ?>'></label>
-<?php muestraError($errores,'autor'); ?><br>
+<p class="error"><?php muestraError($errores,'autor'); ?></p>
 <label for="editorial">Editorial: <input type="text" name="editorial" id="editorial" value='<?php recuerda('editorial') ?>'></label>
-<?php muestraError($errores,'editorial'); ?><br>
+<p class="error"><?php muestraError($errores,'editorial'); ?></p>
 <label for="fechaLanzamiento">Fecha de lanzamiento: <input type="date" name="fechaLanzamiento" id="fechaLanzamiento" value='<?php recuerda('fechaLanzamiento') ?>'></label>
-<?php muestraError($errores,'fechaLanzamiento'); ?><br>
+<p class="error"><?php muestraError($errores,'fechaLanzamiento'); ?></p>
 <label for="precio">Precio: <input type="number" name="precio" id="precio" step='0.01' value='<?php recuerda('precio') ?>'></label>
-<?php muestraError($errores,'precio'); ?><br>
+<p class="error"><?php muestraError($errores,'precio'); ?></p>
 <input type="submit" name="Enviar" id="Enviar">
 </form>
 <br>

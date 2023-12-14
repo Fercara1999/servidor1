@@ -1,5 +1,7 @@
 <?php
 
+// Función que incluye una llamada a comrpruebaBD, en caso de que devuelva algo distinto de '7', nos dirá que la BD esá creada
+// si no es así, creará un botón de creación de la BD
 function cargaScript() {
     try {
         if (compruebaBD() != 7) {
@@ -14,6 +16,7 @@ function cargaScript() {
     }
 }
 
+// Función que se ejecuta al hacer clic sobre el botón 'Crear', y ejecuta el script de creación de la BD
 function insertaScript(){
     $DSN = 'pgsql:host='.IP.';dbname=postgres';
     try {
@@ -27,11 +30,15 @@ function insertaScript(){
         } else {
             echo "Error en la inserción:";
         }
+
+        unset($con);
    }catch (PDOException $e) {
-    muestraErrores($e);
+        muestraErrores($e);
+        unset($con);
     }
 }
 
+// Función que comprueba la existencia de la BD o devuelve un código de error en caso de que no exista
 function compruebaBD() {
     try {
         $con = new PDO(DSN, USER, PASSWORD);
@@ -40,49 +47,13 @@ function compruebaBD() {
     }
 }
 
+// Función que crea un mensaje de error con el codigo y mensaje del mismo, también devuelve el código
 function muestraErrores($e){
-    echo $e->getMessage();
-    echo "<br>";
-    echo $e->getCode();
-    switch ($e->getCode()){
-        case 7:
-            // echo "La base de datos no existe";
-            break;
-        case 2002:
-            echo "La IP de acceso a la BD es incorrecta";
-            break;
-        case 1045:
-            echo "Usuario o contraseña incorrectos";
-            break;
-        case 1049:
-            // echo "Error al conectarse a la base de datos indicada";
-            break;
-        case 1146:
-            echo "Error al encontrar la tabla indicada";
-            break;
-        case 1064:
-            echo "No se han indicado los valores a insertar en la BD";
-            break;
-        case 1406:
-            echo "Alguno de los campos a insertar ha excedido el número de carácteres permitidos";
-            break;
-        case 1292:
-            echo "Formato de fecha incorrecto";
-            break;
-        case 1048:
-            echo "No puedes establecer los datos como nulos";
-            break;
-        case 1007:
-            echo "Problema al crear la bd";
-            break;
-        default:
-            echo "Error de la base de datos";
-            break;
-    }
-
+    echo "<p class='error'>El error " .$e->getMessage(). " da el siguiente mensaje: " .$e->getCode()."<p>";
     return $e->getCode();
 }
 
+// Función que crea la tabla con todos los datos de la BD, es el contenido que verá el usuario en la página
 function leeTabla(){
     try {
         $con = new PDO(DSN,USER,PASSWORD);
@@ -106,14 +77,15 @@ function leeTabla(){
 
         unset($con);
     } catch (PDOException $e) {
-        muestraErrores($e);
+        // muestraErrores($e);
+        unset($con);
     }
 }
 
+// Función que recibe e introduce los datos a insertar en la base de datos 
 function insertaDatos(){
     try {
         $con = new PDO(DSN,USER,PASSWORD);
-            echo "conectado";
     
             $isbn = $_REQUEST['isbn'];
             $titulo = $_REQUEST['titulo'];
@@ -128,13 +100,14 @@ function insertaDatos(){
             $stmt -> execute(array($isbn,$titulo,$autor,$editorial,$fechaPublicacion,$precio));
 
             unset($con);
-    
     } catch (PDOException $e) {
         muestraErrores($e);
         unset($con);
     }
 }
 
+// Función que crea una tabla con el registro que el usuario a seleccionado a través del botón modificar,
+// estos campos serán modificables, salvo la clave primaria (ISBN) 
 function modificaCampo(){
     try {
         $con = new PDO(DSN,USER,PASSWORD);
@@ -166,6 +139,7 @@ function modificaCampo(){
     }
 }
 
+// Función que elimina el registro seleccionado por el usuario, se ejecuta al hacer clic sobre el botón 'Eliminar'
 function borraDato(){
     try {
         $con = new PDO(DSN,USER,PASSWORD);
@@ -182,6 +156,7 @@ function borraDato(){
 
 }
 
+// Función que inserta en la BD un registro con los datos que son pasados por el formulario y después de validar que no contiene errores de sintaxis
 function guardaCambios(){
     try {
         $con = new PDO(DSN,USER,PASSWORD);
@@ -215,6 +190,7 @@ function guardaCambios(){
 
 }
 
+// Función que busca según el campo que el usuario indique, el valor que quiera
 function buscar(){
     try {
         $con = new PDO(DSN,USER,PASSWORD);
@@ -224,10 +200,8 @@ function buscar(){
         $stmt = $con -> prepare($sql);
         $resultado = $stmt -> execute(array($busqueda));
         if($stmt->rowCount() == 0){
-            echo "La búsqueda ha devuelto 0 resultados<br>";
-
+            echo "<p class='error'>La búsqueda ha devuelto 0 resultados</p><br>";
         }else{
-
             echo "<table border='1'>";
             echo "<tr><th>ISBN</th><th>Titulo</th><th>Autor</th><th>Editorial</th><th>Fecha de lanzamiento</th><th>Precio</th><th>Modificar</th><th>Eliminar</th></tr>";
             while($fila = $stmt->fetch(PDO::FETCH_NUM)){
