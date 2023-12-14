@@ -12,55 +12,12 @@ include("./validacionesForm.php");
 
 <?php
 
-
-cargaScript();
-
-if(isset($_REQUEST['Crear'])){
-    insertaScript();
-    header("Location: ./index.php");
-}
-
-if(isset($_GET['Guardar'])){
-    guardaCambios();
-    header("Location: ./index.php");
-}
-
-if (isset($_GET['Modificar'])){
-    modificaCampo();
-}elseif (isset($_GET['Eliminar'])){
-    borraDato();
-    header("Location: ./index.php");
-}elseif (isset($_GET['Buscar'])){
-        buscar();
-}else{   
-?>
-    <!-- Creación del formulario de busqueda -->
-<form action="" method="get">
-    <label for="opciones">Elige un campo con el que buscar:</label>
-    <select name="opcion" id="opcion">
-        <option value="0">Selecciona una opcion</option>
-        <option <?php recuerdaSelect('opcion','titulo') ?> value="titulo">Titulo</option>
-        <option <?php recuerdaSelect('opcion','autor') ?> value="autor">Autor</option>
-        <option <?php recuerdaSelect('opcion','editorial') ?> value="editorial">Editorial</option>
-    </select>
-    <label for="busqueda"> Introduce tu búsqueda: <input type="text" name="busqueda" id="busqueda" value='<?php recuerdaBusqueda('busqueda') ?>'></label>
-    <input type="submit" name="Buscar" id="Buscar" value="Buscar"><br>
-    <?php muestraError($erroresBusqueda,'opcion')?>
-    <br>
-    <?php muestraError($erroresBusqueda,'busqueda')?>
-</form>
-<br>
-<?php
-    leeTabla();
-}
-
 $errores = [];
 
 if(enviado() && validaFormulario($errores)){
     if(isset($_REQUEST['Enviar'])){
         insertaDatos();
         header("Location: ./index.php");
-        exit;
     }
 }else{
 
@@ -85,4 +42,28 @@ if(enviado() && validaFormulario($errores)){
 </form>
 <br>
 <?php } 
+
+cargaScript();
+
+if(isset($_REQUEST['Crear'])){
+    insertaScript();
+    header("Location: ./index.php");
+}
+
+if(isset($_GET['Guardar'])){
+    guardaCambios();
+    header("Location: ./index.php");
+}
+
+if (isset($_GET['Modificar'])){
+    modificaCampo();
+}elseif (isset($_GET['Eliminar'])){
+    borraDato();
+    header("Location: ./index.php");
+}elseif (isset($_GET['Buscar'])){
+        buscar();
+}else{     
+    leeTabla();
+}
+
 include("./fragmentos/footer.php");?>
