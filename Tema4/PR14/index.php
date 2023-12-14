@@ -23,7 +23,6 @@ if(enviado() && validaFormulario($errores)){
 
 ?>
 
-
 <br>
 <form action="" method="get">
 <label for="isbn">ISBN: <input type="number" name="isbn" id="isbn" value='<?php recuerda('isbn') ?>'></label>
