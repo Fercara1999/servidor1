@@ -224,4 +224,28 @@ function buscar(){
     }
 }
 
+function isUser(){
+    if($_SERVER['PHP_AUTH_USER']==USUARIO &&
+    hash('sha256',$_SERVER['PHP_AUTH_PW']) == PASSUSU)
+    {
+       return true;   
+    }
+    return false;
+}
+
+function isAdmin(){
+    if($_SERVER['PHP_AUTH_USER']==ADMIN &&
+    hash('sha256',$_SERVER['PHP_AUTH_PW']) == PASSADMIN)
+    {
+       return true;   
+    }
+    return false;
+}
+
+function cerrar(){
+    die('Cerrarda sesion');
+    header("Location: ./index.php");
+}
+
+
 ?>

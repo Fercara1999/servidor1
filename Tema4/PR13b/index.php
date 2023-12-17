@@ -9,6 +9,20 @@ include("./validacionesForm.php");
 
 ?>
 
+<form action="" method="get">
+    <label for="opciones">Elige un campo con el que buscar:</label>
+    <select name="opcion" id="opcion">
+        <option value="0">Selecciona una opcion</option>
+        <option <?php recuerdaSelect('opcion','titulo') ?> value="titulo">Titulo</option>
+        <option <?php recuerdaSelect('opcion','autor') ?> value="autor">Autor</option>
+        <option <?php recuerdaSelect('opcion','editorial') ?> value="editorial">Editorial</option>
+    </select>
+    <label for="busqueda"> Introduce tu búsqueda: <input type="text" name="busqueda" id="busqueda" value='<?php recuerdaBusqueda('busqueda') ?>'></label>
+    <input type="submit" name="Buscar" id="Buscar" value="Buscar"><br>
+    <?php muestraError($erroresBusqueda,'opcion')?>
+    <?php muestraError($erroresBusqueda,'busqueda')?>
+</form>
+<br>
 
 <?php
 
@@ -23,7 +37,6 @@ if(enviado() && validaFormulario($errores)){
 
 ?>
 
-<br>
 <form action="" method="get">
 <label for="isbn">ISBN: <input type="number" name="isbn" id="isbn" value='<?php recuerda('isbn') ?>'></label>
 <p class="error"><?php muestraError($errores,'isbn'); ?></p>

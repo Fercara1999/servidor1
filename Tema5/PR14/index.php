@@ -4,14 +4,9 @@
 
 include("./fragmentos/header.html");
 require("./confBD.php");
+require("./seguro/acceso.php");
 include("./funciones.php");
 include("./validacionesForm.php");
-
-?>
-
-
-<?php
-
 
 cargaScript();
 
@@ -26,10 +21,44 @@ if(isset($_GET['Guardar'])){
 }
 
 if (isset($_GET['Modificar'])){
-    modificaCampo();
+    if(isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])){
+        if(isAdmin() || isUser())
+        {
+            modificaCampo();
+        }  
+        else{
+            header('WWW-Authenticate: Basic Realm="Contenido restringido"');
+            header('HTTP/1.0 401 Unauthorized');
+            exit;
+        }
+    }else{
+        header('WWW-Authenticate: Basic Realm="Contenido restringido"');
+        header('HTTP/1.0 401 Unauthorized');
+        exit;
+    }
 }elseif (isset($_GET['Eliminar'])){
-    borraDato();
-    header("Location: ./index.php");
+    if(isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])){
+        if(isUser())
+        {
+            header ('Location: ./index.php');
+            exit;
+        }else if(isAdmin())
+        {
+            borraDato();
+            // cerrar();
+            header ('Location: ./index.php');
+            exit;
+        }  
+        else{
+            header('WWW-Authenticate: Basic Realm="Contenido restringido"');
+            header('HTTP/1.0 401 Unauthorized');
+            exit;
+        }
+    }else{
+        header('WWW-Authenticate: Basic Realm="Contenido restringido"');
+        header('HTTP/1.0 401 Unauthorized');
+        exit;
+    }
 }elseif (isset($_GET['Buscar'])){
         buscar();
 }else{   
