@@ -7,7 +7,7 @@
     // Si no hay un usuario de $_SESSION, significa que no deberiamos estar en esa web
     // por lo que no tenemos permisos para estar ahí y nos manda a login
     if(!isset($_SESSION['usuario'])){
-        $_SESSION['error'] = "No tiene permisos para entrar en paginaUser";
+        $_SESSION['error'] = "No tiene permisos para entrar en la pagina";
         header("Location: ./login.php");
         exit;
     }
@@ -27,6 +27,14 @@
         // Mensaje de bienvenida al nombre del usuario
         echo "Bienvenido ".$_SESSION['usuario']['nombre']."<br>";
         compruebaPaginas($_SESSION['usuario']['usuario']);
+
+        if(isset($_SESSION['error']))
+            echo $_SESSION['error'];
+
+        $paginas = misPaginas();
+        foreach($paginas as $value){
+            echo "<br><a href='./".$value."'>".$value."</a>";
+        }
     ?>
     <br>
     <!-- Nos lleva a la pagina en la que se cierra la sesión -->
