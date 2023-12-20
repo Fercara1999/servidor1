@@ -8,7 +8,7 @@ require("./funciones/conexionBD.php");
 
 if(enviado() && !textoVacio('user') && !textoVacio('pass')){
     $usuario = validaUsuario($_REQUEST['user'],$_REQUEST['pass']);
-    // Si entramoa, nos lleva a la página del usuario
+    // Si entramos, nos lleva a la página del usuario
     if($usuario){
         // Indicamos en la superglobal $_SESSION el usuario con el que estamos
         $_SESSION['usuario'] = $usuario;

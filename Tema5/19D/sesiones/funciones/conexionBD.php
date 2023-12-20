@@ -31,22 +31,21 @@ function compruebaPaginas($user){
     $DSN = 'mysql:host='.IP.';dbname='.BD;
     try {
         $con = new PDO($DSN,USER,PASS);
-        $sql = "select perfil from usuarios where usuario = ?";
+        $sql = "select url from paginas where codigo IN (select codigoPagina from accede where codigoPerfil = (select perfil from usuarios
+        s where usuario = ?));";
         $stmt = $con->prepare($sql);
         $stmt->execute([$user]);
-        $perfil = $stmt->fetch(PDO::FETCH_ASSOC);
-        if($perfil){
-            echo $perfil;
-        }
+        $paginas = $stmt->fetchAll(PDO::FETCH_NUM);
+        echo "Puedes acceder a las páginas: ";
+            foreach ($paginas as $pagina => $value) {
+                echo $paginas[$pagina][0].", ";
+            }
 
     } catch (PDOException $e) {
         echo $e->getMessage();
     } finally{
-        // Finalmente, cierra la sesión
         unset($con);
     }
 }
-
-
 
 ?>
