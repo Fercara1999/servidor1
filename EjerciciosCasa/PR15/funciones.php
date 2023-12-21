@@ -181,7 +181,7 @@ function verLibros(){
             foreach ($valores as $dato => $valor) {
                 if ($dato != 'borrado') {
                     if ($dato == 'rutaPortada') {
-                        echo '<img src="'.$valor.'" class="img-fluid w-100" alt="card-horizontal-image" style="height: 300px;">';
+                        echo '<img src="'.$valor.'" class="img-fluid w-100" alt="card-horizontal-image" style="height: 300px; width: 150px">';
                     }
                 }
             }
