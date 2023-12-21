@@ -22,7 +22,7 @@
 
     <form action="" method="post" name="formularioLibros" enctype="multipart/form-data">
 
-        <label for="tiutlo">Titulo: <input type="text" name="titulo" id="titulo"></label>
+        <label for="titulo">Titulo: <input type="text" name="titulo" id="titulo"></label>
         <?php errores($errores,'titulo')?><br>
         <label for="autor">Autor: <input type="text" name="autor" id="autor"></label>
         <?php errores($errores,'autor')?><br>
