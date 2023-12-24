@@ -1,3 +1,9 @@
+<?php 
+    include("./funciones.php");
+    session_start();
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,7 +19,8 @@
 </head>
 <body>
   <?php
-    include("./funciones.php");
+    // include("./funciones.php");
+    require("./fragmentos/header.php");
   ?>
     <div id="carouselWithInterval" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">

@@ -8,7 +8,7 @@
     // por lo que no tenemos permisos para estar ahí y nos manda a login
     if(!isset($_SESSION['usuario'])){
         $_SESSION['error'] = "No tiene permisos para entrar en paginaUser";
-        header("Location: ./login.php");
+        header("Location: ./sesiones.php");
         exit;
     }
 
@@ -21,6 +21,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>HomeUser</title>
+    <?php
+        require("./fragmentos/header.php");
+    ?>
     <style>
         html{
             padding: 20px
@@ -30,11 +33,9 @@
 <body>
     <h1>Home User</h1>
     <?php
-        // Mensaje de bienvenida al nombre del usuario
-        echo "Bienvenido ".$_SESSION['usuario']['usuario']."<br>";
 
         verDatos();
-        verLibros();
+        // verLibros();
 
     ?>
     <br>

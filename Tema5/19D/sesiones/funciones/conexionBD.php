@@ -85,7 +85,7 @@ function sesionIniciada(){
 
 function permisoPagina($url){
     if(!in_array($url,$_SESSION['usuario']['paginas'])){
-        $_SESSION['error'] = "No tiene permiso par air a la pagina ".$url;
+        $_SESSION['error'] = "No tiene permiso para ir a la pagina ".$url;
         header("Location: ./homeUser.php");
         exit;
     }

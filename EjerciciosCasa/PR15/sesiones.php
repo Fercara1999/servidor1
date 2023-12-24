@@ -9,6 +9,8 @@
 <body>
     <?php
         include("./funciones.php");
+        // require();
+        // include("./funciones/funcionesBD.php");
 
         session_start();
 
