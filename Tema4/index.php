@@ -12,7 +12,7 @@
     ?>
     <h2>- Tema 4:</h2>
         <h3>·  <a href="./PR13/index.php" target="blank">PR13</a></h3>
-        <h3>·  <a href="./PR14/index.php" target="blank">PR14</a></h3>
+        <h3>·  <a href="./PR13b/index.php" target="blank">PR13b</a></h3>
 
         
     <?php
