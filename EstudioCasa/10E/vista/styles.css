@@ -1,0 +1,9 @@
+.izq{
+    display: block;
+    float: left;
+}
+
+.der{
+    display: block;
+    float: right;
+}
