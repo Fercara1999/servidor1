@@ -62,6 +62,7 @@
               <div class="col-md-3">
                   <?php
                     echo "<h3 class='text-center mt-2'>Visitados recientemente</h3>";
+                    muestraCookies();
                   ?>
               </div>
 

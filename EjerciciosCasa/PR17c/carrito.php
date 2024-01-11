@@ -44,8 +44,10 @@
 
       <?php
 
-      if(isset($_REQUEST['isbn']))
+      if(isset($_REQUEST['isbn'])){
         $_SESSION['usuario']['carrito'] = $_REQUEST['isbn'];
+        insertarCookie($_REQUEST['isbn']);
+      }
 
       if(isset($_REQUEST['vaciar']))
         $_SESSION['usuario']['carrito'] = "";

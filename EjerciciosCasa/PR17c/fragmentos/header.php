@@ -25,11 +25,14 @@
         <div class="row">
             <div class="col-3"><a href="./index.php"><img src="./logo/logoGrande.png" class="mb-2" alt="" width="150px" height="100px"></a></div>
             
-            <div class="col-6 mx-auto">
+            <div class="col-4 mx-auto">
                 <form action="./busqueda.php" method="post" class="d-flex mt-4">
                     <input type="text" class="form-control" style="width: 300px;" name="busqueda" id="busqueda" placeholder="Introduce tu búsqueda">
                     <input type="submit" class='btn btn-primary' name="buscar" id="buscar" value="Buscar">
                 </form>    
+            </div>
+            <div class="col-2 mx-auto mt-4">
+                <a href='./listaDeseos.php'>Tu lista de deseos</a>
             </div>
             
             <div class="col-3 mx-auto">
