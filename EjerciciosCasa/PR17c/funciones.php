@@ -1390,39 +1390,49 @@ function muestraErroresCatch($th){
     return $th->getCode();
 }
 
-function insertarCookie(){
+function insertarCookie() {
     $i = 0;
     $existe = false;
 
     while (!empty($_COOKIE['isbn'][$i]) && $i <= 3) {
-        if($_COOKIE['isbn'][$i] == $_REQUEST['isbn'])
+        if ($_COOKIE['isbn'][$i] == $_REQUEST['isbn']) {
             $existe = true;
-
+            break;
+        }
         $i++;
     }
-    
-    if(!empty($_COOKIE['isbn'][3]) && !empty($_COOKIE['isbn'][2]) && !empty($_COOKIE['isbn'][1]) && !empty($_COOKIE['isbn'][0]) && !$existe){
+
+    if (!$existe && !empty($_COOKIE['isbn'][3]) && !empty($_COOKIE['isbn'][2]) && !empty($_COOKIE['isbn'][1]) && !empty($_COOKIE['isbn'][0])) {
         $_COOKIE['isbn'][0] = $_COOKIE['isbn'][1];
         $_COOKIE['isbn'][1] = $_COOKIE['isbn'][2];
         $_COOKIE['isbn'][2] = $_COOKIE['isbn'][3];
-        setcookie("isbn[3]", $_REQUEST['isbn'], time() + (3600 * 24));
-    }else if(!$existe)
+        $_COOKIE['isbn'][3] = $_REQUEST['isbn'];
+        
+        setcookie("isbn[0]", $_COOKIE['isbn'][0], time() + (3600 * 24));
+        setcookie("isbn[1]", $_COOKIE['isbn'][1], time() + (3600 * 24));
+        setcookie("isbn[2]", $_COOKIE['isbn'][2], time() + (3600 * 24));
+        setcookie("isbn[3]", $_COOKIE['isbn'][3], time() + (3600 * 24));
+    } else if (!$existe) {
+        $_COOKIE['isbn'][$i] = $_REQUEST['isbn'];
         setcookie("isbn[$i]", $_REQUEST['isbn'], time() + (3600 * 24));
-    
+    }
 }
 
-function muestraCookies(){
-    if(!empty($_COOKIE['isbn'])){
-        $cookies = array_reverse($_COOKIE['isbn']);
-            foreach ($cookies as $value) {
-                $producto = findById($value);
-                if($producto){
-                    echo "<p class='text-center'>- <a href='carrito.php?isbn=".$producto['ISBN']."'>".$producto['titulo']."</a></p>";
-                }
+
+function muestraCookies() {
+    if (!empty($_COOKIE['isbn'])) {
+        $cookies = array_reverse($_COOKIE['isbn'], true);
+        foreach ($cookies as $key => $value) {
+            $producto = findById($value);
+            if ($producto) {
+                echo "<p class='text-center'>- <a href='carrito.php?isbn=" . $producto['ISBN'] . "'>" . $producto['titulo'] . "</a></p>";
             }
-    }else
+        }
+    } else {
         echo "No se ha visitado ningún producto ";
+    }
 }
+
 
 function findById($id){
     try {

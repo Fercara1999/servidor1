@@ -24,14 +24,17 @@
   <?php
     require("./fragmentos/header.php");
 
-    if(isset($_REQUEST['isbn'])){
+    if(isset($_REQUEST['isbn']) && isset($_COOKIE['deseos'])){
         foreach ($_COOKIE['deseos'] as $clave => $value) {
             if($value == $_REQUEST['isbn']){
-                setcookie($_COOKIE['deseos'][$clave], $_REQUEST['isbn'], time()-1);
+                setcookie('deseos['.$clave.']', '', time()-1);
                 unset($_COOKIE['deseos'][$clave]);
+                break;
             }
         }
     }
+    
+    
     ?>
 
     <script>

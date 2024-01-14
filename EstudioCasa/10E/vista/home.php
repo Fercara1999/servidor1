@@ -1,5 +1,3 @@
-
-
 <?php
     require("../funciones/funcionesBD.php");
     require("../funciones/funciones.php");
