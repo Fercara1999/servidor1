@@ -1451,13 +1451,23 @@ function findById($id){
 }
 
 function insertarCookieDeseos() {
-    $i = 0;
-
-    while (!empty($_COOKIE['deseos'][$i])) {
-        $i++;
+    $isbnNuevo = $_REQUEST['isbn'];
+    $existe = false;
+    
+    foreach ($_COOKIE['deseos'] as $value) {
+        if ($value == $isbnNuevo) {
+            $existe = true;
+            break;
+        }
     }
 
-    setcookie("deseos[$i]", $_REQUEST['isbn'], time() + (3600 * 24));
+    if (!$existe) {
+        $i = 0;
+        while (!empty($_COOKIE['deseos'][$i])) {
+            $i++;
+        }
+        setcookie("deseos[$i]", $isbnNuevo, time() + (3600 * 24));
+    }
 }
 
 function verLibrosDeseos(){
