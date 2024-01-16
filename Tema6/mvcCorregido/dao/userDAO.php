@@ -42,9 +42,16 @@ class UserDAO{
         $sql = "INSERT INTO Usuario(codUsuario,descUsuario,password,fechaUltimaConexion) VALUES (?,?,?,?)";
         $parametros = array($usuario->codUsuario,$usuario->descUsuario,$usuario->password,$usuario->fechaUltimaConexion);
 
+        $parametros = array_values((array)$usuario);
         $result = FactoryBD::realizaConsula($sql,$parametros);
         return true;
     }
+
+    public static function update($usuario){
+        
+    }
+
+
 
 }
 
