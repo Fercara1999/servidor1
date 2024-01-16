@@ -5,7 +5,7 @@ session_start();
 
 if(isset($_REQUEST['login'])){
     $_SESSION['vista'] = VIEW.'login.php';
-}elseif(isset($_REQUEST['home'])){
+}elseif(isset($_REQUEST['Home'])){
     $_SESSION['vista'] = VIEW.'home.php';
 }
 require("./views/layout.php");
