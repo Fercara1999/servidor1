@@ -5,6 +5,7 @@ session_start();
 
 if(isset($_REQUEST['login'])){
     $_SESSION['vista'] = VIEW.'login.php';
+    // $_SESSION['controller'] = CON."LoginController.php";
 }elseif(isset($_REQUEST['Home'])){
     $_SESSION['vista'] = VIEW.'home.php';
 }
