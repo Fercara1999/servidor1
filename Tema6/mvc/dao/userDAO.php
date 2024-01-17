@@ -85,7 +85,10 @@ class UserDAO{
         $usuario->codUsuario);
 
         $result = FactoryBD::realizaConsulta($sql,$parametros);
-        return true;
+        if($result->rowCount() > 0)
+            return true;
+        else
+            return false;
     }
 
     public static function delete($usuario){
@@ -130,10 +133,13 @@ class UserDAO{
 
         $result = FactoryBD::realizaConsulta($sql,$parametros);
 
-        if($result->rowCount())
+        if($result->rowCount()){
             echo "Login correcto";
-        else
+            return $result->fetchObject();
+        }else{
             echo "Login INcorrecto";
+            return false;
+        }
     }
 }
 

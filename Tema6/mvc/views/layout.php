@@ -4,20 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Layout</title>
+    <!-- <link rel="stylesheet" href="<?php CSS.'estilos.css'?>"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <header>
         <div>
             <form action="" method="post"> 
-                <input type="submit" name="Home" id="Home" value="Home">
+                <input type="submit" name="Home" id="Home" value="Home" class="btn btn-primary">
             </form>
         </div>    
         <h1>Página Web de Fernando</h1>
 
         <div>
-            <form action="" method="post"> 
-                <input type="submit" value="Login" name="login">
-            </form>
+            <?php
+                if(validado()){
+                    echo "Bienvenido " .$_SESSION['usuario']->descUsuario;
+                    echo '<form action="" method="post">';
+                        echo '<input type="submit" value="Ver perfil" name="verPerfil" class="btn btn-primary">';
+                        echo '<input type="submit" value="Cerrar sesión" name="cerrarSesion" class="btn btn-primary">';
+                    echo '</form>';
+                }else{
+                    echo '<form action="" method="post">';
+                        echo '<input type="submit" value="Login" name="login" class="btn btn-primary">';
+                    echo '</form>';
+                }
+            ?>
         </div>
         <nav>
         </nav>
