@@ -14,7 +14,6 @@ if(isset($_REQUEST['iniciarSesion'])){
             unset($_SESSION['controller']);
         }else{
             $errores['validado'] = "No existe el usuario y contraseña";
-
         }
         // Valida el usuario en la base de datos
         // Iniciar sesión validada
@@ -25,6 +24,8 @@ if(isset($_REQUEST['iniciarSesion'])){
     }else{
         
     }
+}else if($_REQUEST['loginRegistro']){
+    $_SESSION['visto'] = VIEW."./registro.php";
 }
 
 ?>

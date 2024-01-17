@@ -22,7 +22,7 @@
             <?php if(isset($errores))
                 muestraError($errores,'validado')?>
         </p>
-        <input type="submit" name="registro" id="registro" value="Registrarme" class="btn btn-primary">
+        <input type="submit" name="loginRegistro" id="loginRegistro" value="Registrarme" class="btn btn-primary">
         <input type="submit" name="iniciarSesion" id="iniciarSesion" value="Iniciar Sesión" class="btn btn-primary">
     </form>
 </body>
