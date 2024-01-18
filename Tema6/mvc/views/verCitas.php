@@ -12,6 +12,14 @@ if(isset($sms)){
         
     }
 ?>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Especialista</th>
+        <th>Motivo</th>
+        <th>Fecha</th>
+    </tr>
+</table>
 
 
 <form action="" method="post">
