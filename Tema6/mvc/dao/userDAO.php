@@ -128,7 +128,7 @@ class UserDAO{
     }
 
     public static function validarUsuario($nombre,$password){
-        $sql = "SELECT * FROM Usuario WHERE descUsuario = ? AND password = ?";
+        $sql = "SELECT * FROM Usuario WHERE descUsuario = ? AND password = ? AND activo = true";
         $parametros = array($nombre,sha1($password));
 
         $result = FactoryBD::realizaConsulta($sql,$parametros);

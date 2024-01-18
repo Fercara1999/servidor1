@@ -19,6 +19,7 @@
         <div>
             <?php
                 if(validado()){
+                    echo '<input type="submit" value="Ver citas" name="verCitas" class="btn btn-primary">';
                     echo "Bienvenido " .$_SESSION['usuario']->descUsuario;
                     echo '<form action="" method="post">';
                         echo '<input type="submit" value="Ver perfil" name="verPerfil" class="btn btn-primary">';

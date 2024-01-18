@@ -45,7 +45,7 @@ function validado(){
         return false;
 }
 
-function passIgual($contrasena,$confirmaContrasena){
+function passIgual($contrasena,$confirmaContrasena,&$errores){
     if($contrasena !== $confirmaContrasena){
         $errores['igual'] = "Las contraseñas no coinciden";      
         return false;

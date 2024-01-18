@@ -5,7 +5,7 @@ if(isset($_REQUEST['finalizarRegistro'])){
     if(validaFormularioRegistro($errores)){
         $usuario = new User(
             $_REQUEST['codUsuario'],
-            sha1($_REQUEST['contrasena']),
+            $_REQUEST['contrasena'],
             $_REQUEST['descUsuario'],
             (new DateTime())->format('Y-m-d H:i:s'),
             'usuario',
