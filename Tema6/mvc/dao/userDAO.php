@@ -132,13 +132,17 @@ class UserDAO{
         $parametros = array($nombre,sha1($password));
 
         $result = FactoryBD::realizaConsulta($sql,$parametros);
-
-        if($result->rowCount()){
-            echo "Login correcto";
-            return $result->fetchObject();
+        
+        if($usuarioSTD = $result->fetchObject()){
+            $usuario = new User($usuarioSTD->codUsuario,
+            $usuarioSTD->password,
+            $usuarioSTD->descUsuario,
+            $usuarioSTD->fechaUltimaConexion,
+            $usuarioSTD->perfil,
+            $usuarioSTD->activo);
+            return $usuario;
         }else{
-            echo "Login INcorrecto";
-            return false;
+            return null;
         }
     }
 }

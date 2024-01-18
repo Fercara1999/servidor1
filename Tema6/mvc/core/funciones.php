@@ -12,6 +12,20 @@ function validaFormulario(&$errores){
         return false;
 }
 
+function validaFormularioRegistro(&$errores){
+    if(campoVacio('codUsuario'))
+        $errores['codUsuario'] = "Código de usuario vacío";
+    if(campoVacio('descUsuario'))
+        $errores['descUsuario'] = "Nombre de usuario vacío";
+    if(campoVacio('contrasena'))
+        $errores['contrasena'] = "Contraseña vacía";
+
+    if(count($errores) == 0)
+        return true;
+    else
+        return false;
+}
+
 function campoVacio($campo){
     if(empty($_REQUEST[$campo]))
         return true;

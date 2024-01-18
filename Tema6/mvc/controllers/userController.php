@@ -12,8 +12,8 @@ if(!validado()){
         $_SESSION['vista'] = VIEW.'editarContrasena.php';
     }else if(isset($_REQUEST['guardarCambios'])){
         $usuario = $_SESSION['usuario'];
-        if(!campoVacio('nombre')){
-            $usuario->descUsuario = $_REQUEST['nombre'];
+        if(!campoVacio('descUsuario')){
+            $usuario->descUsuario = $_REQUEST['descUsuario'];
             if(UserDAO::update($usuario)){
                 $sms = "Se ha cambiado el nombre correctamente";
                 $_SESSION['usuario'] = $usuario;
@@ -26,7 +26,7 @@ if(!validado()){
         }
     }else if(isset($_REQUEST['guardarContrasena'])){
         $usuario = $_SESSION['usuario'];
-        if(!campoVacio('contrasena') && !campoVacio('confirmaContrasena') && 
+        if(!campoVacio('contrasena') || !campoVacio('confirmaContrasena') || 
             passIgual($_REQUEST['contrasena'],$_REQUEST['confirmaContrasena'])){
                 $usuario->password = $_REQUEST['contrasena'];
                 if(UserDAO::cambiarContrasena($usuario)){

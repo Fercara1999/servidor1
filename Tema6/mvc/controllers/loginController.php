@@ -7,7 +7,7 @@ if(isset($_REQUEST['iniciarSesion'])){
         $usuario = UserDAO::validarUsuario($_REQUEST['nombre'],$_REQUEST['contrasena']);
 
         if($usuario != null){
-            $usuario->fechaUltimaConexion = date_format(new DateTime(''),'Y-m-d');
+            $usuario->fechaUltimaConexion = (new DateTime())->format('Y-m-d H:i:s');
             UserDAO::update($usuario);
             $_SESSION['usuario'] = $usuario;
             $_SESSION['vista'] = VIEW.'home.php';
@@ -24,8 +24,9 @@ if(isset($_REQUEST['iniciarSesion'])){
     }else{
         
     }
-}else if($_REQUEST['loginRegistro']){
-    $_SESSION['visto'] = VIEW."./registro.php";
+}else if(isset($_REQUEST['loginRegistro'])){
+    $_SESSION['vista'] = VIEW."./registro.php";
+    $_SESSION['controller'] = CON."registroController.php";
 }
 
 ?>

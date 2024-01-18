@@ -1,6 +1,6 @@
 <form action="" method="post">
-    <label for="nombre">Contrasena: <input type="password" name="contrasena" id="contrasena" readonly></label><br>
-    <label for="nombre">Confirma contraseña: <input type="confirmaContrasena" name="confirmaContrasena" id="confirmaContrasena"></label><br>
+    <label for="contrasena">Contrasena: <input type="password" name="contrasena" id="contrasena"></label><br>
+    <label for="confirmaContrasena">Confirma contraseña: <input type="password" name="confirmaContrasena" id="confirmaContrasena"></label><br>
     <p class='text-danger'>
             <?php if(isset($errores))
                 muestraError($errores,'igual')?>
@@ -9,5 +9,5 @@
             <?php if(isset($errores))
                 muestraError($errores,'update')?>
     </p>
-    <input type="submit" name="guardarContrasena" id="guardarContrasena" value="guardarContrasena" class="btn btn-primary">
+    <input type="submit" name="guardarContrasena" id="guardarContrasena" value="Guardar contraseña" class="btn btn-primary">
 </form>
