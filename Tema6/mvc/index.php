@@ -17,6 +17,8 @@ if(isset($_REQUEST['login'])){
 }elseif(isset($_REQUEST['verCitas'])){
     $_SESSION['vista'] = VIEW.'verCitas.php';
     $_SESSION['controller'] = CON.'citaController.php';
+}elseif(isset($_REQUEST['pedirCita'])){
+    $_SESSION['controller'] = CON.'userController.php';
 }
 if(isset($_SESSION['controller']))
     require($_SESSION['controller']);
