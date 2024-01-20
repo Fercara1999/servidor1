@@ -12,11 +12,14 @@ add constraint paciente_fk
 foreign key (paciente)
 references Usuario (codUsuario);
 
-insert into Cita values(1,'traumatologo',
-'Tengo la rodilla hinchada', '2024-02-25',true,1);
+insert into Cita values(5,'traumatologo',
+'Tengo la rodilla hinchada', '2024-02-25',6,true);
 
-insert into Cita values(2,'oftalmologo',
-'Tengo el ojo rojo', '2024-06-25',true,1);
+insert into Cita values(3,'oftalmologo',
+'Tengo el ojo rojo', '2024-06-25',9,true);
+
+insert into Cita values(4,'oftalmologo',
+'Tengo el ojo verde', '2024-06-25',9,true);
 
 create table paciente(
 

@@ -4,21 +4,29 @@ if(isset($sms)){
     echo $sms;
 }
 
-    while($cita = $arrayCitas->fetchObject()){
-        echo "<p>id: <?php echo $cita->codUsuario ?></p>";
-        echo "<p>especialista: <?php echo $cita->especialista ?></p>";
-        echo "<p>motivo: <?php echo $cita->motivo ?></p>";
-        echo "<p>fecha: <?php echo $cita->fecha ?></p>";
-        
-    }
+$arrayCitas = CitaDAO::buscarPorPaciente($_SESSION['usuario']);
+
 ?>
-<table>
+<table border='1' class='table table-hover p-5'>
     <tr>
-        <th>ID</th>
         <th>Especialista</th>
         <th>Motivo</th>
         <th>Fecha</th>
+        <th>Editar</th>
+        <th>Cancelar</th>
     </tr>
+    <?php
+    foreach ($arrayCitas as $cita) {
+        echo "<tr>";
+        echo "<form method='post'>";
+        echo "<input type='hidden' name='idCita' id='idCita' value='$cita->id' class='btn btn-primary'>";
+        echo "<td>". $cita->especialista."</td>";
+        echo "<td>". $cita->motivo."</td>";
+        echo "<td>".$cita->fecha."</td>";
+        echo "<td><input type='submit' name='editarCita' id='editarCita' value='Editar cita' class='btn btn-primary'></td>";
+        echo "<td><input type='submit' name='cancelarCita' id='cancelarCita' value='Cancelar cita' class='btn btn-primary'></td>";
+    }
+    ?>
 </table>
 
 

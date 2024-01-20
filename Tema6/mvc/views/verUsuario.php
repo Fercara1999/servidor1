@@ -13,5 +13,5 @@ if(isset($sms)){
 
 <form action="" method="post">
     <input type="submit" name="modificarDatos" id="modificarDatos" value="Modificar datos" class="btn btn-primary">
-    <input type="submit" name="borrarUsuario" id="borrarUsuario" value="Dar de baja" class="btn btn-primary">
+    <!-- <input type="submit" name="pedirCita" id="pedirCita" value="Pedir cita" class="btn btn-primary"> -->
 </form>

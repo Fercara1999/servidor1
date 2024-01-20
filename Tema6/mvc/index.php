@@ -14,6 +14,9 @@ if(isset($_REQUEST['login'])){
 }elseif(isset($_REQUEST['verPerfil'])){
     $_SESSION['vista'] = VIEW.'verUsuario.php';
     $_SESSION['controller'] = CON."userController.php";
+}elseif(isset($_REQUEST['verCitas'])){
+    $_SESSION['vista'] = VIEW.'verCitas.php';
+    $_SESSION['controller'] = CON.'citaController.php';
 }
 if(isset($_SESSION['controller']))
     require($_SESSION['controller']);
@@ -36,23 +39,23 @@ require("./views/layout.php");
 // print_r(UserDAO::buscarPorNombre('ernan'));
 // print_r(UserDAO::validarUsuario('ana','ana'));
 
-echo "<pre>";
-print_r(CitaDAO::findAll());
-print_r(CitaDAO::findByID(2));
-echo "</pre>";
+// echo "<pre>";
+// print_r(CitaDAO::findAll());
+// print_r(CitaDAO::findByID(2));
+// echo "</pre>";
 
-$cita = new Cita(5,"Trauma","Dolor de cabeza",'2024-02-01',111,1);
-CitaDAO::delete($cita);
+// $cita = new Cita(5,"Trauma","Dolor de cabeza",'2024-02-01',111,1);
+// CitaDAO::delete($cita);
 
-echo "<pre>";
-print_r(CitaDAO::findAll());
-echo "</pre>";
+// echo "<pre>";
+// print_r(CitaDAO::findAll());
+// echo "</pre>";
 
-$usuario = UserDAO::findById(111);
+// $usuario = UserDAO::findById(9);
 
-echo "<pre>";
-print_r(CitaDAO::buscarPorPaciente($usuario));
-echo "</pre>";
+// echo "<pre>";
+// print_r(CitaDAO::buscarPorPaciente($usuario));
+// echo "</pre>";
 
 
 ?>

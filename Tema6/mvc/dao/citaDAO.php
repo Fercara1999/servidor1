@@ -31,7 +31,7 @@ class CitaDAO{
         $result = FactoryBD::realizaConsulta($sql,$parametros);
 
         if($citaSTD = $result->fetchObject()){
-            $cita = new User($citaSTD->id,
+            $cita = new Cita($citaSTD->id,
             $citaSTD->especialista,
             $citaSTD->motivo,
             $citaSTD->fecha,

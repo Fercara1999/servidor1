@@ -49,6 +49,16 @@ if(!validado()){
         }else{
             $errores['delete'] = "No se ha podido eliminar el usuario";
         }
+    }else if(isset($_REQUEST['pedirCita'])){
+        $_SESSION['vista'] = VIEW."pideCita.php";
+    }else if(isset($_REQUEST['solicitarCita'])){
+        $cita = new Cita("",$_REQUEST['especialista'],$_REQUEST['motivo'],$_REQUEST['fecha'],$_SESSION['usuario']->codUsuario,1);
+        if(CitaDAO::insert($cita)){
+            $sms = "Cita registrada correctamente";
+            $_SESSION['vista'] = VIEW.'verCitas.php';
+            $_SESSION['controller'] = CON.'citaController.php';
+        }else
+            $errores['delete'] = "No se ha podido registrar la cita";
     }
 }
 
