@@ -12,13 +12,16 @@
             text-decoration: none;
             color: black;
         }
-    </style>
+        </style>
     <?php
+    require_once("./config/config.php");
+
         if(isset($_REQUEST['login'])){
             $_SESSION['vista'] = VIEW.'sesiones.php';
-            require($_SESSION['vista']);
             $_SESSION['controller'] = CON.'loginController.php';
-        }
+        }else
+            $_SESSION['controller'] = CON.'loginController.php';
+        
     ?>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -60,6 +63,14 @@
             </div>
         </div>
     </header>
+    <?php
+        if(!isset($_SESSION['vista']))
+            require_once './index.php';
+        else
+            require_once $_SESSION['vista'];
+        
+    ?>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

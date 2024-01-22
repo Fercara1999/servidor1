@@ -1,6 +1,6 @@
 <?php 
-    include("./config/config.php");
-    session_start();
+    // include("./config/config.php");
+    // session_start();
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="icon" href="./logo/logoGrande.png" type="image/x-icon">
+    <link rel="icon" href="./weblogo/logoGrande.png" type="image/x-icon">
     <style>
         .imagenSlider{
             height: 400px;
@@ -22,7 +22,7 @@
 </head>
 <body>
   <?php
-    require("./views/header.php");
+    require_once("./views/header.php");
 
     cargaScript();
     
@@ -68,6 +68,7 @@
               <div class="col-md-9">
                   <?php
                       if(compruebaBD() == "existe") {
+                          
                           verLibros();
                       }
                   ?>
@@ -81,6 +82,6 @@
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 <?php
-    require("./views/footer.php");
+    require_once("./views/footer.php");
   ?>
 </html>

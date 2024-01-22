@@ -8,6 +8,7 @@ define('VIEW','./views/');
 define('CON','./controllers/');
 
 require("./core/funciones.php");
+require("./core/insertaScript.php");
 
 require("./config/configBD.php");
 

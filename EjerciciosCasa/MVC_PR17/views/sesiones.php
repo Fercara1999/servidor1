@@ -9,9 +9,6 @@
 <body>
 
     <?php
-        // include("./funciones.php");
-        // require("./fragmentos/header.php");
-        // session_start();
 
         if(isset($_SESSION['usuario']))
             $_SESSION['vista'] = VIEW."index.php";
@@ -108,7 +105,7 @@
         </div>
     <?php
         }
-        require("./fragmentos/footer.php");
+        require_once(VIEW."footer.php");
     ?>
 </body>
 </html>
