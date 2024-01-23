@@ -26,6 +26,20 @@ function validaFormularioRegistro(&$errores){
         return false;
 }
 
+function validaFormularioNuevaCita(&$errores){
+    if(campoVacio('especialista'))
+        $errores['especialista'] = "Campo especialista vacío";
+    if(campoVacio('motivo'))
+        $errores['motivo'] = "Campo motivo vacío";
+    if(campoVacio('fecha'))
+        $errores['fecha'] = "Campo fecha vacía";
+
+    if(!empty($errores['especialista']) || !empty($errores['motivo']) || !empty($errores['fecha']))
+        return true;
+    else
+        return false;
+}
+
 function campoVacio($campo){
     if(empty($_REQUEST[$campo]))
         return true;
@@ -51,6 +65,13 @@ function passIgual($contrasena,$confirmaContrasena,&$errores){
         return false;
     }
     return true;
+}
+
+function isAdmin(){
+    if($_SESSION['usuario']->perfil == 'administrador')
+        return true;
+    else
+        return false;
 }
 
 ?>

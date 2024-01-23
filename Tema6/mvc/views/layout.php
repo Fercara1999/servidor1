@@ -21,6 +21,9 @@
                 if(validado()){
                     echo "Bienvenido " .$_SESSION['usuario']->descUsuario;
                     echo '<form action="" method="post">';
+                    if(isAdmin()){
+                        echo '<input type="submit" value="Ver todas las citas" name="verTodasCitas" class="btn btn-primary"><br>';
+                    }
                         echo '<input type="submit" value="Ver citas" name="verCitas" class="btn btn-primary"><br>';
                         echo '<input type="submit" name="pedirCita" id="pedirCita" value="Pedir cita" class="btn btn-primary">';
                         echo '<input type="submit" value="Ver perfil" name="verPerfil" class="btn btn-primary">';

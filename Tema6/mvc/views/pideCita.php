@@ -14,5 +14,9 @@
             <?php if(isset($errores))
                 muestraError($errores,'fecha')?>
     </p>
+    <p class='text-danger'>
+            <?php if(isset($errores))
+                muestraError($errores,'insert')?>
+    </p>
     <input type="submit" name="solicitarCita" id="solicitarCita" value="Solicitar cita" class="btn btn-primary">
 </form>
