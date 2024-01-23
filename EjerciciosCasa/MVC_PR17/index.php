@@ -68,8 +68,8 @@
               <div class="col-md-9">
                   <?php
                       if(compruebaBD() == "existe") {
-                          
-                          verLibros();
+                          LibroDAO::verLibros();
+                          $_SESSION['controller'] = CON . 'librosController.php';
                       }
                   ?>
               </div>

@@ -12,7 +12,12 @@ require("./core/insertaScript.php");
 
 require("./config/configBD.php");
 
-// require("./dao/factoryBD.php");
+require("./dao/libroDAO.php");
+require("./dao/albaranDAO.php");
+require("./dao/pedidoDAO.php");
+require("./dao/userDAO.php");
+
+require("./dao/factoryBD.php");
 // require("./models/user.php");
 // require("./dao/userDAO.php");
 
