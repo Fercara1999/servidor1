@@ -8,8 +8,8 @@ $con = new PDO(DSN,USER,PASSWORD);
             $_SESSION['usuario'] = $usuario;
             $_SESSION['vista'] = VIEW.'home.php';
     }else if(isset($_REQUEST['registrar'])){
-
-        if(validaRegistro($erroress)){
+        $errores = [];
+        if(validaRegistro($errores)){
             $usuario = new User(
                 "",
                 $_REQUEST['usuario'],
@@ -20,9 +20,10 @@ $con = new PDO(DSN,USER,PASSWORD);
                 0
             );
     
-            UserDAO::insert($usuario);
-            $_SESSION['usuario'] = $usuario;
-            $_SESSION['vista'] = VIEW.'home.php';
+            if(UserDAO::insert($usuario)){
+                $_SESSION['usuario'] = $usuario;
+                $_SESSION['vista'] = VIEW.'home.php';
+            }
         }else{
             $errores['insert'] = "No se ha podido insertar el usuario";
         }

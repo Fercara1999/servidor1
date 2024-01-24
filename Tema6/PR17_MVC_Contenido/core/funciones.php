@@ -115,5 +115,52 @@ function campoVacio($campo){
         return false;
 }
 
+// Comprueba si la contraseña introducida tiene al menos 8 carácteres, entre ellos 1 número, 1 minúscula y 1 mayúscula
+function expresionContrasena($campo){
+    $patron = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/';
+    $texto = $_REQUEST[$campo];
+    
+    if(preg_match($patron,$texto))
+    return true;
+else
+return false;
+}
+
+// Comprueba si el correo introducido tiene el formato correcto
+function expresionCorreo(){
+    $patron = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
+    $texto = $_REQUEST['correo'];
+    
+    if(preg_match($patron,$texto))
+    return true;
+else
+return false;
+}
+
+// Compara las contraseñas del campo 'contraseña' y 'confirma contraseña' y devuelve true si son iguales y false si no
+function mismaContrasena($contra,$repContra){
+    $contrasena = $contra;
+    $confContrasena = $repContra;
+    
+    if($contrasena == $confContrasena)
+    return true;
+else
+return false;
+}
+
+// Comprueba que la fecha de nacimiento con la que se registra el usuario sea mayor a 12 años
+function compruebaEdad($campoFecha) {
+    $hoy = new DateTime();
+    $fechaNacimiento = new DateTime($campoFecha);
+
+    $edad = $hoy->format('Y') - $fechaNacimiento->format('Y');
+
+    if ($edad >= 12) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 
 ?>

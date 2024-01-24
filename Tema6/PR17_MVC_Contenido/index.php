@@ -13,6 +13,8 @@ if(isset($_REQUEST['login'])){
     $_SESSION['vista'] = VIEW.'home.php';
     header('Location: index.php');
     exit;
+}else if(isset($_REQUEST['botonHome'])){
+    $_SESSION['vista'] = VIEW.'home.php';
 }
 
 if(isset($_SESSION['controller']))

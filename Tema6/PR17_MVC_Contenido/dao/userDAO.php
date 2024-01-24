@@ -43,19 +43,19 @@ class UserDAO{
         }
     }
 
-    public static function insert($usuario){
-        $sql = "INSERT INTO usuarios(id_usuario,usuario,contrasena,correo,fechaNacimiento,rol) VALUES(?,?,?,?,?,?)";
-        $parametros = array($usuario->id_usuario,
-        $usuario->usuario,
-        sha1($usuario->contrasena),
-        $usuario->correo,
-        $usuario->fechaNacimiento,
-        $usuario->rol,
-        $usuario->borrado);
-        // unset($parametros['fechaNacimiento']);
-        $result = FactoryBD::realizaConsulta($sql,$parametros);
+    public static function insert($usuario) {
+        $sql = "INSERT INTO usuarios(usuario, contrasena, correo, fechaNacimiento, rol) VALUES(?, ?, ?, ?, ?)";
+        $parametros = array(
+            $usuario->usuario,
+            sha1($usuario->contrasena),
+            $usuario->correo,
+            $usuario->fechaNacimiento,
+            $usuario->rol
+        );
+        $result = FactoryBD::realizaConsulta($sql, $parametros);
         return true;
     }
+    
 
     public static function update($usuario){
         $sql = 'UPDATE usuarios SET id_usuario = ?,
