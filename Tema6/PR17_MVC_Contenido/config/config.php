@@ -7,9 +7,11 @@ define('JS','./webroot/js/');
 define('VIEW','./views/');
 define('CON','./controllers/');
 
-// require("./core/funciones.php");
+require("./core/funciones.php");
 
-// require("./config/configBD.php");
+require("./config/configBD.php");
+
+require("./dao/libroDAO.php");
 
 // require("./dao/factoryBD.php");
 // require("./models/user.php");
