@@ -7,5 +7,24 @@ $con = new PDO(DSN,USER,PASSWORD);
         if($usuario != null)
             $_SESSION['usuario'] = $usuario;
             $_SESSION['vista'] = VIEW.'home.php';
+    }else if(isset($_REQUEST['registrar'])){
+
+        if(validaRegistro($erroress)){
+            $usuario = new User(
+                "",
+                $_REQUEST['usuario'],
+                $_REQUEST['contrasena'],
+                $_REQUEST['correo'],
+                $_REQUEST['fechaNacimiento'],
+                "cliente",
+                0
+            );
+    
+            UserDAO::insert($usuario);
+            $_SESSION['usuario'] = $usuario;
+            $_SESSION['vista'] = VIEW.'home.php';
+        }else{
+            $errores['insert'] = "No se ha podido insertar el usuario";
+        }
     }
 ?>

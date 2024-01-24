@@ -1,7 +1,7 @@
 
 <header class="container">
     <div class="row">
-        <div class="col-3"><a href="./index.php"><img src=" <?php echo IMG."logoGrande.png" ?>" class="mb-2" alt="" width="150px" height="100px"></a></div>
+        <div class="col-3"><a href="index.php"><img src=" <?php echo IMG."logoGrande.png" ?>" class="mb-2" alt="" width="150px" height="100px"></a></div>
         
         <div class="col-6 mx-auto">
             <form action="./busqueda.php" method="post" class="d-flex mt-4">

@@ -1,5 +1,5 @@
 <?php 
-    session_start();
+    // session_start();
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +49,7 @@
       </div>
 
       <?php
-        // if(compruebaBD() == "existe")
+        if(compruebaBD() == "existe")
             LibroDAO::verLibros();
       ?>
 

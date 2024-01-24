@@ -51,7 +51,7 @@ class UserDAO{
         $usuario->correo,
         $usuario->fechaNacimiento,
         $usuario->rol,
-        $usuario->correo);
+        $usuario->borrado);
         // unset($parametros['fechaNacimiento']);
         $result = FactoryBD::realizaConsulta($sql,$parametros);
         return true;
