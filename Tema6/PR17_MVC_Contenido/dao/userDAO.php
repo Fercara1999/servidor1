@@ -139,23 +139,21 @@ class UserDAO{
         }
     }
 
-    public static function validarUsuario($nombre,$contrasena){
-        $sql = "SELECT * FROM Usuario WHERE contrasena = ? AND usuario = ? AND borrado = false";
-        $parametros = array($nombre,sha1($contrasena));
-
-        $result = FactoryBD::realizaConsulta($sql,$parametros);
-        
-        if($usuarioSTD = $result->fetchObject()){
-            $usuario = new User($usuarioSTD->id_usuario,
-            $usuarioSTD->usuario,
-            $usuarioSTD->contrasena,
-            $usuarioSTD->correo,
-            $usuarioSTD->fechaNacimiento,
-            $usuarioSTD->rol,
-            $usuarioSTD->borrado);
-            return $usuario;
-        }else{
-            return null;
+    public static function validaUsuario($user,$pass){
+        try {
+            $con = new PDO(DSN,USER,PASSWORD);
+            $sql = "select * from usuarios where usuario = ? and contrasena = ?";
+            $parametros = array($user,sha1($pass));
+            $result = FactoryBD::realizaConsulta($sql,$parametros);
+            $usuario = $result->fetchObject();
+            if($usuario){
+                return $usuario;
+            }
+            return false;
+        } catch (PDOException $e) {
+            echo $e->getCode();
+        } finally{
+            unset($con);
         }
     }
 }

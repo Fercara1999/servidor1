@@ -52,7 +52,7 @@ function cargaScript(){
 
     // Comprueba si la sesión está o no iniciada
     function sesionIniciada(){
-        if(!isset($_SESSION['usuario']['usuario'])){
+        if(!isset($_SESSION['usuario'])){
             $_SESSION['error'] = "No tiene la sesión iniciada";
             return false;
         }else
@@ -107,5 +107,13 @@ function muestraError(&$array,$campo){
     if(isset($array[$campo]))
         echo $array[$campo];
 }
+
+function campoVacio($campo){
+    if(empty($_REQUEST[$campo]))
+        return true;
+    else
+        return false;
+}
+
 
 ?>

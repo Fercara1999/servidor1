@@ -3,25 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Inicio - Librería Fernando</title>
 </head>
 <body>
     <?php
-    if(!isset($_SESSION['vista'])){
         require_once VIEW.'fragmentos/header.php';
-        require_once VIEW.'home.php';
-        require_once VIEW.'fragmentos/footer.php';
-    }
-
-        require_once VIEW.'fragmentos/header.php';
-        require_once VIEW.'home.php';
-        require_once VIEW.'fragmentos/footer.php';
 
     
-        if(!isset($_SESSION['vista']))
-            require VIEW.'home.php';
-        else
-            // require $_SESSION['vista'];
+    if(!isset($_SESSION['vista']))
+        require_once VIEW.'home.php';
+    else
+        require $_SESSION['vista'];
+
+        require_once VIEW.'fragmentos/footer.php';
     
     ?>
 </body>
