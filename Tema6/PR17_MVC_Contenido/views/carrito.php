@@ -24,24 +24,27 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
       </a>
-    </div>
+  </div>
 
     <?php
 
-      if(isset($_REQUEST['isbn']))
-        $_SESSION['usuario']->carrito = $_REQUEST['isbn'];
+  if(empty($_SESSION['usuario'])){
+    echo '<div class="container mt-5 text-center">';
+    echo '<h1 class="mb-4">Debes iniciar sesión para comprar</h1></div>';
+  }else if(isset($_REQUEST['isbn']))
+    $_SESSION['usuario']->carrito = $_REQUEST['isbn'];
+  else if(isset($_REQUEST['vaciar']))
+    $_SESSION['usuario']['carrito'] = "";
 
-      if(isset($_REQUEST['vaciar']))
-        $_SESSION['usuario']['carrito'] = "";
-
-      if(isset($_REQUEST['comprar'])){
-        finalizarCompra();
-      }else if(!empty($_SESSION['usuario']->carrito)){
-        muestraCarrito();
-      }else{
-        echo '<div class="container mt-5 text-center">';
-        echo '<h1 class="mb-4">Tu carrito está vacío</h1></div>';
-      }
+  if(empty($_SESSION['usuario'])){
+    echo '<div class="container mt-5 text-center">';
+    echo '<h1 class="mb-4">Debes iniciar sesión para comprar</h1></div>';
+  }else if(!empty($_SESSION['usuario']->carrito)){
+    muestraCarrito();
+  }else{
+    echo '<div class="container mt-5 text-center">';
+    echo '<h1 class="mb-4">Tu carrito está vacío</h1></div>';
+  }
 
     ?>
 </body>

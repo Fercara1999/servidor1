@@ -162,5 +162,135 @@ function compruebaEdad($campoFecha) {
     }
 }
 
+// Muestra el contenido del carrito del usuario que tiene la sesión iniciada, usa la superglobal $_SESSION['usuario']['carrito'] para ello
+function muestraCarrito(){
+    $isbn = $_SESSION['usuario']->carrito;
+
+    try {
+        $con = new PDO(DSN, USER, PASSWORD);
+
+        $sql = 'SELECT * FROM libros WHERE ISBN = ?';
+
+        $stmt = $con->prepare($sql);
+        $stmt->execute([$isbn]);
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        echo '<div class="container mt-5 text-center">';
+        echo '<h1 class="mb-4">Estás a un paso de comprar...</h1>';
+        echo '<div class="card mb-3 mx-auto" style="max-width: 840px;">';
+        echo '<div class="row g-0">';
+        
+        echo '<div class="col-md-4">';
+        foreach ($result as $dato => $valor) {
+            if ($dato == 'rutaPortada') {
+                echo '<img src="'.$valor.'" class="img-fluid" alt="Portada del libro">';
+            }
+        }
+        echo '</div>';
+        
+        echo '<div class="col-md-8">';
+        echo '<div class="card-body">';
+        foreach ($result as $dato => $valor) {
+            if ($dato != 'borrado') {
+                if ($dato == 'titulo') {
+                    echo '<h2 class="card-title">'.$valor.'</h2>';
+                }
+                if ($dato == 'autor') {
+                    echo '<p class="card-text"><small class="text-muted">'.$valor.'</small></p>';
+                }
+                if ($dato == 'unidades'){
+                    if($valor > 0 )
+                        echo '<p class="card-text"><small>UNIDADES DISPONIBLES: '.$valor.'</small></p>';
+                }
+                if ($dato == 'sinopsis') {
+                    echo '<p class="card-text">'.$valor.'</p>';
+                }
+                if ($dato == 'precio') {
+                    echo '<h4 class="card-title">'.$valor.'€</h4>';
+                    $precio = $valor;
+                }
+            }
+        }
+
+        echo '<div class="d-flex justify-content-center mt-3">';
+        echo "<form method='post' action=''><input type='submit' class='btn btn-primary me-3' value='Vaciar carrito' id='vaciar' name='vaciar'>";
+        echo "<input type='submit' class='btn btn-primary me-3' value='Explorar tienda' id='explorar' name='explorar'></form></div>";
+        
+        echo '<div class="d-flex justify-content-between align-items-center mt-5">';
+        echo "<form method='post' class='d-flex'>";
+        echo "<input type='hidden' name='isbn' value='".$_SESSION['usuario']->carrito."' id='isbn'>";
+        echo "<input type='hidden' name='precio' value='".$precio."' id='precio'>";
+        echo "<label for='cantidad' class='me-3'>Cuantas unidades quieres comprar:</label>";
+        echo "<input type='number' class='form-control me-3' id='cantidad' value='1' name='cantidad' style='width: 80px;' min='1'>";
+        echo "<input type='submit' class='btn btn-primary' value='Finalizar compra' id='comprar' name='comprar'>";
+        echo '</form></div>';
+
+        echo '</div></div></div></div></div>';
+
+    } catch (\Throwable $th) {
+        muestraErroresCatch($th);
+    }
+}
+
+// Muestra los errores que se producen en las diferentes funciones
+function muestraErroresCatch($th){
+    switch ($th->getCode()){
+        case 0:
+            echo "No encuentra todos los parámetros de la secuencia";
+            break;
+        case 2002:
+            echo "La IP de acceso a la BD es incorrecta";
+            break;
+        case 1045:
+            echo "Usuario o contraseña incorrectos";
+            break;
+        case 1049:
+            // echo "Error al conectarse a la base de datos indicada";
+            break;
+        case 1146:
+            echo "Error al encontrar la tabla indicada";
+            break;
+        case 1064:
+            echo "No se han indicado los valores a insertar en la BD";
+            break;
+        case 1406:
+            echo "Alguno de los campos a insertar ha excedido el número de carácteres permitidos";
+            break;
+        case 1292:
+            echo "Formato de fecha incorrecto";
+            break;
+        case 1048:
+            echo "No puedes establecer los datos como nulos";
+            break;
+        case 1007:
+            echo "Problema al crear la bd";
+            break;
+        case 1062:
+            echo "Has introducido una clave que ya se encuentra en la base de datos";
+            break;
+        default:
+            echo "Error de la base de datos";
+            break;
+    }
+
+    return $th->getCode();
+}
+
+// Muestra el formulario de cambio de contraseña en el que se pide la contraseña actual y dos veces la nueva contraseña
+function verCambioContrasena(){
+    try {
+        echo "<form method='post'>";
+
+        echo "<br><label for='contrasenaActual' class='form-label me-2 ancho-caja'>Contraseña actual: <input type='password' name='contrasenaActual' id='contrasenaActual' class='form-control'></label><br>";
+        echo "<label for='nuevaContrasena' class='form-label me-2 ancho-caja'>Nueva contraseña: <input type='password' name='nuevaContrasena' id='nuevaContrasena' class='form-control'></label><br>";
+        echo "<label for='confirmaNuevaContrasena' class='form-label me-2 ancho-caja'>Confirma contraseña nueva: <input type='password' name='confirmaNuevaContrasena' id='confirmaNuevaContrasena' class='form-control'></label><br>";
+
+        unset($con);
+    } catch (\Throwable $th) {
+        muestraErroresCatch($th);
+        unset($con);
+    }
+}
 
 ?>

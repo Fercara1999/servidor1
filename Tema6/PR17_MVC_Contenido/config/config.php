@@ -17,6 +17,9 @@ require("./dao/factoryBD.php");
 require("./models/user.php");
 require("./dao/userDAO.php");
 
+require("./models/pedido.php");
+require("./dao/pedidoDAO.php");
+
 // require("./models/cita.php");
 // require("./dao/citaDAO.php");
 
