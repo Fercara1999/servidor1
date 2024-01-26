@@ -293,4 +293,107 @@ function verCambioContrasena(){
     }
 }
 
+function muestraHeaderUsuario(){
+    if(sesionIniciada()){
+        echo '<form method="post" style="display: inline-block; margin-left: 10px;">';
+        echo '<button type="submit" style="background: none; border: none; padding: 0; margin: 0; cursor: pointer;" id="botonHomeUser" name="botonHomeUser">';
+        echo 'Bienvenid@ '.$_SESSION['usuario']->usuario;
+        echo '</button>';
+        echo '<button type="submit" style="background: none; border: none; padding: 0; margin: 0; cursor: pointer;" id="botonCarrito" name="botonCarrito">';
+        echo '<img src="webroot/img/carritoVacio.png" alt="" width="70px" height="70px">';
+        echo '</button>';
+        echo '</form>';
+        echo '<br><a href="'.VIEW.'logout.php" class="ms-4">Cierre de sesión</a>';
+    }else{
+        echo "<form method='post'>";
+        echo "<input type='submit' class='btn btn-primary mt-4' value='Login / Registro' name='login' id='login'>";
+        echo "</form>";
+    }
+}
+
+function isAdmin(){
+    if($_SESSION['usuario']->rol == 'administrador')
+        return true;
+    else
+        return false;
+}
+
+function isModerador(){
+    if($_SESSION['usuario']->rol == 'moderador')
+        return true;
+    else
+        return false;
+}
+
+// Muestra el mensaje de error almacenado en el campo que le indicamos en el array que le indicamos
+function muestraErrores($errores,$name){
+    if(isset($errores[$name]))
+        echo $errores[$name];
+}
+
+// Realiza todas las validaciones a la hora de meter el albarán y devuelve true en caso de que no haya errores y false en caso de que si
+function validaAlbaran(&$albaran){
+    if(campoVacio('fechaAlbaran'))
+        $albaran['fechaAlbaran'] = "El campo de fecha del albarán está vacío";
+    else if(compruebaFecha($_REQUEST['fechaAlbaran']))
+        $albaran['fechaAlbaran'] = "La fecha introducida es posterior a la fecha actual";
+    if(campoVacio('isbn')){
+        $albaran['isbn'] = 'El campo ISBN está vacío';
+    }else if(!expresionISBN('isbn')){
+        $albaran['isbn'] = "El formato del ISBN no es válido";
+    }else if(existeISBN('isbn'))
+        $albaran['isbn'] = "No existe ningun libro con el ISBN introducido";
+    if(campoVacio('cantidad'))
+        $albaran['cantidad'] = "El campo cantidad está vacío";
+    if(count($albaran) == 0)
+        return true;
+    else
+        return false;
+}
+
+// Comprueba que la fecha que se pasa como parámetro sea posterior a la fecha actual
+function compruebaFecha($campoFecha){
+    $hoy = new DateTime();
+    $hoy->format('Y-m-d');
+
+    $fechaHoy = $hoy->format('Y-m-d');
+
+    if($fechaHoy < $campoFecha)
+        return true;
+    else
+        return false;
+}
+
+// Expresion para que el ISBN tenga 13 carácteres numéricos
+function expresionISBN($campo){
+    $patron = '/^\d{13}$/';
+    $isbn = $_REQUEST[$campo];
+
+    if(preg_match($patron,$isbn))
+        return true;
+    else
+        return false;
+}
+
+// Comprueba si el ISBN introducido pertenece o no a algún libro de la base de datos a la hora de meter un nuevo albarán
+function existeISBN($isbn){
+    try {
+        $con = new PDO(DSN, USER, PASSWORD);
+        $isbn = $_REQUEST[$isbn];
+    
+        $sql = 'SELECT * FROM libros WHERE ISBN = ?';
+        $stmt = $con->prepare($sql);
+        $stmt->execute(array($isbn));
+
+        $resultadoLibro = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if($resultadoLibro)
+            return false;
+        else
+            return true;
+    } catch (\Throwable $th) {
+        muestraErroresCatch($th);
+    }
+}
+
 ?>

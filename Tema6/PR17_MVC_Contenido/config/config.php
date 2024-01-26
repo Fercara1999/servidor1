@@ -20,6 +20,9 @@ require("./dao/userDAO.php");
 require("./models/pedido.php");
 require("./dao/pedidoDAO.php");
 
+require("./models/albaran.php");
+require("./dao/albaranDAO.php");
+
 // require("./models/cita.php");
 // require("./dao/citaDAO.php");
 

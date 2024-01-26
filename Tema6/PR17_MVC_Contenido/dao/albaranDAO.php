@@ -83,12 +83,37 @@ class  AlbaranDAO{
         return true;
     }
 
-    public static function activar($usuario){
+    public static function activar($albaran){
         $sql = "UPDATE albaranes SET borrado = false WHERE codigoAlbaran = ?";
 
         $parametros = array($albaran->codigoAlbaran);
         $result = FactoryBD::realizaConsulta($sql,$parametros);
         return true;
+    }
+
+    public static function nuevoAlbaran(){
+        $fecha = $_REQUEST['fechaAlbaran'];
+
+        $isbn = $_REQUEST['isbn'];
+        $cantidad = $_REQUEST['cantidad'];
+
+        $usuario = $_SESSION['usuario']->id_usuario;
+
+        try {
+            $sql = 'INSERT INTO albaranes(fechaAlbaran, ISBN_libro, cantidadIncremento, id_usuario) VALUES (?,?,?,?)';
+            $parametros = array($fecha,$isbn,$cantidad,$usuario);
+            FactoryBD::realizaConsulta($sql,$parametros);
+
+            $sql = 'UPDATE libros SET unidades = unidades + ? WHERE isbn = ?';
+            $parametros = array($cantidad,$isbn);
+            FactoryBD::realizaConsulta($sql,$parametros);
+
+            echo "Albarán introducido con exito";
+
+            unset($con);
+        } catch (\Throwable $th) {
+            muestraErroresCatch($th);
+        }
     }
 
 }

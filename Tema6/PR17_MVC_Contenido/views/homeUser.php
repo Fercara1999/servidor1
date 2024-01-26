@@ -29,6 +29,8 @@
             echo "</form>";
         }
 
+        PedidoDAO::misPedidos();        
+
     ?>
     <br><br>
 </body>

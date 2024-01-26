@@ -134,9 +134,9 @@ class PedidoDAO{
             
             echo '<div class="col-md-6">';
             echo '<div class="card-body">';
-            echo "<input type='hidden' name='usuario' value='".$_SESSION['usuario']['usuario']."'>";
-            echo "<input type='hidden' name='correo' value='".$_SESSION['usuario']['correo']."'>";
-            echo "<input type='hidden' name='fechaNacimiento' value='".$_SESSION['usuario']['fechaNacimiento']."'>";
+            echo "<input type='hidden' name='usuario' value='".$_SESSION['usuario']->usuario."'>";
+            echo "<input type='hidden' name='correo' value='".$_SESSION['usuario']->correo."'>";
+            echo "<input type='hidden' name='fechaNacimiento' value='".$_SESSION['usuario']->fechaNacimiento."'>";
             foreach ($result as $datos => $valores) {
                 if($datos == 'idPedido') {
                     echo "<input type='hidden' name='$datos' value='$valores'>";
@@ -179,7 +179,6 @@ class PedidoDAO{
         unset($con);
 
     } catch (\Throwable $th) {
-        $con->rollBack();
         muestraErroresCatch($th);
     }
     }
@@ -216,9 +215,6 @@ class PedidoDAO{
                     $parametros = array($usuario,$fechaHoy,$libro,$cantidad,$precioTotal);
                     $result = FactoryBD::realizaConsulta($sqlInsertarPedido,$parametros);
     
-                    $_SESSION['usuario']['carrito'] = "";
-    
-                    echo '<div class="text-center mt-2 mx-auto"><img src="./imagenes/compraRealizada.gif" width="300px"></div>';
                 } else {
                     echo '<div class="container mt-5 text-center">';
                     echo '<h1 class="mb-4">No hay suficientes unidades disponibles para realizar la compra</h1></div>';

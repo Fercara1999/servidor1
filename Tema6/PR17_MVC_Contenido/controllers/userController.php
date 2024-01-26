@@ -7,6 +7,8 @@
         UserDAO::actualizarDatos();
     }else if(isset($_REQUEST['actualizarContrasena'])){
         UserDAO::validaCambioContrasena();
+    }else if(isset($_REQUEST['nuevoAlbaran'])){
+        $_SESSION['controller'] = CON.'albaranController.php';
     }
 
 

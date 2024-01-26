@@ -9,6 +9,8 @@ if(isset($_REQUEST['explorar'])){
     $_SESSION['vista'] = VIEW.'home.php';
 }else if(isset($_REQUEST['comprar'])){
     PedidoDAO::finalizarCompra();
+    $_SESSION['usuario']->carrito = "";
+    $_SESSION['vista'] = VIEW.'finCompra.php';
 }
 
 ?>

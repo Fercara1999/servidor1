@@ -20,8 +20,15 @@ if(isset($_REQUEST['login'])){
     $_SESSION['vista'] = VIEW.'carrito.php';
     $_SESSION['controller'] = CON.'carritoController.php';
 }else if(isset($_REQUEST['botonHomeUser'])){
-    $_SESSION['vista'] = VIEW.'homeUser.php';
+    if(isAdmin()){
+        $_SESSION['vista'] = VIEW.'homeAdmin.php';
+    }else if(isModerador()){
+        $_SESSION['vista'] = VIEW.'homeModerador.php';
+    }else{
+        $_SESSION['vista'] = VIEW.'homeUser.php';
+    }
     $_SESSION['controller'] = CON.'userController.php';
+
 }
 
 if(isset($_SESSION['controller']))
