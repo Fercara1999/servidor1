@@ -131,7 +131,7 @@ class  AlbaranDAO{
     
             foreach ($resultados as $valores) {
                 echo '<tr>';
-                echo "<form method='post' action='./modificando.php'>";
+                echo "<form method='post'>";
                 
                 foreach ($valores as $campo => $valor) {
                     if($campo != 'borrado'){
@@ -152,6 +152,93 @@ class  AlbaranDAO{
         } catch (\Throwable $th) {
             muestraErroresCatch($th);
             unset($con);
+        }
+    }
+
+    public static function modificarAlbaran(){
+        $albaran = $_REQUEST['codigoAlbaran'];
+    
+        try {
+            $sql = 'SELECT * FROM albaranes WHERE codigoAlbaran = ? and borrado = false';
+            $parametros = array($albaran);
+            
+            $result = FactoryBD::realizaConsulta($sql,$parametros);
+    
+            $resultados = $result->fetch(PDO::FETCH_ASSOC);
+    
+            echo "<table class='table table-hover'>";
+            echo "<tr><th>Codigo albarán</th><th>Fecha albarán</th><th>ISBN</th><th>Cantidad</th><th>ID usuario</th></tr>";
+    
+            echo '<tr>';
+            echo "<form method='post'>";
+            foreach ($resultados as $campo => $valores) {
+                if($campo == 'codigoAlbaran'){
+                    echo '<td><input type="text" class="form-control" name="'.$campo.'" value="'.$valores.'" readonly></td>';
+                }else if($campo == 'id_usuario'){
+                    echo '<td><input type="text" class="form-control" name="'.$campo.'" value="'.$valores.'" readonly></td>';
+                }else if($campo == 'fechaAlbaran')
+                    echo '<td><input type="date" class="form-control" name="'.$campo.'" value="'.$valores.'"></td>';
+                else if($campo == 'cantidadIncremento')
+                    echo '<td><input type="number" class="form-control" name="'.$campo.'" value="'.$valores.'" min="1"></td>';
+                else if($campo != 'borrado'){
+                    echo '<td><input type="text" class="form-control" name="'.$campo.'" value="'.$valores.'"></td>';
+                }
+            }
+    
+                echo "<td><input type='submit' class='btn bg-success' value='Guardar cambios' name='guardarCambiosAlbaran'></td></form>";
+    
+            echo "</tr>";
+        } catch (\Throwable $th) {
+            muestraErroresCatch($th);
+        }
+    
+    }
+
+    public static function guardaCambiosAlbaran(){
+        $albaran = $_REQUEST['codigoAlbaran'];
+        $fechaAlbaran = $_REQUEST['fechaAlbaran'];
+        $ISBN = $_REQUEST['ISBN_libro'];
+        $cantidad = $_REQUEST['cantidadIncremento'];
+    
+        try {
+            $sqlAlbaranesOriginal = 'SELECT cantidadIncremento FROM albaranes WHERE codigoAlbaran = ?';
+            $parametros = array($albaran);
+            $result = FactoryBD::realizaConsulta($sqlAlbaranesOriginal,$parametros);
+            $resultAlbaranesOriginal = $result->fetch(PDO::FETCH_ASSOC);
+            $cantidadOriginal = $resultAlbaranesOriginal['cantidadIncremento'];
+    
+            $sqlAlbaranes = 'UPDATE albaranes SET fechaAlbaran = ?, ISBN_libro = ?, cantidadIncremento = ? WHERE codigoAlbaran = ?';
+            $parametros = array($fechaAlbaran,$ISBN,$cantidad,$albaran);
+            FactoryBD::realizaConsulta($sqlAlbaranes,$parametros);
+    
+            $sqlLibros = 'SELECT unidades FROM libros WHERE ISBN = ?';
+            $parametros = array($ISBN);
+            $result = FactoryBD::realizaConsulta($sqlLibros,$parametros);
+            $resultLibros = $result->fetch(PDO::FETCH_ASSOC);
+    
+            $diferenciaCantidad = $cantidad - $cantidadOriginal;
+            $nuevaCantidadLibros = $resultLibros['unidades'] + $diferenciaCantidad;
+    
+            $sqlUpdateLibros = 'UPDATE libros SET unidades = ? WHERE ISBN = ?';
+            $parametros = array($nuevaCantidadLibros,$ISBN);
+            FactoryBD::realizaConsulta($sqlUpdateLibros,$parametros);
+    
+        } catch (\Throwable $th) {
+            muestraErroresCatch($th);
+        }
+    }
+
+    public static function borraAlbaran(){
+        $albaran = $_REQUEST['codigoAlbaran'];
+    
+        try {
+            $sql = 'UPDATE albaranes SET borrado = true WHERE codigoAlbaran = ?';
+            $parametros = array($albaran);
+    
+            FactoryBD::realizaConsulta($sql,$parametros);
+    
+        } catch (\Throwable $th) {
+            muestraErroresCatch($th);
         }
     }
 

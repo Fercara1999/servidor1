@@ -7,8 +7,16 @@ if(isset($_REQUEST['registrarNuevoLibro']) && validaLibro($erroresLibro)){
 }else if(isset($_REQUEST['registrarNuevoLibro'])){
     muestraErroresArray($erroresLibro);
 }else if(isset($_REQUEST['modificarProducto'])){
-    $_SESSION['vista'] = VIEW.'modificando.php';
     LibroDAO::modificarLibro();
+}else if(isset($_REQUEST['guardarCambiosProducto'])){
+    LibroDAO::guardaCambiosProducto();
+    $_SESSION['vista'] = VIEW.'home.php';
+    echo "Libro modificado con exito";
+}else if(isset($_REQUEST['borrarProducto'])){
+    LibroDAO::borraProducto();
+    $_SESSION['vista'] = VIEW.'home.php';
+    echo "Libro borrado con exito";
+    
 }
 
 ?>

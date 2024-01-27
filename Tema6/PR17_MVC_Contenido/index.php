@@ -28,7 +28,8 @@ if(isset($_REQUEST['login'])){
         $_SESSION['vista'] = VIEW.'homeUser.php';
     }
     $_SESSION['controller'] = CON.'userController.php';
-
+}else if(isset($_REQUEST['modificarProducto'])){
+    $_SESSION['controller'] = CON.'libroController.php';
 }
 
 if(isset($_SESSION['controller']))

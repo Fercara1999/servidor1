@@ -11,6 +11,15 @@
         $_SESSION['controller'] = CON.'albaranController.php';
     }else if(isset($_REQUEST['nuevoLibro'])){
         $_SESSION['controller'] = CON.'libroController.php';
+    }else if(isset($_REQUEST['pedidos'])){
+        $_SESSION['vista'] = VIEW.'pedidos.php';
+        $_SESSION['controller'] = CON.'pedidoController.php';
+    }else if(isset($_REQUEST['albaranes'])){
+        $_SESSION['vista'] = VIEW.'albaranes.php';
+        $_SESSION['controller'] = CON.'albaranController.php';
+    }else if(isset($_REQUEST['productos'])){
+        $_SESSION['vista'] = VIEW.'productos.php';
+        $_SESSION['controller'] = CON.'libroController.php';
     }
 
 

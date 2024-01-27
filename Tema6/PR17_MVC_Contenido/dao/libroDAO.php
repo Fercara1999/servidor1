@@ -320,6 +320,42 @@ class LibroDAO{
     
     }
 
+    public static function guardaCambiosProducto(){
+        $isbn = $_REQUEST['ISBN'];
+        $titulo = $_REQUEST['titulo'];
+        $autor = $_REQUEST['autor'];
+        $editorial = $_REQUEST['editorial'];
+        $genero = $_REQUEST['genero'];
+        $anoPublicacion = $_REQUEST['anioPublicacion'];
+        $sinopsis = $_REQUEST['sinopsis'];
+        $rutaPortada = $_REQUEST['rutaPortada'];
+        $precio = $_REQUEST['precio'];
+        $unidades = $_REQUEST['unidades'];
+    
+        try {
+            $sql = 'UPDATE libros SET ISBN = ?, titulo = ?, autor = ?, editorial = ?, genero = ?, anioPublicacion = ?, sinopsis = ?, rutaPortada = ?, precio = ?, unidades = ? WHERE ISBN = ?';
+            $parametros = array($isbn,$titulo,$autor,$editorial,$genero,$anoPublicacion,$sinopsis,$rutaPortada,$precio,$unidades,$isbn);
+
+            FactoryBD::realizaConsulta($sql,$parametros);
+    
+        } catch (\Throwable $th) {
+            muestraErroresCatch($th);
+        }
+    }
+
+    public static function borraProducto(){
+        $isbn = $_REQUEST['ISBN'];
+    
+        try {    
+            $sql = 'UPDATE libros SET borrado = true WHERE ISBN = ?';
+            $parametros = array($isbn);
+    
+            FactoryBD::realizaConsulta($sql,$parametros);
+        } catch (\Throwable $th) {
+            muestraErroresCatch($th);
+        }
+    }
+
 }
 
 ?>

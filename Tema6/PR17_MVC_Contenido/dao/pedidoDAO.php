@@ -241,7 +241,7 @@ class PedidoDAO{
     
             foreach ($resultados as $valores) {
                 echo '<tr>';
-                echo "<form method='post' action='./modificando.php'>";
+                echo "<form method='post'>";
                 
                 foreach ($valores as $campo => $valor) {
                     if($campo != 'borrado'){
@@ -261,6 +261,87 @@ class PedidoDAO{
         } catch (\Throwable $th) {
             muestraErroresCatch($th);
             unset($con);
+        }
+    }
+
+    public static function modificarPedido(){
+        $pedido = $_REQUEST['idPedido'];
+    
+        try {
+            $sql = 'SELECT * FROM pedidos WHERE idPedido = ? and borrado = false';
+            $parametros = array($pedido);
+            $result = FactoryBD::realizaConsulta($sql,$parametros);
+    
+            $resultados = $result->fetch(PDO::FETCH_ASSOC);
+    
+            echo "<table class='table table-hover'>";
+            echo "<tr><th>ID pedido</th><th>ID usuario</th><th>Fecha pedido</th><th>ISBN</th><th>Cantidad</th><th>Precio total</th></tr>";
+    
+            echo '<tr>';
+            echo "<form method='post'>";
+            foreach ($resultados as $campo => $valores) {
+                if($campo == 'idPedido'){
+                    echo '<td><input type="text" class="form-control" name="'.$campo.'" value="'.$valores.'" readonly></td>';
+                }else if($campo == 'id_usuario'){
+                    echo '<td><input type="text" class="form-control" name="'.$campo.'" value="'.$valores.'" readonly></td>';
+                }else if($campo == 'fechaPedido')
+                    echo '<td><input type="date" class="form-control" name="'.$campo.'" value="'.$valores.'" readonly></td>';
+                else if($campo == 'ISBN')
+                    echo '<td><input type="text" class="form-control" name="'.$campo.'" value="'.$valores.'"></td>';
+                else if($campo == 'cantidad'){
+                    echo '<td><input type="number" class="form-control" name="'.$campo.'" value="'.$valores.'" min="1"></td>';
+                }else if ($campo == 'precioTotal'){
+                    echo '<td><input type="text" class="form-control" name="'.$campo.'" value="'.$valores.'" readonly></td>';
+                }else if($campo != 'borrado'){
+                    echo '<td><input type="text" class="form-control" name="'.$campo.'" value="'.$valores.'"></td>';
+                }
+            }
+    
+                echo "<td><input type='submit' class='btn bg-success' value='Guardar cambios' name='guardarCambiosPedido'></td></form>";
+    
+            echo "</tr>";
+        } catch (\Throwable $th) {
+            muestraErroresCatch($th);
+        }
+    
+    }
+
+    public static function guardaCambiosPedido(){
+        $idPedido = $_REQUEST['idPedido'];
+        $fechaPedido = $_REQUEST['fechaPedido'];
+        $ISBN = $_REQUEST['ISBN'];
+        $cantidad = $_REQUEST['cantidad'];
+    
+        try {
+            $sqlPrecioPorUnidad = 'SELECT precio FROM libros WHERE ISBN = ?';
+            $parametros = array($ISBN);
+            $result = FactoryBD::realizaConsulta($sqlPrecioPorUnidad,$parametros);
+            $precioPorUnidad = $result->fetchColumn();
+    
+            $nuevoPrecioTotal = $cantidad * $precioPorUnidad;
+    
+            $sqlPedidos = 'UPDATE pedidos SET fechaPedido = ?, ISBN = ?, cantidad = ?, precioTotal = ? WHERE idPedido = ?';
+            $parametros = array($fechaPedido,$ISBN,$cantidad,$nuevoPrecioTotal,$idPedido);
+            $result = FactoryBD::realizaConsulta($sqlPedidos,$parametros);
+    
+            $sqlUpdateLibros = 'UPDATE libros SET unidades = unidades + ? WHERE ISBN = ?';
+            $parametros = array($cantidad,$ISBN);
+            FactoryBD::realizaConsulta($sqlUpdateLibros,$parametros);
+        } catch (\Throwable $th) {
+            muestraErroresCatch($th);
+        }
+    }
+
+    public static function borraPedido(){
+        $pedido = $_REQUEST['idPedido'];
+    
+        try {
+            $sql = 'UPDATE pedidos SET borrado = true WHERE idPedido = ?';
+            $parametros = array($pedido);
+    
+            FactoryBD::realizaConsulta($sql,$parametros);
+        } catch (\Throwable $th) {
+            muestraErroresCatch($th);
         }
     }
 }
