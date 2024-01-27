@@ -204,6 +204,122 @@ class LibroDAO{
             unset($con);
         }
     }
+
+    public static function nuevoLibro(){
+
+        $isbn = $_REQUEST['isbn'];
+        $titulo = $_REQUEST['titulo'];
+        $autor = $_REQUEST['autor'];
+        $editorial = $_REQUEST['editorial'];
+        $genero = $_REQUEST['genero'];
+        $anoPublicacion = $_REQUEST['anoPublicacion'];
+        $sinopsis = $_REQUEST['sinopsis'];
+        $rutaPortada = $_REQUEST['ruta'];
+        $precio = $_REQUEST['precio'];
+        $unidades = $_REQUEST['unidades'];
+
+        try {
+
+            $sql = 'INSERT INTO libros(ISBN,titulo,autor,editorial,genero,anioPublicacion,sinopsis,rutaPortada,precio,unidades) VALUES (?,?,?,?,?,?,?,?,?,?)';
+            $parametros = array($isbn,$titulo,$autor,$editorial,$genero,$anoPublicacion,$sinopsis,$rutaPortada,$precio,$unidades);
+
+            FactoryBD::realizaConsulta($sql,$parametros);
+
+            echo "Libro introducido con exito";
+            unset($con);
+        } catch (\Throwable $th) {
+            muestraErroresCatch($th);
+        }
+    }
+
+    public static function verProductos(){
+        $usuario = $_SESSION['usuario']->usuario;
+        try {
+    
+            $sql = 'SELECT * FROM libros WHERE borrado = false';
+            $parametros = array();
+            $result = FactoryBD::realizaConsulta($sql,$parametros);
+    
+            $resultados = $result->fetchAll(PDO::FETCH_ASSOC);
+            echo "<h1>Libros</h1>";
+            echo "<table class='table table-hover'>";
+            echo "<tr><th>ISBN</th><th>Titulo</th><th>Autor</th><th>Editorial</th><th>Género</th><th>Año de publicación</th><th>Sinópsis</th><th>Ruta portada</th><th>Precio</th><th>Unidades</th></tr>";
+    
+            foreach ($resultados as $valores) {
+                echo '<tr>';
+                echo "<form method='post'>";
+                
+                foreach ($valores as $campo => $valor) {
+                    if($campo != 'borrado'){
+                        echo "<input type='hidden' name='$campo' value='$valor'>";
+                        echo '<td>'.$valor.'</td>';
+                    }
+                }
+                if($_SESSION['usuario']->rol == 'administrador'){
+                    echo '<td><input type="submit" class="bg-warning btn" value="Modificar" name="modificarProducto" id="modificarProducto"</td>';
+                    echo '<td><input type="submit" class="bg-danger btn" value="Borrar" name="borrarProducto" id="borrarProducto"</td></form>';
+                }
+                echo "</tr>";
+            }
+    
+            echo "</table>";
+            unset($con);
+        } catch (\Throwable $th) {
+            muestraErroresCatch($th);
+            unset($con);
+        }
+    }
+
+    public static function modificarLibro(){
+        $producto = $_REQUEST['ISBN'];
+    
+        try {
+            $sql = 'SELECT * FROM libros WHERE isbn = ? and borrado = false';
+            $parametros = array($producto);
+            $result = FactoryBD::realizaConsulta($sql,$parametros);
+    
+            $resultados = $result->fetch(PDO::FETCH_ASSOC);
+    
+            echo "<table class='table table-hover'>";
+            echo "<tr><th>ISBN</th><th>Titulo</th><th>Autor</th><th>Editorial</th><th>Género</th><th>Año de publicación</th><th>Sinópsis</th><th>Ruta portada</th><th>Precio</th><th>Unidades</th></tr>";
+    
+            echo '<tr>';
+            echo "<form method='post'>";
+    
+            foreach ($resultados as $campo => $valores) {
+                if($campo == 'ISBN'){
+                    echo '<td><input type="text" class="form-control" name="'.$campo.'" value="'.$valores.'" readonly></td>';
+                } else if($campo == 'titulo' || $campo == 'autor' || $campo == 'editorial' || $campo == 'sinopsis' || $campo == 'rutaPortada'){
+                    echo '<td><input type="text" class="form-control" name="'.$campo.'" value="'.$valores.'"></td>';
+                } else if($campo == 'genero'){
+                    echo '<td><select name="genero" class="form-control" id="genero">';
+                    echo '<option value="0">Selecciona una opción</option>';
+                    $generos = array("aventuras", "ficcion", "policiaco", "terror", "misterio", "romantica", "humor", "poesia", "mitologia", "teatro", "cuento", "no_ficcion");
+    
+                    foreach ($generos as $opcion) {
+                        $selected = ($valores == $opcion) ? 'selected' : '';
+                        echo '<option value="'.$opcion.'" '.$selected.'>'.$opcion.'</option>';
+                    }
+                    echo '</select></td>';
+                } else if($campo == 'anioPublicacion' || $campo == 'unidades') {
+                    echo '<td><input type="number" class="form-control" name="'.$campo.'" value="'.$valores.'" min="1"></td>';
+                } else if($campo == 'precio') {
+                    echo '<td><input type="number" class="form-control" name="'.$campo.'" value="'.$valores.'" step="0.01"></td>';
+                } else if($campo != 'borrado'){
+                    echo '<td><input type="text" class="form-control" name="'.$campo.'" value="'.$valores.'"></td>';
+                }
+            }
+    
+            echo "<td><input type='submit' class='btn bg-success' value='Guardar cambios' name='guardarCambiosProducto'></td></form>";
+    
+            echo "</tr>";
+        } catch (\Throwable $th) {
+            muestraErroresCatch($th);
+            unset($con);
+        }
+    
+    }
+
 }
 
 ?>

@@ -224,6 +224,45 @@ class PedidoDAO{
             }
         }
     }
+
+    public static function verPedidos(){
+        $usuario = $_SESSION['usuario']->usuario;
+        try {
+    
+            $sql = 'SELECT * FROM pedidos WHERE borrado = false';
+            $parametros = array();
+            
+            $result = FactoryBD::realizaConsulta($sql,$parametros);
+    
+            $resultados = $result->fetchAll(PDO::FETCH_ASSOC);
+            echo "<h1>Pedidos</h1>";
+            echo "<table class='table table-hover'>";
+            echo "<tr><th>ID pedido</th><th>ID usuario</th><th>Fecha pedido</th><th>ISBN</th><th>Cantidad</th><th>Precio total</th></tr>";
+    
+            foreach ($resultados as $valores) {
+                echo '<tr>';
+                echo "<form method='post' action='./modificando.php'>";
+                
+                foreach ($valores as $campo => $valor) {
+                    if($campo != 'borrado'){
+                        echo "<input type='hidden' name='$campo' value='$valor'>";
+                        echo '<td>'.$valor.'</td>';
+                    }
+                }
+                if($_SESSION['usuario']->rol == 'administrador'){
+                    echo '<td><input type="submit" class="bg-warning btn" value="Modificar" name="modificarPedido" id="modificarPedido"</td>';
+                    echo '<td><input type="submit" class="bg-danger btn" value="Borrar" name="borrarPedido" id="borrarPedido"</td></form>';
+                }
+                echo "</tr>";
+            }
+    
+            echo "</table>";
+    
+        } catch (\Throwable $th) {
+            muestraErroresCatch($th);
+            unset($con);
+        }
+    }
 }
 
 ?>

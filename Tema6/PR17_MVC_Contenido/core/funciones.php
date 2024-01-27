@@ -396,4 +396,93 @@ function existeISBN($isbn){
     }
 }
 
+// Realiza todas las validaciones a la hora de meter un nuevo libro y devuelve true en caso de que no haya errores y false en caso de que si
+function validaLibro(&$libro){
+    if(campoVacio('isbn'))
+        $libro['isbn'] = "El campo ISBN está vacío";
+    else if(!expresionISBN('isbn'))
+        $libro['isbn'] = "El formato del ISBN no es válido";
+    if(campoVacio('titulo'))
+        $libro['titulo'] = "El campo titulo está vacío";
+    else if(expresionTitulo())
+        $libro['titulo'] = "El formato del titulo no es valido";
+    if(campoVacio('autor'))
+        $libro['autor'] = "El campo autor está vacío";
+    else if(expresionAutor())
+        $libro['autor'] = "El formato del autor no es valido";
+    if(campoVacio('editorial'))
+        $libro['editorial'] = "El campo editorial está vacío";
+    else if(expresionAutor())
+        $libro['editorial'] = "El formato de la editorial no es valido";
+    if(campoVacio('genero'))
+        $libro['genero'] = "El campo genero está vacío";
+    else if(distinta0())
+        $libro['genero'] = "No has seleccionado un genero";
+    if(!compruebaAno($_REQUEST['anoPublicacion']))
+        $libro['anoPublicacion'] = "El año de publicacion es posterior a la fecha actual";
+    if(campoVacio('sinopsis'))
+        $libro['sinopsis'] = "El campo sinopsis está vacío";
+    if(campoVacio('ruta'))
+        $libro['rutaPortada'] = "El campo ruta portada está vacío";
+    if(campoVacio('precio'))
+        $libro['precio'] = "El campo precio está vacío";
+    if(campoVacio('unidades'))
+        $libro['unidades'] = "El campo unidades está vacío";
+    if(count($libro) == 0)
+        return true;
+    else
+        return false;
+}
+
+// Muestra todos los errores que contiene el array que le pasamos por parámetro
+function muestraErroresArray($errores){
+    echo "<div class='text-danger'>";
+    foreach ($errores as $campo => $mensajes) {
+        echo $mensajes . "<br>";
+    }
+    echo "</div>";
+}
+
+// Expresion para el titulo, permite mayúsuclas, minúsculas y números
+function expresionTitulo(){
+    $patron = '/^[A-Za-z0-9\s]+$/';
+    $campo = $_REQUEST['titulo'];
+    
+    if(preg_match($patron, $campo)) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+// Expresion para que se incluya al menos el nombre y primer apellido del autor, el segundo apellido es opcional
+function expresionAutor(){
+    $patron = '/^[A-Z]{1}[a-z]{1,}\s[A-Z]{1}[a-z]{1,}(?:\s[A-Z]{1}[a-z]+)?$/';
+    $campo = $_REQUEST['autor'];
+    if(preg_match($patron, $campo))
+        return false;
+    else
+        return true;
+}
+
+// Función que comprueba que en el select se ha elegido una opción diferente al '0'
+function distinta0(){
+    if($_REQUEST['genero'] == '0')
+        return true;
+    else
+        return false;
+}
+
+// Comprueba que el año que se pasa como parámetro sea posterior a la fecha actual
+function compruebaAno($campoFecha) {
+    $hoy = new DateTime();
+    $anoHoy = (int)$hoy->format('Y');
+    $anoCampoFecha = (int)$campoFecha;
+
+    if ($anoHoy >= $anoCampoFecha) {
+        return true;
+    } else {
+        return false;
+    }
+}
 ?>

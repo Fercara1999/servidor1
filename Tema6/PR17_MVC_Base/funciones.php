@@ -230,7 +230,6 @@ function expresionTitulo(){
     }
 }
 
-
 // Expresion para que se incluya al menos el nombre y primer apellido del autor, el segundo apellido es opcional
 function expresionAutor(){
     $patron = '/^[A-Z]{1}[a-z]{1,}\s[A-Z]{1}[a-z]{1,}(?:\s[A-Z]{1}[a-z]+)?$/';

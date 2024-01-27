@@ -116,6 +116,45 @@ class  AlbaranDAO{
         }
     }
 
+    public static function verAlbaranes(){
+        $usuario = $_SESSION['usuario']->usuario;
+        try {
+    
+            $sql = 'SELECT * FROM albaranes where borrado = false';
+            $parametros = array();
+            $result =  FactoryBD::realizaConsulta($sql,$parametros);
+    
+            $resultados = $result->fetchAll(PDO::FETCH_ASSOC);
+            echo "<h1>Albaranes</h1>";
+            echo "<table class='table table-hover'>";
+            echo "<tr><th>Codigo albarán</th><th>Fecha albarán</th><th>ISBN</th><th>Cantidad</th><th>ID usuario</th></tr>";
+    
+            foreach ($resultados as $valores) {
+                echo '<tr>';
+                echo "<form method='post' action='./modificando.php'>";
+                
+                foreach ($valores as $campo => $valor) {
+                    if($campo != 'borrado'){
+                        echo "<input type='hidden' name='$campo' value='$valor'>";
+                        echo '<td>'.$valor.'</td>';
+                    }
+                }
+                if($_SESSION['usuario']->rol == 'administrador'){     
+                    echo '<td><input type="submit" class="bg-warning btn" value="Modificar" name="modificarAlbaran" id="modificarAlbaran"</td>';
+                    echo '<td><input type="submit" class="bg-danger btn" value="Borrar" name="borrarAlbaran" id="borrarAlbaran"</td></form>';
+                }
+    
+                echo "</tr>";
+            }
+    
+            echo "</table>";
+    
+        } catch (\Throwable $th) {
+            muestraErroresCatch($th);
+            unset($con);
+        }
+    }
+
 }
 
 ?>

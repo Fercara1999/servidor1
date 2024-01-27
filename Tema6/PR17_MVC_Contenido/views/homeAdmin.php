@@ -1,55 +1,4 @@
-<!-- <?php 
-
-    // include("./funciones.php");
-
-    // session_start();
-
-    // if(!isset($_SESSION['usuario'])){
-    //     $_SESSION['error'] = "No tienes la sesión iniciada";
-    //     header("Location: ./sesiones.php");
-    //     exit;
-    // }else if($_SESSION['usuario']['rol'] != 'administrador'){
-    //     $_SESSION['error'] = "No tiene permisos para entrar en la página del administrador";
-    //     header("Location: ./index.php");
-    //     exit;
-    // }
-
-?>
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title><?php 
-    // echo $_SESSION['usuario']['usuario']
-    ?>
-    </title>
-    <?php
-        // require("./fragmentos/header.php");
-    ?>
-    <style>
-        html {
-            padding: 20px;
-        }
-
-        .ancho-caja {
-            width: 200px;
-            margin-right: 10px;
-        }
-    </style>
-</head> -->
 <body>
-    <?php
-    // if(isset($_REQUEST['actualizar'])){
-    //     actualizarDatos();
-    // }
-    // if(isset($_REQUEST['actualizarContrasena'])){
-    //     validaCambioContrasena();
-    // }
-    ?>
-
     <?php
         if(isset($_REQUEST['modificar'])){
             UserDAO::verDatos();
@@ -73,11 +22,7 @@
 
         $erroresAlbaran = [];
         
-        // if(isset($_REQUEST['registrarNuevoAlbaran']) && validaAlbaran($erroresAlbaran)){
-        //     nuevoAlbaran();
-        // }else if(isset($_REQUEST['registrarNuevoAlbaran'])){
-        //     muestraErroresArray($erroresAlbaran);
-        // }
+
         if(isset($_REQUEST['nuevoAlbaran'])){
             echo "<form method='post' class='ancho-caja'>";
             echo "<div class='form-group'>";
@@ -103,12 +48,6 @@
         }
 
         $erroresLibro = [];
-
-        if(isset($_REQUEST['registrarNuevoLibro']) && validaLibro($erroresLibro)){
-            nuevoLibro();
-        }else if(isset($_REQUEST['registrarNuevoLibro'])){
-            muestraErroresArray($erroresLibro);
-        }
 
         if(isset($_REQUEST['nuevoLibro'])){
             echo "<form method='post'>";
@@ -161,10 +100,10 @@
         echo '<input type="submit" class="btn btn-primary" value="Nuevo libro" name="nuevoLibro" id="nuevoLibro">';
         echo "</form>";
         
-        // misPedidos();
-        // verAlbaranes();
-        // verPedidos();
-        // verProductos();
+        PedidoDAO::misPedidos();
+        AlbaranDAO::verAlbaranes();
+        PedidoDAO::verPedidos();
+        LibroDAO::verProductos();
     ?>
 
     <br><br>
