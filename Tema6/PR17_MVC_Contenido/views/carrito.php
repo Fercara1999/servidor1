@@ -1,19 +1,14 @@
-<style>
-    .imagenSlider{
-        height: 400px;
-    }
-</style>
-<body>
-  <div id="carouselWithInterval" class="carousel slide" data-bs-ride="carousel">
+
+<div id="carouselWithInterval" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active" data-bs-interval="2000">
-          <img src="./imagenes/Banner1.jpeg" class="d-block w-100 imagenSlider" alt="Slide 1">
+          <img src="<?php echo IMG.'Banner1.jpeg' ?>" class="d-block w-100 imagenSlider" alt="Slide 1">
         </div>
         <div class="carousel-item" data-bs-interval="2000">
-          <img src="./imagenes/bannerStephenKing.jpg" class="d-block w-100 imagenSlider" alt="Slide 2">
+          <img src="<?php echo IMG.'bannerCancion.webp' ?>" class="d-block w-100 imagenSlider" alt="Slide 2">
         </div>
         <div class="carousel-item" data-bs-interval="2000">
-          <img src="./imagenes/bannerCancion.webp" class="d-block w-100 imagenSlider" alt="Slide 3">
+          <img src="<?php echo IMG.'bannerStephenKing.jpg' ?>" class="d-block w-100 imagenSlider" alt="Slide 3">
         </div>
       </div>
       <a class="carousel-control-prev" href="#carouselWithInterval" role="button" data-bs-slide="prev">
@@ -24,14 +19,16 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
       </a>
-  </div>
+    </div>
 
     <?php
 
-  if(empty($_SESSION['usuario'])){
-    echo '<div class="container mt-5 text-center">';
-    echo '<h1 class="mb-4">Debes iniciar sesión para comprar</h1></div>';
-  }else if(isset($_REQUEST['isbn']))
+if(!empty($mensaje)){
+  echo "<h1>".$mensaje."</h1>";
+}
+
+
+  if(isset($_REQUEST['isbn']) && sesioniniciada())
     $_SESSION['usuario']->carrito = $_REQUEST['isbn'];
   else if(isset($_REQUEST['vaciar']))
     $_SESSION['usuario']['carrito'] = "";
@@ -47,4 +44,3 @@
   }
 
     ?>
-</body>

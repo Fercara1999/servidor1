@@ -304,7 +304,7 @@ class LibroDAO{
                 } else if($campo == 'anioPublicacion' || $campo == 'unidades') {
                     echo '<td><input type="number" class="form-control" name="'.$campo.'" value="'.$valores.'" min="1"></td>';
                 } else if($campo == 'precio') {
-                    echo '<td><input type="number" class="form-control" name="'.$campo.'" value="'.$valores.'" step="0.01"></td>';
+                    echo '<td><input type="number" class="form-control" name="'.$campo.'" value="'.$valores.'" step="0.01" min="0.01"></td>';
                 } else if($campo != 'borrado'){
                     echo '<td><input type="text" class="form-control" name="'.$campo.'" value="'.$valores.'"></td>';
                 }
@@ -337,6 +337,8 @@ class LibroDAO{
             $parametros = array($isbn,$titulo,$autor,$editorial,$genero,$anoPublicacion,$sinopsis,$rutaPortada,$precio,$unidades,$isbn);
 
             FactoryBD::realizaConsulta($sql,$parametros);
+
+            return true;
     
         } catch (\Throwable $th) {
             muestraErroresCatch($th);
@@ -351,6 +353,7 @@ class LibroDAO{
             $parametros = array($isbn);
     
             FactoryBD::realizaConsulta($sql,$parametros);
+            return true;
         } catch (\Throwable $th) {
             muestraErroresCatch($th);
         }

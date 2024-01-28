@@ -21,8 +21,9 @@ $con = new PDO(DSN,USER,PASSWORD);
             );
     
             if(UserDAO::insert($usuario)){
-                $_SESSION['usuario'] = $usuario;
+                $mensaje = "Registro completado con exito";
                 $_SESSION['vista'] = VIEW.'home.php';
+
             }
         }else{
             $errores['insert'] = "No se ha podido insertar el usuario";

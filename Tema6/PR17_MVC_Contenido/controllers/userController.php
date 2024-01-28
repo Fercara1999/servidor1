@@ -4,9 +4,17 @@
 //     UserDAO::verDatos();
 // }
     if(isset($_REQUEST['actualizar'])){
-        UserDAO::actualizarDatos();
+        if(UserDAO::actualizarDatos())
+            $mensaje = "Datos actualizados con exito";
+        else{
+            $mensaje = "Error al actualizar los datos";
+        }
     }else if(isset($_REQUEST['actualizarContrasena'])){
-        UserDAO::validaCambioContrasena();
+        if(UserDAO::validaCambioContrasena()){
+            $mensaje = "Contraseña actualizada correctamente";
+        }else{
+            $mensaje = "Error al cambiar la contraseña";
+        }
     }else if(isset($_REQUEST['nuevoAlbaran'])){
         $_SESSION['controller'] = CON.'albaranController.php';
     }else if(isset($_REQUEST['nuevoLibro'])){

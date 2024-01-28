@@ -108,9 +108,7 @@ class  AlbaranDAO{
             $parametros = array($cantidad,$isbn);
             FactoryBD::realizaConsulta($sql,$parametros);
 
-            echo "Albarán introducido con exito";
-
-            unset($con);
+            return true;
         } catch (\Throwable $th) {
             muestraErroresCatch($th);
         }
@@ -222,6 +220,8 @@ class  AlbaranDAO{
             $sqlUpdateLibros = 'UPDATE libros SET unidades = ? WHERE ISBN = ?';
             $parametros = array($nuevaCantidadLibros,$ISBN);
             FactoryBD::realizaConsulta($sqlUpdateLibros,$parametros);
+
+            return true;
     
         } catch (\Throwable $th) {
             muestraErroresCatch($th);
@@ -236,7 +236,7 @@ class  AlbaranDAO{
             $parametros = array($albaran);
     
             FactoryBD::realizaConsulta($sql,$parametros);
-    
+            return true;
         } catch (\Throwable $th) {
             muestraErroresCatch($th);
         }

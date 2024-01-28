@@ -169,7 +169,7 @@ class PedidoDAO{
                 }
             }
             echo '</div>';
-            echo "<input type='submit' name='factura' id='factura' class='btn btn-primary me-3' value='Descargar factura'>";
+            echo "<input type='submit' name='factura' id='factura' class='btn btn-primary ms-3' value='Descargar factura'>";
             echo '</div>';
             
             echo '</div>';
@@ -214,10 +214,7 @@ class PedidoDAO{
                     $sqlInsertarPedido = 'INSERT INTO pedidos(id_usuario, fechaPedido, ISBN, cantidad, precioTotal) VALUES (?, ?, ?, ?, ?)';
                     $parametros = array($usuario,$fechaHoy,$libro,$cantidad,$precioTotal);
                     $result = FactoryBD::realizaConsulta($sqlInsertarPedido,$parametros);
-    
-                } else {
-                    echo '<div class="container mt-5 text-center">';
-                    echo '<h1 class="mb-4">No hay suficientes unidades disponibles para realizar la compra</h1></div>';
+                    return true;
                 }
             } catch (\Throwable $th) {
                 muestraErroresCatch($th);
@@ -327,6 +324,8 @@ class PedidoDAO{
             $sqlUpdateLibros = 'UPDATE libros SET unidades = unidades + ? WHERE ISBN = ?';
             $parametros = array($cantidad,$ISBN);
             FactoryBD::realizaConsulta($sqlUpdateLibros,$parametros);
+
+            return true;
         } catch (\Throwable $th) {
             muestraErroresCatch($th);
         }
@@ -340,6 +339,8 @@ class PedidoDAO{
             $parametros = array($pedido);
     
             FactoryBD::realizaConsulta($sql,$parametros);
+
+            return true;
         } catch (\Throwable $th) {
             muestraErroresCatch($th);
         }

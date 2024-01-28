@@ -1,7 +1,13 @@
 <?php
 
+if(!empty($mensaje)){
+    echo $mensaje;
+}
+
 PedidoDAO::misPedidos();
 
-PedidoDAO::verPedidos();
+if(isAdmin() || isModerador()){
+    PedidoDAO::verPedidos();
+}
 
 ?>

@@ -80,28 +80,6 @@ class UserDAO{
         return true;
     }
 
-    // public static function cambiarContrasena($usuario){
-    //     $sql = 'UPDATE Usuario SET id_usuario = ?,
-    //     contrasena = ?,
-    //     correo = ?,
-    //     fechaNacimiento = ?,
-    //     borrado = ?
-    //     WHERE id_usuario = ?';
-        
-    //     $parametros = array(sha1($usuario->usuario),
-    //     $usuario->contrasena,
-    //     $usuario->correo,
-    //     $usuario->fechaNacimiento,
-    //     $usuario->borrado,
-    //     $usuario->id_usuario);
-
-    //     $result = FactoryBD::realizaConsulta($sql,$parametros);
-    //     if($result->rowCount() > 0)
-    //         return true;
-    //     else
-    //         return false;
-    // }
-
     public static function delete($usuario){
         $sql = "UPDATE usuarios SET borrado = true WHERE id_usuario = ?";
 
@@ -198,9 +176,9 @@ class UserDAO{
                 $sql = 'UPDATE usuarios SET correo = ?, fechaNacimiento = ? WHERE usuario = ?';
                 $parametros = array($correo,$fecha,$usuario);
                 FactoryBD::realizaConsulta($sql,$parametros);
-                echo "Datos actualizados con exito";
+                return true;
             }else{
-                echo "No se han podido modificar los datos";
+                return false;
             }
     
         } catch (\Throwable $th) {
@@ -231,9 +209,9 @@ class UserDAO{
                             $sql = 'UPDATE usuarios SET contrasena = ? WHERE usuario = ?';
                             $parametros = array(sha1($nueva),$usuario);
                             FactoryBD::realizaConsulta($sql,$parametros);
-                            echo "Contraseña actualizada correctamente";
+                            return true;
                         } else {
-                            echo "La nueva contraseña no cumple con los requisitos mínimos";
+                            return false;
                             exit;
                         }
                     } else {

@@ -1,38 +1,19 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <body>
-
     <?php
-
-        if(isset($_SESSION['usuario']))
-            header("Location: ./index.php");
-
+    if(!empty($mensaje)){
+        echo "<h1>".$mensaje."</h1>";
+    }
         $erroresRegistro = [];
-
-            // if(isset($_REQUEST['iniciarSesion'])){
-            //     if(!campoVacio('usuario') && !campoVacio('contrasena')){
-            //         $usuario = validaUsuario($_REQUEST['usuario'],$_REQUEST['contrasena']);
-            //         if(!$usuario){
-            //             echo '<div class="container mt-5 text-center">';
-            //             echo '<h1 class="mb-4">Usuario o contraseña incorrectos</h1></div>';
-            //         }else{
-            //             $_SESSION['usuario'] = $usuario;
-            //             header("Location: ./index.php");
-            //             exit;
-            //         }
-            //     }
-            // }
-
-
-            if(pulsadoBoton('registrar') && validaRegistro($erroresRegistro)){
-                if(insertaUsuario()){
-                    echo '<div class="container mt-5 text-center">';
-                    echo '<h1 class="mb-4">Registro completado con exito</h1></div>';
-                }else{
-                    echo '<div class="container mt-5 text-center">';
-                    echo '<h1 class="mb-4">Error en el registro</h1></div>';
-                }
+        if(pulsadoBoton('registrar') && validaRegistro($erroresRegistro)){
+            if(insertaUsuario()){
+                echo '<div class="container mt-5 text-center">';
+                echo '<h1 class="mb-4">Registro completado con exito</h1></div>';
             }else{
-        ?>
+                echo '<div class="container mt-5 text-center">';
+                echo '<h1 class="mb-4">Error en el registro</h1></div>';
+            }
+        }else{
+    ?>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-6">
@@ -94,4 +75,3 @@
         }
     ?>
 </body>
-</html>

@@ -14,11 +14,15 @@
                 <input type="submit" class='btn btn-primary' name="buscar" id="buscar" value="Buscar">
             </form>    
         </div>
-        
         <div class="col-3 mx-auto">
             <?php
                 muestraHeaderUsuario();
             ?>
         </div>
     </div>
+    <style>
+        .imagenSlider{
+            height: 400px;
+        }
+    </style>
 </header>

@@ -1,4 +1,9 @@
 <?php
+
+if(!empty($mensaje)){
+    echo $mensaje;
+}
+
 if (isAdmin()){
     echo '<form method="post">';
     echo '<input type="submit" class="btn btn-primary" value="Nuevo libro" name="nuevoLibro" id="nuevoLibro">';

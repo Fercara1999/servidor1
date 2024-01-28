@@ -12,8 +12,9 @@
     
     if(!isset($_SESSION['vista']))
         require_once VIEW.'home.php';
-    else
+    else{
         require $_SESSION['vista'];
+    }
 
         require_once VIEW.'fragmentos/footer.php';
     
