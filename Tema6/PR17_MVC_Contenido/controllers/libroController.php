@@ -16,7 +16,9 @@ if(isset($_REQUEST['registrarNuevoLibro']) && validaLibro($erroresLibro)){
     LibroDAO::borraProducto();
     $_SESSION['vista'] = VIEW.'home.php';
     echo "Libro borrado con exito";
-    
+}else if(isset($_REQUEST['busqueda'])){
+    LibroDAO::buscarLibros($_REQUEST['busqueda']);
+    $_SESSION['vista'] = VIEW.'busqueda.php';
 }
 
 ?>

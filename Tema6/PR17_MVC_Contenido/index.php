@@ -30,6 +30,8 @@ if(isset($_REQUEST['login'])){
     $_SESSION['controller'] = CON.'userController.php';
 }else if(isset($_REQUEST['modificarProducto'])){
     $_SESSION['controller'] = CON.'libroController.php';
+}else if(isset($_REQUEST['buscar'])){
+    $_SESSION['controller'] = CON.'libroController.php';
 }
 
 if(isset($_SESSION['controller']))

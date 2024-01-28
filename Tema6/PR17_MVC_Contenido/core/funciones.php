@@ -26,7 +26,7 @@ function cargaScript(){
         try {
             $con = new mysqli();
             $con -> connect(IP,USER,PASSWORD);
-            $script = file_get_contents("./script_libreria.sql");
+            $script = file_get_contents("./webroot/sql/script_libreria.sql");
             if ($con->multi_query($script)) {
                 // Tuve que redirigir con JS ya que con PHP no se actualizaba la página
                 echo "<script>window.location.href = './index.php';</script>";

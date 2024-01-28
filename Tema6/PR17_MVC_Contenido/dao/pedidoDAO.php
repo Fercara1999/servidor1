@@ -97,7 +97,7 @@ class PedidoDAO{
 
     public static function misPedidos(){
         echo '<br><h1 class="mb-1">Mis pedidos</h1>';
-    $usuario = $_SESSION['usuario']->id_usuario;
+        $usuario = $_SESSION['usuario']->id_usuario;
 
     try {
         $con = new PDO(DSN, USER, PASSWORD);
@@ -115,7 +115,7 @@ class PedidoDAO{
             
             echo '<div class="col-md-2">';
 
-            echo "<form method='post' action='./creaFactura.php'>";
+            echo "<form method='post'>";
             foreach ($result as $datos => $valores) {
                 if($datos == 'ISBN'){
                     $sqln = 'SELECT * FROM libros WHERE ISBN = ?';

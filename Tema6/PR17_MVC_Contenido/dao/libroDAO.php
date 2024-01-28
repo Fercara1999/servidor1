@@ -356,6 +356,77 @@ class LibroDAO{
         }
     }
 
+    public static function buscarLibros($busqueda) {
+        try {
+            $sql = 'SELECT * FROM libros WHERE 
+                    ISBN LIKE ? OR
+                    titulo LIKE ? OR
+                    autor LIKE ? OR
+                    editorial LIKE ? OR
+                    genero LIKE ?';
+    
+            $busquedaParam = "%{$busqueda}%";
+            $parametros = array($busquedaParam,$busquedaParam,$busquedaParam,$busquedaParam,$busquedaParam);
+
+            $result = FactoryBD::realizaConsulta($sql,$parametros);
+    
+            $resultados = $result->fetchAll(PDO::FETCH_ASSOC);
+    
+            if($resultados){
+                echo '<div class="row g-3">';
+    
+                foreach ($resultados as $valores) {
+                    echo '<div class="col-md-4">';
+                    echo '<div class="card">';
+                    echo '<div class="row g-0">';
+                    
+                    echo '<div class="col-6">';
+                    foreach ($valores as $dato => $valor) {
+                        if ($dato != 'borrado') {
+                            if ($dato == 'rutaPortada') {
+                                echo '<img src="'.$valor.'" class="img-fluid w-100" alt="card-horizontal-image" width="150px">';
+                            }
+                        }
+                    }
+                    echo '</div>';
+                    
+                    echo '<div class="col-6">';
+                    echo '<div class="card-body">';
+                    foreach ($valores as $dato => $valor) {
+                        echo "<form method='post'>";
+                        if ($dato != 'borrado') {
+                            if ($dato == 'ISBN') {
+                                echo "<input type='hidden' name='isbn' value='$valor' id='isbn'>";
+                            }
+                            if ($dato == 'titulo') {
+                                echo '<h5 class="card-title">'.$valor.'</h5>';
+                            }
+                            if ($dato == 'autor') {
+                                echo '<p class="card-text"><small class="text-muted">'.$valor.'</small></p>';
+                            }
+                            if ($dato == 'sinopsis') {
+                                echo '<p class="card-text">'.$valor.'</p>';
+                            }
+                            if ($dato == 'precio') {
+                                echo '<h5 class="card-title">'.$valor.'€</h5>';
+                            }
+                        }
+                    }
+                    echo "<input type='submit' class='btn btn-primary' value='Añadir al carrito' id='anadir' name='anadir'>";
+                    echo "</form>";
+                    echo '</div></div>';
+                    
+                    echo '</div></div></div>';
+                }
+                echo '</div>';
+            }else{
+                echo '<div class="container mt-5 text-center">';
+            echo '<h1 class="mb-4">No se encontraron resultados para la búsqueda</h1></div>';
+            }
+        } catch (\Throwable $th) {
+            muestraErroresCatch($th);
+        }
+    }
 }
 
 ?>

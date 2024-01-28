@@ -12,6 +12,8 @@ if(isset($_REQUEST['modificarPedido'])){
     PedidoDAO::borraPedido();
     $_SESSION['vista'] = VIEW.'home.php';
     echo "Pedido eliminado con exito";
+}else if(isset($_REQUEST['factura'])){
+    require(VIEW.'creaFactura.php');
 }
 
 ?>
