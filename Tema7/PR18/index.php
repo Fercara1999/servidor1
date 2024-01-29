@@ -4,12 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PR18 - Fernando Calles</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/estilos.css">
+    <style>
+        html{
+            margin: 20px;
+        }
+    </style>
 </head>
 <body>
+<h1>PR18 - Fernando Calles</h1>
 <form action="" method="post">
     Selecciona una ciudad: 
     <select name="ciudades" id="ciudades">
-        <option value="0">Selecciona una opcion</option>
+        <option value="0">Selecciona una opción</option>
         <option value="Avila">Ávila</option>
         <option value="Burgos">Burgos</option>
         <option value="Leon">León</option>
@@ -20,7 +28,7 @@
         <option value="Valladolid">Valladolid</option>
         <option value="Zamora">Zamora</option>
     </select>
-    <input type="submit" id="enviar" name="enviar" value="Enviar">
+    <input type="submit" id="enviar" name="enviar" value="Enviar" class="btn btn-primary">
 </form>
 <?php
 
@@ -34,6 +42,7 @@ if(isset($_REQUEST['enviar'])){
         if($contenido){
             $jsonContenido = json_decode($contenido,true);
             $claveCiudad = $jsonContenido[0]['Key'];
+            echo "<h1>".$_REQUEST['ciudades']."</h1>";
             echo "La clave de la ciudad elegida es: " .$claveCiudad."<br>";
             echo "Longitud:".$jsonContenido[0]['GeoPosition']['Longitude']."<br>";
             echo "Latitud:".$jsonContenido[0]['GeoPosition']['Latitude']."<br>";
@@ -48,18 +57,37 @@ if(isset($_REQUEST['enviar'])){
             if($contenido){
                 $jsonContenido = json_decode($contenido,true);
                 
+                echo "<table border='1' class='table table-hover'><tr><th>Día</th><th>Mínimas</th><th>Máxima</th><th>Día</th><th>Noche</th><th>Precipitaciones</th></tr>";
                 foreach ($jsonContenido['DailyForecasts'] as $key => $value) {
+                    echo "<tr>";
                     foreach ($value as $campo => $valor) {
                         if($campo == 'Date'){
-                            echo "Previsión para el día: " .$valor;
+                            echo "<td>$valor</td>";
+
                         }
                         if($campo == 'Temperature'){
-                            echo "<br>Minimas: ".((int)$valor['Minimum']['Value']-32)*5/9;
-                            echo "<br>Máximas: ".((int)$valor['Maximum']['Value']-32)*5/9;
+                            echo "<td>" . round(((int)$valor["Minimum"]['Value'] - 32) * 5 / 9, 1) . "ºC</td>";
+                            echo "<td>" . round(((int)$valor["Maximum"]['Value'] - 32) * 5 / 9, 1) . "ºC</td>";
                         }
+                        if($campo == 'Day'){
+                            echo "<td>".$valor['IconPhrase']."</td>";
+                        }
+                        if($campo == 'Night'){
+                            echo "<td>".$valor['IconPhrase']."</td>";
+                            if($valor['HasPrecipitation']){
+                                echo "<td>Si</td>";
+                            }else{
+                                echo "<td>No</td>";
+                            }
+                        }
+
                     }
+                    echo "</tr>";
                 }
+                echo "</table>";
             }
+        }else{
+            echo "No has seleccionado una opción válida";
         }
         echo "</pre>";
 
@@ -67,8 +95,8 @@ if(isset($_REQUEST['enviar'])){
 }
 
 ?>
-
-
-
 </body>
+<?php
+    require("./fragmentos/footer.php");
+?>
 </html>
