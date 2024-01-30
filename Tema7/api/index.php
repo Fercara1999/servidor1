@@ -3,7 +3,7 @@
 require('./controlador/Base.php');
 require('./controlador/InstitutosController.php');
 
-print_r(Base::condiciones());
+// print_r(Base::condiciones());
 
 if(isset($_SERVER['PATH_INFO'])){
     // Comprobar el recurso

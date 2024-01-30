@@ -47,7 +47,7 @@ class InstitutosController extends Base{
 
         foreach ($filtros as $key => $value) {
             if(!in_array($key,$permitimos)){
-                self::response("HTTP/1.0 400 No permite la condición utilizada");
+                self::response("HTTP/1.0 400 No permite la condición utilizada: " .$key);
             }else{
             }
         }
