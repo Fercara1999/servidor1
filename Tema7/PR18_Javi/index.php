@@ -57,13 +57,17 @@ if(isset($_REQUEST['enviar'])){
             if($contenido){
                 $jsonContenido = json_decode($contenido,true);
                 
-                echo "<table border='1' class='table table-hover'><tr><th>Día</th><th>Mínimas</th><th>Máxima</th><th>Día</th><th>Noche</th><th>Precipitaciones</th></tr>";
+                echo '<div class="accordion" id="accordionBasic">';
+                echo '<div class="accordion-item">';
+                echo '<h2 class="accordion-header" id="headingOne">';
+                echo '<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">';
                 foreach ($jsonContenido['DailyForecasts'] as $key => $value) {
-                    echo "<tr>";
+
                     foreach ($value as $campo => $valor) {
                         if($campo == 'Date'){
-                            echo "<td>$valor</td>";
-
+                            echo $valor;
+                            echo '      </button>';
+                            echo '    </h2>';
                         }
                         if($campo == 'Temperature'){
                             echo "<td>" . round(((int)$valor["Minimum"]['Value'] - 32) * 5 / 9, 1) . "ºC</td>";
