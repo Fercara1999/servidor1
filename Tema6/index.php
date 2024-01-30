@@ -10,7 +10,7 @@
     <?php
         include("../fragmentos/header.html");
     ?>
-    <h2>- Tema 5:</h2>
+    <h2>- Tema 6:</h2>
         <h3>·  <a href="./PR17_MVC_Contenido/index.php" target="blank">Navidad MVC</a></h3>
 
         

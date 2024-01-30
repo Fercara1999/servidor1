@@ -10,7 +10,7 @@
     <?php
         include("../fragmentos/header.html");
     ?>
-    <h2>- Tema 5:</h2>
+    <h2>- Tema 7:</h2>
         <h3>·  <a href="./PR18/index.php" target="blank">PR18</a></h3>
 
         
