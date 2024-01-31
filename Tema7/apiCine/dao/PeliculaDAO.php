@@ -43,6 +43,33 @@ class PeliculaDAO{
 
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function findbyFiltros($filtros){
+        
+        $num = count($filtros);
+        $parametros = array();
+        $sql = "SELECT * FROM peliculas WHERE ";
+        
+        foreach ($filtros as $key => $value) {
+            if($key == 'titulo'){
+                $sql .= $key ." LIKE ? ";
+                $valor = '%'.$value.'%';
+                array_push($parametros,$valor);
+            }else{
+                $sql .= $key ." = ? ";
+                array_push($parametros,$value);
+            }
+
+            if($num == 2){
+                $num--;
+                $sql .= ' and ';
+            }
+        
+        }
+
+        $result = FactoryBD::realizaConsulta($sql,$parametros);
+        return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 
 ?>

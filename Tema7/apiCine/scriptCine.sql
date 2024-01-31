@@ -1,4 +1,3 @@
-Copy code
 -- Crear la base de datos
 CREATE DATABASE IF NOT EXISTS apiCine;
 USE apiCine;
@@ -17,5 +16,5 @@ INSERT INTO peliculas (titulo, director, genero, activo) VALUES
 ('Titanic', 'James Cameron', 'Romance', true),
 ('The Shawshank Redemption', 'Frank Darabont', 'Drama', true),
 ('Inception', 'Christopher Nolan', 'Ciencia Ficción', true),
-('The Godfather', 'Francis Ford Coppola', 'Crimen', true);
+('The Godfather', 'Francis Ford Coppola', 'Crimen', true),
 ('La La Land', 'Damien Chazelle', 'Romance', true);
