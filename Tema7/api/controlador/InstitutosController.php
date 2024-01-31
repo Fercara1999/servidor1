@@ -40,14 +40,14 @@ class InstitutosController extends Base{
         }
     }
 
-    static function buscaConFiltro(){
+    static function buscaConFiltros(){
         // Comprobar si el nombre del filtro está permitido
         $permitimos = ['nombre','localidad'];
         $filtros = self::condiciones();
 
         foreach ($filtros as $key => $value) {
             if(!in_array($key,$permitimos)){
-                self::response("HTTP/1.0 400 No permite la condición utilizada: " .$key);
+                self::response("HTTP/1.0 400 No se permite la condicion utilizada: " .$key);
             }else{
             }
         }
