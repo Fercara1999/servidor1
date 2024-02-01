@@ -90,6 +90,9 @@ class InstitutosController extends Base{
             $permitimos = ['nombre','localidad','telefono'];
             $datos = file_get_contents('php://input');
             $datos = json_decode($datos,true);
+            if($datos == null){
+                self:: response('HTTP/1.0 400 El cuerpo no está bien formado'); 
+            }
             // Verificar que lo recibido en el body son los institutos
             foreach ($datos as $key => $value) {
                 if(!in_array($key,$permitimos)){
@@ -99,7 +102,10 @@ class InstitutosController extends Base{
             $instituto = InstitutoDAO::findbyId($recursos[2]);
             if(count($instituto) == 1){
                 $instituto = (object)$instituto[0];
-                if(InstitutoDAO::update($datos,$instituto)){
+                foreach ($datos as $key => $value) {
+                    $instituto->$key = $value;
+                }
+                if(InstitutoDAO::update($instituto)){
                     $instituto = InstitutoDAO::findbyId($recursos[2]);
                     $instituto = json_encode($instituto);
                     self::response('HTTP/1.0 201 Recurso modificado', $instituto);
@@ -109,6 +115,19 @@ class InstitutosController extends Base{
             }else{
                 self::response('HTTP/1.0 400 No se ha encontrado el instituto con ese ID');
             }
+            // if(count($instituto) == 1){
+            //     $instituto = (object)$instituto[0];
+                
+            //     if(InstitutoDAO::update($datos,$instituto)){
+            //         $instituto = InstitutoDAO::findbyId($recursos[2]);
+            //         $instituto = json_encode($instituto);
+            //         self::response('HTTP/1.0 201 Recurso modificado', $instituto);
+            //     }else{
+            //         self::response('HTTP/1.0 400 No esta introduciendo los atributos de instituto(nombre, localidad, telefono');
+            //     }
+            // }else{
+            //     self::response('HTTP/1.0 400 No se ha encontrado el instituto con ese ID');
+            // }
         }else{
             self::response('HTTP/1.0 400 No ha indicado el id');
         }

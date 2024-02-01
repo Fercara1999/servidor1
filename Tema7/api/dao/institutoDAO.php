@@ -31,9 +31,9 @@ class InstitutoDAO{
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function update($datos,$instituto){
+    public static function update($instituto){
         $sql = "UPDATE institutos SET nombre = ?, localidad = ?, telefono = ? WHERE id = ?";
-        $parametros = [$datos['nombre'],$datos['localidad'],$datos['telefono'],$instituto->id];
+        $parametros = [$instituto->nombre,$instituto->localidad,$instituto->telefono,$instituto->id];
      
         $result = FactoryBD::realizaConsulta($sql,$parametros);
         if($result->rowCount() > 0){
