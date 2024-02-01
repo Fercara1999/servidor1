@@ -47,7 +47,20 @@ class InstitutosController extends Base{
                 break;
 
             case 'DELETE':
-                # code...
+                $recursos = self::divideURI();
+                if(count($recursos) == 3){
+                    if(!empty(InstitutoDAO::findbyId($recursos[2]))){
+                        if(InstitutoDAO::delete($recursos[2])){
+                            self::response('HTTP/1.0 200 Recurso eliminado');
+                        }else{
+                            self::response('HTTP/1.0 400 No se pudo eliminar el recurso');
+                        }
+                    }else{
+                        self::response('HTTP/1.0 400 No se pudo localizar el recurso a eliminar');
+                    }
+                }else{
+                    self::response('HTTP/1.0 400 No ha indicado el id');
+                }
                 break;
 
             default:
@@ -86,11 +99,15 @@ class InstitutosController extends Base{
             $instituto = InstitutoDAO::findbyId($recursos[2]);
             if(count($instituto) == 1){
                 $instituto = (object)$instituto[0];
-                if(InstitutoDAO::update($instituto)){
-                    self::response('HTTP/1.0 201 Recurso creado', $instituto);
+                if(InstitutoDAO::update($datos,$instituto)){
+                    $instituto = InstitutoDAO::findbyId($recursos[2]);
+                    $instituto = json_encode($instituto);
+                    self::response('HTTP/1.0 201 Recurso modificado', $instituto);
                 }else{
                     self::response('HTTP/1.0 400 No esta introduciendo los atributos de instituto(nombre, localidad, telefono');
                 }
+            }else{
+                self::response('HTTP/1.0 400 No se ha encontrado el instituto con ese ID');
             }
         }else{
             self::response('HTTP/1.0 400 No ha indicado el id');

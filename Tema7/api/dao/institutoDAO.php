@@ -31,9 +31,9 @@ class InstitutoDAO{
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function update($instituto){
+    public static function update($datos,$instituto){
         $sql = "UPDATE institutos SET nombre = ?, localidad = ?, telefono = ? WHERE id = ?";
-        $parametros = [$instituto['nombre'],$instituto['localidad'],$instituto['telefono'],$instituto['id']];
+        $parametros = [$datos['nombre'],$datos['localidad'],$datos['telefono'],$instituto->id];
      
         $result = FactoryBD::realizaConsulta($sql,$parametros);
         if($result->rowCount() > 0){
@@ -50,6 +50,16 @@ class InstitutoDAO{
             return true;
         }
 
+    }
+
+    public static function delete($id){
+        $sql = "DELETE FROM institutos WHERE id = ?";
+        $parametros = array($id);
+
+        $result = FactoryBD::realizaConsulta($sql,$parametros);
+        if($result->rowCount() > 0){
+            return true;
+        }
     }
 
     public static function findbyFiltros($filtros){

@@ -70,6 +70,48 @@ class PeliculaDAO{
         $result = FactoryBD::realizaConsulta($sql,$parametros);
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function insert($datos){
+        $sql = "INSERT INTO peliculas(titulo,director,genero,activo) VALUES (?,?,?,?)";
+        $parametros = [$datos->titulo,$datos->director,$datos->genero,$datos->activo];
+
+        $result = FactoryBD::realizaConsulta($sql,$parametros);
+        if($result->rowCount() > 0){
+            return true;
+        }
+    }
+
+    public static function findLast(){
+        $sql = "SELECT * from peliculas ORDER BY id DESC LIMIT 1";
+        $parametros = [];
+
+        $result = FactoryBD::realizaConsulta($sql,$parametros);
+        if($result->rowCount() > 0){
+            return true;
+        }
+    }
+
+    public static function update($datos,$pelicula){
+        $sql = "UPDATE peliculas SET titulo = ?, director = ?, genero = ? WHERE id = ?";
+        $parametros = [$datos['titulo'],$datos['director'],$datos['genero'], $pelicula->id];
+
+        $result = FactoryBD::realizaConsulta($sql,$parametros);
+
+        if($result->rowCount() > 0){
+            return true;
+        }
+    }
+
+    public static function delete($id){
+        $sql = "DELETE FROM peliculas WHERE id = ?";
+        $parametros = array($id);
+
+        $result = FactoryBD::realizaConsulta($sql,$parametros);
+            if($result->rowCount() > 0){
+                return true;
+            }
+    }
+    
 }
 
 ?>
