@@ -1,0 +1,5 @@
+<?php
+
+echo "<h2>FORMULARIO VALIDADO FERNANDO CALLES</h2>";
+
+?>
