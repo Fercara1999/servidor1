@@ -29,6 +29,9 @@
         }else if(isset($_REQUEST['crearLibro'])){
             $_SESSION['controller'] = CON . 'librosController.php';
             $_SESSION['vista'] = VIEW . 'crearLibro.php';
+        }else if(isset($_REQUEST['verLibros'])){
+            $_SESSION['controller'] = CON . 'librosController.php';
+            $_SESSION['vista'] = VIEW . 'verLibros.php';
         }
         
         if(isset($_SESSION['controller']))

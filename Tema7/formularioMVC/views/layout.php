@@ -28,6 +28,9 @@
             echo '<form action="" method="post">';
             echo '<input type="submit" name="cerrarSesion" id="cerrarSesion" value="Cerrar sesión">';
             echo '<input type="submit" name="crearLibro" id="crearLibro" value="Crear libro">';
+            if(isAdmin()){
+                echo "<input type='submit' name='verLibros' id='verLibros' value='Ver libros'>";
+            }
             echo '</form>';
         }
 

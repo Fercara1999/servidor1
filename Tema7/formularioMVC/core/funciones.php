@@ -65,5 +65,12 @@ function muestraError(&$array,$campo){
         echo $array[$campo];
 }
 
+function isAdmin(){
+    if($_SESSION['usuario']->perfil == 'admin'){
+        return true;
+    }else{
+        return false;
+    }
+}
 
 ?>
