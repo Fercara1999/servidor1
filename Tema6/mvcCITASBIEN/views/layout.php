@@ -19,11 +19,11 @@
         <div>
             <?php
                 if(validado()){
-                    echo "Bienvenido " .$_SESSION['usuario']->descUsuario;
+                    echo "Bienvenido " .$_SESSION['usuario']->username;
                     echo '<form action="" method="post">';
-                        echo '<input type="submit" value="Ver citas" name="verCitas" class="btn btn-primary"><br>';
-                        echo '<input type="submit" name="pedirCita" id="pedirCita" value="Pedir cita" class="btn btn-primary">';
-                        echo '<input type="submit" value="Ver perfil" name="verPerfil" class="btn btn-primary">';
+                        // echo '<input type="submit" value="Ver citas" name="verCitas" class="btn btn-primary"><br>';
+                        // echo '<input type="submit" name="pedirCita" id="pedirCita" value="Pedir cita" class="btn btn-primary">';
+                        // echo '<input type="submit" value="Ver perfil" name="verPerfil" class="btn btn-primary">';
                         echo '<input type="submit" value="Cerrar sesión" name="cerrarSesion" class="btn btn-primary">';
                     echo '</form>';
                 }else{

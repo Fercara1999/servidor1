@@ -19,12 +19,7 @@ function validaFormularioRegistro(&$errores){
         return false;
 }
 
-function validado(){
-    if(isset($_SESSION['usuario']))
-        return true;
-    else
-        return false;
-}
+º
 
 function isAdmin(){
     if($_SESSION['usuario']->perfil == "admin"){
