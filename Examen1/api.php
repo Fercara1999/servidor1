@@ -11,7 +11,7 @@ if(isset($_SERVER['PATH_INFO'])){
         if($recurso[1] === 'palabra'){
             PartidaController::palabra();
         }else{
-    
+            PartidaController::response("HTTP/1.0 400 Direccion incorrecta, no se ha especificado el recurso");
         }
     }else{
         PartidaController::response("HTTP/1.0 400 Direccion incorrecta, no se ha especificado el recurso");

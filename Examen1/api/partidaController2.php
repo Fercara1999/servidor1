@@ -11,8 +11,10 @@ class PartidaController{
             case 'GET':
                 if(count($recursos) == 2 && count($filtros) == 0){
                     $datos = PalabraDAO::obtenPalabra();
-                }else if(count($recursos) == 2 && count($filtros) > 0){
+                }else if(count($recursos) == 2 && count($filtros) == 1){
                     $datos = self::buscaConFiltros();
+                }else{
+                    self::response("HTTP/1.0 400 No permite el metodo utilizado");    
                 }
                 
                 $datos = json_encode($datos);
