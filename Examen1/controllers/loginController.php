@@ -22,7 +22,7 @@ if(isset($_REQUEST['iniciarSesion'])){
             // Configuramos la sesión
             $_SESSION['usuario'] = $usuario;
             $_SESSION['vista'] = VIEW . 'home.php';
-        // Si no lo es
+        // Si no lo es, mostramos el error en pantalla
         }else{
             echo "No existe el usuario y contraseña";
         }
