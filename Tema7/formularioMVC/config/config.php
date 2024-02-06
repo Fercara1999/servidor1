@@ -15,6 +15,10 @@ require("./dao/factoryBD.php");
 
 require("./models/usuario.php");
 require("./dao/usuarioDAO.php");
+
+require("./models/libro.php");
+require("./dao/libroDAO.php");
+
 // require("./models/user.php");
 // require("./dao/userDAO.php");
 

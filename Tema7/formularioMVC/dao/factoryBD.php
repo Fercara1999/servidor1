@@ -1,5 +1,6 @@
 <?php
 
+// require("./config/configBD.php");
 class FactoryBD{
     public static function realizaConsulta($sql,$arrayParametros){
         try {

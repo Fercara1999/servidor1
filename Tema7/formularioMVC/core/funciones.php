@@ -27,5 +27,43 @@ function campoVacio($campo){
         return false;
 }
 
+function validaFormularioLibro(&$errores) {
+
+    if (!campoVacio($_REQUEST['isbn'])) {
+        $errores['isbn'] = "ISBN vacío";
+    }
+    
+    if (!campoVacio($_REQUEST['titulo'])) {
+        $errores['titulo'] = "Título vacío";
+    }
+
+    if (!campoVacio($_REQUEST['autor'])) {
+        $errores['autor'] = "Autor vacío";
+    }
+
+    if (!campoVacio($_REQUEST['editorial'])) {
+        $errores['editorial'] = "Editorial vacía";
+    }
+
+    if (!campoVacio($_REQUEST['fechaLanzamiento'])) {
+        $errores['fechaLanzamiento'] = "Fecha de Lanzamiento vacía";
+    }
+
+    if (!campoVacio($_REQUEST['numeroPaginas'])) {
+        $errores['numeroPaginas'] = "Número de Páginas vacío";
+    }
+
+    if(count($errores) == 0){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function muestraError(&$array,$campo){
+    if(isset($array[$campo]))
+        echo $array[$campo];
+}
+
 
 ?>

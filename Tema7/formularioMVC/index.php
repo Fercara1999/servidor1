@@ -1,5 +1,7 @@
 <?php
     require("./config/config.php");
+    require("./consumirAPI/configurarAPI.php");
+    require("./consumirAPI/curl.php");
     session_start();
 
     if(!empty($_SESSION['msg'])){
@@ -24,6 +26,9 @@
             $_SESSION['controller'] = CON . "loginController.php";
         }else if(isset($_REQUEST['cerrarSesion'])){
             $_SESSION['controller'] = CON . "loginController.php";
+        }else if(isset($_REQUEST['crearLibro'])){
+            $_SESSION['controller'] = CON . 'librosController.php';
+            $_SESSION['vista'] = VIEW . 'crearLibro.php';
         }
         
         if(isset($_SESSION['controller']))
