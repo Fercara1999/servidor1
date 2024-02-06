@@ -24,7 +24,7 @@ if(isset($_REQUEST['iniciarSesion'])){
             $_SESSION['vista'] = VIEW . 'home.php';
         // Si no lo es
         }else{
-            $errores['validado'] = "No existe el usuario y contraseña";
+            echo "No existe el usuario y contraseña";
         }
     }else{
         echo "Has dejado campos vacíos en el login";
